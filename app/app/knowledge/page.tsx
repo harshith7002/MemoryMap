@@ -9,30 +9,24 @@ export default function KnowledgePage() {
   const [query, setQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
 
-  const categories = ['All', 'Automotive', 'Education', 'Craft', 'Agriculture'];
+  const categories = ['All', 'Automotive Repair', 'Pedagogy & Teaching', 'Handloom Craft', 'Agriculture'];
   const filteredMemories = searchMemories(query, selectedCategory);
 
   return (
     <div className={styles.container}>
-      {/* Archival Newspaper Header */}
       <div className={styles.header}>
-        <div className={styles.topMetaRow}>
-          <span className={styles.archiveTag}>THE ARCHIVE // CATALOGUE REGISTRY</span>
-          <span className={styles.countTag}>47 PRESERVED MEMORIES</span>
-        </div>
-
-        <h1 className={styles.title}>The Archive</h1>
+        <h1 className={styles.title}>Explore preserved knowledge</h1>
         <p className={styles.subtitle}>
-          Thousands of small lessons that would otherwise disappear with time.
+          Thousands of small lessons and diagnostic insights captured directly from experienced practitioners.
         </p>
 
-        {/* Newspaper Style Search Field */}
+        {/* Clean Search Input */}
         <div className={styles.searchBar}>
-          <span className={styles.searchPrompt}>SEARCH HUMAN KNOWLEDGE:</span>
+          <span className={styles.searchIcon}>🔍</span>
           <input
             type="text"
             className={styles.searchInput}
-            placeholder="Search human knowledge... (e.g. engine acoustic, soil smell, loom tension)"
+            placeholder="Search memories, people and expertise..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
@@ -40,7 +34,6 @@ export default function KnowledgePage() {
 
         {/* Filter Chips */}
         <div className={styles.filtersRow}>
-          <span className={styles.filterLabel}>FILTER TRADE:</span>
           {categories.map((cat) => (
             <button
               key={cat}
@@ -53,36 +46,32 @@ export default function KnowledgePage() {
         </div>
       </div>
 
-      {/* Newspaper / Archival Style Catalog List */}
-      <div className={styles.newspaperList}>
+      {/* Clean Subtle Separator List */}
+      <div className={styles.cleanList}>
         {filteredMemories.map((m) => (
-          <article key={m.id} className={styles.archiveRow}>
-            <div className={styles.idCol}>
-              <span className={styles.archiveNum}>{m.catalogId}</span>
-              <span className={styles.catBadge}>{m.category}</span>
-            </div>
+          <article key={m.id} className={styles.entryRow}>
+            <div className={styles.entryMain}>
+              <div className={styles.metaRow}>
+                <span className={styles.catBadge}>{m.category}</span>
+                <span className={styles.duration}>⏱️ {m.duration}</span>
+              </div>
 
-            <div className={styles.mainCol}>
               <h2 className={styles.entryTitle}>
                 <Link href={`/app/knowledge/${m.id}`}>{m.title}</Link>
               </h2>
 
-              <div className={styles.authorMeta}>
-                <span>Practitioner: <strong>{m.expertName}</strong></span>
-                <span className={styles.dot}>·</span>
-                <span>{m.expertRole}</span>
-                <span className={styles.dot}>·</span>
-                <span>Audio Length: {m.duration}</span>
-              </div>
+              <p className={styles.summaryText}>{m.summary}</p>
 
-              <blockquote className={styles.quoteExcerpt}>
-                “{m.transcript || m.summary}”
-              </blockquote>
+              <div className={styles.authorMeta}>
+                <span>{m.expertName}</span>
+                <span className={styles.dot}>·</span>
+                <span>{m.expertRole} ({m.expertExperience} yrs exp)</span>
+              </div>
             </div>
 
-            <div className={styles.actionCol}>
-              <Link href={`/app/knowledge/${m.id}`} className={styles.listenBtn}>
-                ▶ LISTEN [{m.duration}] →
+            <div className={styles.entryAction}>
+              <Link href={`/app/knowledge/${m.id}`} className={styles.listenLink}>
+                Listen & Read Record →
               </Link>
             </div>
           </article>
@@ -90,8 +79,7 @@ export default function KnowledgePage() {
 
         {filteredMemories.length === 0 && (
           <div className={styles.emptyState}>
-            <h3>No catalog entries found</h3>
-            <p>Try resetting search filters.</p>
+            <p>No preserved memories match your search.</p>
           </div>
         )}
       </div>

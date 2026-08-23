@@ -28,107 +28,77 @@ export default function AskPage() {
       const response = getQAResponse(q);
       setResult(response);
       setIsLoading(false);
-    }, 1200);
+    }, 900);
   };
 
   return (
     <div className={styles.container}>
-      {/* Search Engine Header */}
       <div className={styles.header}>
-        <span className={styles.badge}>ORAL ARCHIVE QUERY ENGINE</span>
         <h1 className={styles.title}>Ask the archive.</h1>
         <p className={styles.subtitle}>
-          Search across decades of unwritten practical experience. Answers are retrieved verbatim with original voice audio timestamps.
+          Search across decades of unwritten practical experience. Answers are retrieved directly from original oral accounts.
         </p>
       </div>
 
-      {/* Query Entry Console */}
-      <div className={styles.inputCard}>
-        <span className={styles.inputLabel}>ENTER ARCHIVAL QUERY:</span>
-        <textarea
-          className={styles.textarea}
-          rows={3}
-          placeholder="e.g. What should I check first when an engine overheats after 30 minutes of highway driving?"
-          value={question}
-          onChange={(e) => setQuestion(e.target.value)}
-        />
-
-        <div className={styles.exampleChips}>
-          <span className={styles.exampleLabel}>SUGGESTED ARCHIVE SEARCHES:</span>
-          {exampleQuestions.map((eq, idx) => (
-            <button
-              key={idx}
-              className={styles.chip}
-              onClick={() => handleAsk(eq)}
-            >
-              {eq}
-            </button>
-          ))}
-        </div>
-
-        <div className={styles.actionRow}>
-          <span className={styles.privacyNote}>
-            🔒 Query returns indexed oral testimony, not generated web summary text.
-          </span>
+      {/* Clean Single Search Input Box */}
+      <div className={styles.searchCard}>
+        <div className={styles.inputRow}>
+          <input
+            type="text"
+            className={styles.searchInput}
+            placeholder="e.g. What should I check first when an engine overheats?"
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleAsk()}
+          />
           <button
-            className={styles.askButton}
+            className={styles.queryBtn}
             onClick={() => handleAsk()}
             disabled={isLoading || !question.trim()}
           >
-            {isLoading ? 'Querying Index...' : '🔍 Query Oral Archive'}
+            {isLoading ? 'Searching...' : 'Ask →'}
           </button>
+        </div>
+
+        <div className={styles.suggestionsRow}>
+          <span className={styles.sugLabel}>Suggested:</span>
+          {exampleQuestions.map((eq, idx) => (
+            <button key={idx} className={styles.sugChip} onClick={() => handleAsk(eq)}>
+              {eq}
+            </button>
+          ))}
         </div>
       </div>
 
       {/* Loading State */}
       {isLoading && (
-        <div className={styles.loadingBox}>
+        <div className={styles.loadingState}>
           <span className={styles.spinner} />
-          <span>Searching 12 preserved oral accounts and field recording transcripts...</span>
+          <span>Searching 12 preserved oral accounts...</span>
         </div>
       )}
 
-      {/* Researched Archive Response Card */}
+      {/* Clean Answer Card */}
       {result && !isLoading && (
         <div className={styles.resultCard}>
-          <div className={styles.resultHeader}>
-            <span className={styles.answerBadge}>VERIFIED ORAL ACCOUNT // {result.catalogId}</span>
-            <span className={styles.attrBadge}>SOURCE VERIFIED</span>
+          <div className={styles.authorHeader}>
+            <strong className={styles.expertName}>{result.sourceExpert}</strong>
+            <span className={styles.expertRole}>{result.sourceRole} · {result.sourceExperience} years experience</span>
           </div>
 
-          <blockquote className={styles.answerText}>“{result.answer}”</blockquote>
+          <blockquote className={styles.answerQuote}>
+            “{result.answer}”
+          </blockquote>
 
-          {/* Source Attribution Record Box */}
-          <div className={styles.sourceBox}>
-            <div className={styles.sourceHeader}>
-              <span className={styles.sourceLabel}>SOURCE ATTRIBUTION & AUDIO VERIFICATION</span>
+          <div className={styles.sourceFooter}>
+            <div className={styles.sourceRef}>
+              <span className={styles.refTitle}>{result.memoryTitle}</span>
+              <span className={styles.refTime}>Timestamp: {result.recordingTimestamp}</span>
             </div>
 
-            <div className={styles.sourceContent}>
-              <div className={styles.authorRow}>
-                <div className={styles.authorAvatar}>👨‍🔧</div>
-                <div className={styles.authorInfo}>
-                  <span className={styles.authorName}>{result.sourceExpert}</span>
-                  <span className={styles.authorRole}>
-                    {result.sourceRole} • {result.sourceExperience} years experience
-                  </span>
-                </div>
-              </div>
-
-              <div className={styles.memoryRefBox}>
-                <div className={styles.refInfo}>
-                  <span className={styles.refTitle}>{result.memoryTitle}</span>
-                  <span className={styles.refTime}>Exact Timestamp: {result.recordingTimestamp}</span>
-                </div>
-
-                <Link
-                  href={`/app/knowledge/${result.memoryId}`}
-                  className={styles.listenBtn}
-                >
-                  🔊 Listen to original audio recording →
-                </Link>
-              </div>
-            </div>
+            <Link href={`/app/knowledge/${result.memoryId}`} className={styles.listenLink}>
+              ▶ Listen to original audio source →
+            </Link>
           </div>
         </div>
       )}

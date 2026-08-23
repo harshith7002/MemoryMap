@@ -7,125 +7,88 @@ import styles from './ListenToLifeSection.module.css';
 
 export const ListenToLifeSection: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(true);
-  const [activeStage, setActiveStage] = useState<number>(3); // 1: Voice, 2: Transcript, 3: Extraction
 
   return (
-    <section className={styles.fullBleedSection}>
+    <section className={styles.section}>
       <div className={styles.container}>
-        {/* Section Metadata */}
-        <div className={styles.sectionHeader}>
-          <span className={styles.monoTag}>[ EXHIBIT 02 // ARCHIVAL TRANSFORMATION ]</span>
-          <h2 className={styles.title}>Knowledge Is Alive</h2>
+        <div className={styles.header}>
+          <span className={styles.tag}>PRODUCT INTERFACE</span>
+          <h2 className={styles.title}>From Voice → Knowledge</h2>
           <p className={styles.subtitle}>
-            Watch spontaneous oral accounts evolve into verified, structured institutional memory.
+            Spoken accounts are captured in natural voice, then automatically structured into verified procedures, tips, and warnings.
           </p>
         </div>
 
-        {/* Transformation Pipeline Stage Selector */}
-        <div className={styles.stageBar}>
-          <button
-            className={`${styles.stageTab} ${activeStage === 1 ? styles.stageActive : ''}`}
-            onClick={() => setActiveStage(1)}
-          >
-            <span className={styles.stageNum}>01</span>
-            <span className={styles.stageName}>RAW VOICE RECORDING</span>
-          </button>
-          <span className={styles.stageArrow}>➔</span>
-
-          <button
-            className={`${styles.stageTab} ${activeStage === 2 ? styles.stageActive : ''}`}
-            onClick={() => setActiveStage(2)}
-          >
-            <span className={styles.stageNum}>02</span>
-            <span className={styles.stageName}>SPOKEN TRANSCRIPT</span>
-          </button>
-          <span className={styles.stageArrow}>➔</span>
-
-          <button
-            className={`${styles.stageTab} ${activeStage === 3 ? styles.stageActive : ''}`}
-            onClick={() => setActiveStage(3)}
-          >
-            <span className={styles.stageNum}>03</span>
-            <span className={styles.stageName}>AI EXTRACTION & CATALOGING</span>
-          </button>
-        </div>
-
-        {/* Live Transformation Board */}
-        <div className={styles.transformationBoard}>
-          {/* STAGE 1: RAW VOICE */}
-          {activeStage === 1 && (
-            <div className={styles.stagePane}>
-              <div className={styles.paneMeta}>STAGE 01 // ACOUSTIC VOICE CAPTURE</div>
-              <div className={styles.audioPlayerBox}>
-                <div className={styles.playerControls}>
-                  <button
-                    className={styles.playBtn}
-                    onClick={() => setIsPlaying(!isPlaying)}
-                  >
-                    {isPlaying ? '⏸ PAUSE ARCHIVE AUDIO' : '▶ PLAY SPOKEN ACCOUNT'}
-                  </button>
-                  <span className={styles.timeMono}>TIMESTAMP: 02:17 / 04:32</span>
+        {/* Clean Product Interface Grid */}
+        <div className={styles.demoProductGrid}>
+          {/* LEFT: Audio Player & Spoken Transcript */}
+          <div className={styles.playerCol}>
+            <div className={styles.playerCard}>
+              <div className={styles.playerHeader}>
+                <div className={styles.trackInfo}>
+                  <strong className={styles.trackAuthor}>Ramesh Kumar</strong>
+                  <span className={styles.trackMeta}>Master Mechanic · Audio Timestamp: 02:17</span>
                 </div>
+                <button
+                  className={styles.playToggle}
+                  onClick={() => setIsPlaying(!isPlaying)}
+                >
+                  {isPlaying ? '⏸' : '▶'}
+                </button>
+              </div>
 
-                <div className={styles.waveformContainer}>
-                  <Waveform isAnimating={isPlaying} barCount={48} height={40} color="var(--color-brass)" />
-                </div>
-                <p className={styles.paneDesc}>
-                  Unfiltered 8-minute audio captured in a workshop setting. Trapped in audio file format without indexing.
+              <div className={styles.waveformWrapper}>
+                <Waveform isAnimating={isPlaying} barCount={36} height={36} color="var(--color-amber)" />
+              </div>
+
+              <div className={styles.transcriptBox}>
+                <span className={styles.boxLabel}>VERBATIM TRANSCRIPT</span>
+                <blockquote className={styles.quoteText}>
+                  “When this engine starts making that high-pitched metallic ticking, most guys grab the scanner. But if you put your hand right on the thermostat housing... you feel the pulse. 80% of the time, it's water pump impeller erosion...”
+                </blockquote>
+              </div>
+            </div>
+          </div>
+
+          {/* RIGHT: Clean Extracted Structured Result */}
+          <div className={styles.resultCol}>
+            <div className={styles.structuredCard}>
+              <div className={styles.cardTop}>
+                <span className={styles.catTag}>Automotive Repair</span>
+                <span className={styles.catalogId}>ARCH-0047</span>
+              </div>
+
+              <h3 className={styles.entryTitle}>Diagnosing Engine Overheating</h3>
+
+              <div className={styles.sectionBlock}>
+                <span className={styles.blockTitle}>PROCEDURE</span>
+                <p className={styles.blockContent}>
+                  Check coolant circulation flow before replacing the thermostat housing.
                 </p>
               </div>
-            </div>
-          )}
 
-          {/* STAGE 2: TRANSCRIPT */}
-          {activeStage === 2 && (
-            <div className={styles.stagePane}>
-              <div className={styles.paneMeta}>STAGE 02 // SPOKEN VERBATIM TRANSCRIPT</div>
-              <blockquote className={styles.rawTranscriptQuote}>
-                “When this engine starts making that high-pitched metallic ticking, most guys grab the scanner. But if you put your hand right on the thermostat housing... you feel the pulse. If the lower hose is cold while the top is scalding hot, that's water pump impeller erosion...”
-              </blockquote>
-            </div>
-          )}
+              <div className={styles.sectionBlock}>
+                <span className={styles.blockTitleAmber}>EXPERT TIP</span>
+                <p className={styles.blockContent}>
+                  Feel upper vs lower radiator hose temperatures — if lower is cold while upper is scalding, test water pump vanes.
+                </p>
+              </div>
 
-          {/* STAGE 3: AI EXTRACTION (SIGNATURE DEMO) */}
-          {activeStage === 3 && (
-            <div className={styles.stagePane}>
-              <div className={styles.paneMeta}>STAGE 03 // EXTRACTED & CATALOGED KNOWLEDGE RECORD</div>
+              <div className={styles.sectionBlock}>
+                <span className={styles.blockTitleRed}>COMMON MISTAKE</span>
+                <p className={styles.blockContent}>
+                  Replacing the thermostat immediately without verifying actual impeller cavitation.
+                </p>
+              </div>
 
-              <div className={styles.extractionCardsGrid}>
-                {/* Extracted Procedure */}
-                <div className={styles.extractedCard}>
-                  <span className={styles.cardTypeGreen}>[ PROCEDURE ]</span>
-                  <h3 className={styles.cardTitle}>Cooling System Circulation Test</h3>
-                  <p className={styles.cardDesc}>Check coolant flow and hose temperature differential before replacing thermostat housing.</p>
-                  <span className={styles.sourceTag}>Verbatim Audio Ref: 02:17</span>
-                </div>
-
-                {/* Extracted Expert Tip */}
-                <div className={styles.extractedCard}>
-                  <span className={styles.cardTypeBrass}>[ MASTER PRACTITIONER TIP ]</span>
-                  <h3 className={styles.cardTitle}>Tactile & Aroma Diagnostics</h3>
-                  <p className={styles.cardDesc}>Burnt sweet scent at reservoir cap indicates early cylinder head gasket pressure seepage.</p>
-                  <span className={styles.sourceTag}>Verbatim Audio Ref: 03:45</span>
-                </div>
-
-                {/* Extracted Common Mistake */}
-                <div className={styles.extractedCard}>
-                  <span className={styles.cardTypeRust}>[ COMMON MISTAKE TO AVOID ]</span>
-                  <h3 className={styles.cardTitle}>Premature Thermostat Swap</h3>
-                  <p className={styles.cardDesc}>Replacing the thermostat immediately without verifying actual impeller cavitation.</p>
-                  <span className={styles.sourceTag}>Verbatim Audio Ref: 04:10</span>
-                </div>
+              <div className={styles.cardFooter}>
+                <span className={styles.sourceTag}>Verbatim Audio Source: 02:17</span>
+                <Link href="/app/knowledge/demo-memory-1" className={styles.inspectBtn}>
+                  Inspect Full Record →
+                </Link>
               </div>
             </div>
-          )}
-        </div>
-
-        {/* Action Link */}
-        <div className={styles.bottomLinkRow}>
-          <Link href="/app/knowledge/demo-memory-1" className={styles.inspectCatalogBtn}>
-            Inspect Full Digitized Field Recording Catalog Entry #ARCH-0047 →
-          </Link>
+          </div>
         </div>
       </div>
     </section>

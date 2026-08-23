@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import Link from 'next/link';
 import { Button } from '@/components/ui/Button/Button';
 import { Waveform } from '@/components/ui/Waveform/Waveform';
 import styles from './HeroSection.module.css';
@@ -10,70 +9,62 @@ export const HeroSection: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   return (
-    <section className={styles.fullScreenHero}>
-      {/* Top Archive Metadata Bar */}
-      <div className={styles.topArchiveBar}>
-        <span className={styles.brandTitle}>MEMORYMAP</span>
-        <span className={styles.archiveTag}>[ ARCHIVE RECORD #0047 ]</span>
-        <span className={styles.catLabel}>ORAL KNOWLEDGE REGISTRY</span>
-      </div>
+    <section className={styles.heroSection}>
+      <div className={styles.container}>
+        {/* Left Column: Headline & Narrative */}
+        <div className={styles.leftCol}>
+          <h1 className={styles.headline}>Some knowledge disappears quietly.</h1>
 
-      {/* Hero Viewport: Centered Focus on Ramesh Kumar */}
-      <div className={styles.portraitCenterStage}>
-        {/* Large Documentary Portrait Frame */}
-        <div className={styles.largePortraitFrame}>
-          <img
-            src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1000&auto=format&fit=crop"
-            alt="Ramesh Kumar - Master Mechanic"
-            className={styles.portraitImage}
-          />
-          <div className={styles.photoVignette} />
-
-          {/* Overlay Audio Control Trigger */}
-          <div className={styles.audioOverlayBar}>
-            <button
-              className={styles.playAudioBtn}
-              onClick={() => setIsPlaying(!isPlaying)}
-            >
-              {isPlaying ? '⏸ PAUSE AUDIO' : '▶ LISTEN TO RAMESH (02:17)'}
-            </button>
-            <div className={styles.waveInline}>
-              <Waveform isAnimating={isPlaying} barCount={28} height={22} color="var(--color-brass)" />
-            </div>
-            <span className={styles.timeMono}>02:17 / 04:32</span>
+          <div className={styles.narrativeGroup}>
+            <p className={styles.narrativeLine}>A mechanic retires.</p>
+            <p className={styles.narrativeLine}>A teacher leaves the classroom.</p>
+            <p className={styles.narrativeLine}>An artisan puts down their tools.</p>
           </div>
-        </div>
 
-        {/* Archival Subject Metadata & Caption */}
-        <div className={styles.subjectMetaBlock}>
-          <h1 className={styles.subjectName}>RAMESH KUMAR</h1>
-          <p className={styles.subjectRole}>MASTER MECHANIC · 35 YEARS PRACTICE · MUMBAI WORKSHOP</p>
-          <span className={styles.recDateMono}>FIELD RECORDING DATED: 18 AUGUST 2026</span>
-
-          <blockquote className={styles.spokenQuote}>
-            “I've learned to hear an engine before I learned to understand it.”
-          </blockquote>
-        </div>
-      </div>
-
-      {/* Product Mission Statement BELOW the visual */}
-      <div className={styles.productMissionSection}>
-        <div className={styles.missionContainer}>
-          <h2 className={styles.missionHeadline}>
-            35 years of knowledge should not end on the day someone retires.
-          </h2>
-
-          <p className={styles.missionSubtext}>
-            MemoryMap records the unwritten practical experience that normally disappears when veteran practitioners leave — transforming natural voice conversations into verified institutional memory.
+          <p className={styles.summaryText}>
+            <strong>MemoryMap preserves what experience taught them</strong> — capturing natural voice accounts and transforming tacit intuition into searchable institutional knowledge.
           </p>
 
           <div className={styles.ctaRow}>
-            <Button href="/app/record" variant="brass" size="lg">
-              Preserve Someone's Knowledge →
+            <Button href="/app/record" variant="primary" size="lg">
+              Preserve knowledge →
             </Button>
             <Button href="/app/knowledge" variant="secondary" size="lg">
-              Explore the Archive Index
+              Explore the archive
             </Button>
+          </div>
+        </div>
+
+        {/* Right Column: Documentary Portrait of Ramesh Kumar */}
+        <div className={styles.rightCol}>
+          <div className={styles.portraitCard}>
+            <div className={styles.imageWrapper}>
+              <img
+                src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1000&auto=format&fit=crop"
+                alt="Ramesh Kumar - Master Mechanic"
+                className="clean-photo"
+              />
+            </div>
+
+            <div className={styles.captionBar}>
+              <div className={styles.captionInfo}>
+                <strong className={styles.expertName}>Ramesh Kumar</strong>
+                <span className={styles.expertRole}>Master Mechanic · 35 years practice</span>
+              </div>
+
+              <div className={styles.audioPlayer}>
+                <button
+                  className={styles.playBtn}
+                  onClick={() => setIsPlaying(!isPlaying)}
+                >
+                  {isPlaying ? '⏸' : '▶'}
+                </button>
+                <div className={styles.waveBox}>
+                  <Waveform isAnimating={isPlaying} barCount={20} height={20} color="var(--color-amber)" />
+                </div>
+                <span className={styles.timeTag}>02:17</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>

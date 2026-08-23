@@ -1,239 +1,230 @@
-.fullBleedSection {
-  padding: var(--space-20) 0;
-  background-color: var(--env-forest-bg);
-  color: var(--env-forest-text);
-  border-bottom: 1px solid var(--env-forest-border);
+.section {
+  padding: 6rem 0;
+  background-color: var(--bg-main);
 }
 
 .container {
-  max-width: 1280px;
+  max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 var(--space-8);
+  padding: 0 2rem;
   display: flex;
   flex-direction: column;
-  gap: var(--space-10);
+  gap: 3rem;
 }
 
-.sectionHeader {
+.header {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: 0.5rem;
 }
 
-.monoTag {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--color-brass);
-  letter-spacing: 0.08em;
+.tag {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-amber);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .title {
   font-family: var(--font-serif);
-  font-size: clamp(2.25rem, 4vw, 3.25rem);
-  color: var(--env-forest-text);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  color: var(--text-primary);
 }
 
 .subtitle {
-  font-size: 1.125rem;
-  color: #A3BAA3;
+  font-size: 1.0625rem;
+  color: var(--text-secondary);
   max-width: 600px;
 }
 
-.stageBar {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  border-bottom: 1px solid var(--env-forest-border);
-  padding-bottom: var(--space-4);
-  flex-wrap: wrap;
+.demoProductGrid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 2.5rem;
+  align-items: stretch;
 }
 
-.stageTab {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  padding: var(--space-3) var(--space-4);
-  background-color: var(--env-forest-card);
-  border: 1px solid var(--env-forest-border);
-  color: #A3BAA3;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.stageTab:hover {
-  border-color: var(--color-brass);
-  color: var(--env-forest-text);
-}
-
-.stageActive {
-  background-color: #273827;
-  border-color: var(--color-brass);
-  color: var(--color-brass);
-  font-weight: 700;
-}
-
-.stageNum {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--color-brass);
-}
-
-.stageName {
-  font-family: var(--font-sans);
-  font-size: 0.8125rem;
-  letter-spacing: 0.04em;
-}
-
-.stageArrow {
-  color: var(--color-brass);
-  font-size: 0.9rem;
-}
-
-.transformationBoard {
+/* Player Column */
+.playerCol {
   width: 100%;
 }
 
-.stagePane {
-  background-color: var(--env-forest-card);
-  border: 1px solid var(--env-forest-border);
-  padding: var(--space-8);
+.playerCard {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
-  animation: fadeIn 0.3s ease forwards;
+  gap: 1.5rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.04);
+  height: 100%;
 }
 
-.paneMeta {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--color-brass);
-  letter-spacing: 0.08em;
-  border-bottom: 1px solid var(--env-forest-border);
-  padding-bottom: var(--space-3);
-}
-
-.audioPlayerBox {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-}
-
-.playerControls {
+.playerHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.playBtn {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--color-brass);
-  background-color: rgba(197, 155, 39, 0.15);
-  border: 1px solid var(--color-brass);
-  padding: 0.4rem 0.85rem;
-  cursor: pointer;
-}
-
-.timeMono {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: #A3BAA3;
-}
-
-.waveformContainer {
-  padding: var(--space-4);
-  background-color: #0F160F;
-  border: 1px solid var(--env-forest-border);
-}
-
-.paneDesc {
-  font-size: 0.875rem;
-  color: #A3BAA3;
-}
-
-.rawTranscriptQuote {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-  color: var(--env-forest-text);
-  line-height: 1.6;
-  padding-left: var(--space-6);
-  border-left: 3px solid var(--color-brass);
-}
-
-.extractionCardsGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-6);
-}
-
-.extractedCard {
-  background-color: #0F160F;
-  border: 1px solid var(--env-forest-border);
-  padding: var(--space-6);
+.trackInfo {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
 }
 
-.cardTypeGreen {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: #6B8F68;
-  letter-spacing: 0.05em;
-  font-weight: 700;
-}
-
-.cardTypeBrass {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--color-brass);
-  letter-spacing: 0.05em;
-  font-weight: 700;
-}
-
-.cardTypeRust {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: #E74C3C;
-  letter-spacing: 0.05em;
-  font-weight: 700;
-}
-
-.cardTitle {
+.trackAuthor {
   font-family: var(--font-serif);
-  font-size: 1.35rem;
-  color: var(--env-forest-text);
+  font-size: 1.25rem;
+  color: var(--text-primary);
 }
 
-.cardDesc {
+.trackMeta {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.playToggle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--text-primary);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 0.875rem;
-  color: #A3BAA3;
+}
+
+.waveformWrapper {
+  padding: 1rem 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.transcriptBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  background-color: var(--bg-subtle);
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+}
+
+.boxLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.quoteText {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--text-primary);
   line-height: 1.5;
 }
 
-.sourceTag {
+/* Result Column */
+.resultCol {
+  width: 100%;
+}
+
+.structuredCard {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.04);
+  height: 100%;
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.catTag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-amber);
+  background-color: var(--color-amber-light);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-sm);
+}
+
+.catalogId {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--color-brass);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.entryTitle {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--text-primary);
+}
+
+.sectionBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.blockTitle {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.04em;
+}
+
+.blockTitleAmber {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-amber);
+  letter-spacing: 0.04em;
+}
+
+.blockTitleRed {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #C0392B;
+  letter-spacing: 0.04em;
+}
+
+.blockContent {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
   margin-top: auto;
 }
 
-.bottomLinkRow {
-  display: flex;
-  justify-content: flex-end;
+.sourceTag {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
 }
 
-.inspectCatalogBtn {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--color-brass);
+.inspectBtn {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
 @media (max-width: 992px) {
-  .extractionCardsGrid {
+  .demoProductGrid {
     grid-template-columns: 1fr;
   }
 }

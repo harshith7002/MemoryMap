@@ -1,113 +1,140 @@
 .section {
-  padding: var(--space-20) 0;
-  background-color: var(--color-archive-paper);
-  border-bottom: 1px solid var(--color-border);
+  padding: 6rem 0;
+  background-color: var(--bg-card);
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .container {
-  max-width: 1280px;
+  max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 var(--space-8);
+  padding: 0 2rem;
   display: flex;
   flex-direction: column;
-  gap: var(--space-12);
+  gap: 4rem;
 }
 
 .header {
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
-  border-bottom: 1px solid var(--color-border-subtle);
-  padding-bottom: var(--space-6);
+  gap: 0.5rem;
 }
 
-.metaLabel {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--color-brass);
-  letter-spacing: 0.08em;
+.tag {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-amber);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
-.title {
+.mainTitle {
   font-family: var(--font-serif);
-  font-size: clamp(2rem, 3.5vw, 2.75rem);
-  color: var(--color-text-primary);
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  color: var(--text-primary);
 }
 
 .subtitle {
-  font-size: var(--text-base);
-  color: var(--color-text-secondary);
+  font-size: 1.0625rem;
+  color: var(--text-secondary);
   max-width: 600px;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-6);
-}
-
-.stepCard {
-  background-color: #FFFFFF;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-sm);
-  padding: var(--space-6);
+.storiesList {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
-  transition: all var(--transition-base);
+  gap: 5rem;
 }
 
-.stepCard:hover {
-  border-color: var(--color-brass);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+.storyRow {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 4rem;
+  align-items: center;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid var(--border-color);
 }
 
-.cardTop {
+.storyRow:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.imageCol {
+  width: 100%;
+}
+
+.photoFrame {
+  width: 100%;
+  height: 320px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.contentCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.tradeLabel {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-amber);
+  letter-spacing: 0.05em;
+}
+
+.storyHeadline {
+  font-family: var(--font-serif);
+  font-size: clamp(1.75rem, 2.8vw, 2.35rem);
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.quoteText {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  padding-left: 1rem;
+  border-left: 2px solid var(--color-amber);
+}
+
+.metaFooter {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--color-border-subtle);
-  padding-bottom: var(--space-3);
+  padding-top: 1rem;
 }
 
-.stepNum {
-  font-family: var(--font-serif);
-  font-size: 1.75rem;
-  color: var(--color-brass);
+.expertDetails {
+  display: flex;
+  flex-direction: column;
 }
 
-.stepCode {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--color-text-muted);
+.expertName {
+  font-size: 1rem;
+  color: var(--text-primary);
 }
 
-.stepTitle {
-  font-family: var(--font-serif);
-  font-size: 1.35rem;
-  color: var(--color-text-primary);
-}
-
-.stepSub {
+.expertRole {
   font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--color-brass);
+  color: var(--text-muted);
 }
 
-.stepDesc {
+.profileBtn {
   font-size: 0.875rem;
-  color: var(--color-text-secondary);
-  line-height: 1.5;
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
 @media (max-width: 992px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 576px) {
-  .grid {
+  .storyRow {
     grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .photoFrame {
+    height: 260px;
   }
 }

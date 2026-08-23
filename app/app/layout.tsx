@@ -9,24 +9,24 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   const navItems = [
-    { label: 'Control Center', code: 'ARCH-01', href: '/app/dashboard' },
-    { label: 'Field Recording', code: 'STUDIO', href: '/app/record' },
-    { label: 'Archive Catalog', code: 'INDEX', href: '/app/knowledge' },
-    { label: 'Oral Search', code: 'QUERY', href: '/app/ask' },
-    { label: 'Practitioners', code: 'PEOPLE', href: '/app/experts' },
-    { label: 'Evolution Track', code: 'TIMELINE', href: '/app/timeline' },
-    { label: 'Settings', code: 'SYS-CFG', href: '/app/settings' },
+    { label: 'Control Center', href: '/app/dashboard' },
+    { label: 'Record Voice', href: '/app/record' },
+    { label: 'Knowledge Archive', href: '/app/knowledge' },
+    { label: 'Ask MemoryMap', href: '/app/ask' },
+    { label: 'Practitioners', href: '/app/experts' },
+    { label: 'Timeline Track', href: '/app/timeline' },
+    { label: 'Settings', href: '/app/settings' },
   ];
 
   return (
     <div className={styles.appContainer}>
-      {/* Archival Sidebar */}
+      {/* Clean Sidebar */}
       <aside className={styles.sidebar}>
         <div className={styles.sidebarHeader}>
-          <Link href="/" className={styles.brand}>
-            <span className={styles.brandTitle}>MemoryMap</span>
-            <span className={styles.brandSub}>ORAL ARCHIVE PLATFORM</span>
+          <Link href="/" className={styles.brandTitle}>
+            MemoryMap
           </Link>
+          <span className={styles.brandSub}>Knowledge Archive</span>
         </div>
 
         <nav className={styles.navMenu}>
@@ -41,37 +41,27 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                 href={item.href}
                 className={`${styles.navItem} ${isActive ? styles.active : ''}`}
               >
-                <span className={styles.navCode}>{item.code}</span>
-                <span className={styles.navLabel}>{item.label}</span>
-                {item.href === '/app/record' && <span className={styles.livePulse} />}
+                <span>{item.label}</span>
               </Link>
             );
           })}
         </nav>
 
         <div className={styles.sidebarFooter}>
-          <div className={styles.archiveMetaBox}>
-            <span className={styles.metaTitle}>DEMO ARCHIVAL PROFILE</span>
-            <span className={styles.metaName}>Ramesh Kumar Archive</span>
-            <span className={styles.metaCode}>CATALOG #EXPRT-1989-0047</span>
-          </div>
-          <Link href="/demo" className={styles.exhibitionLink}>
+          <Link href="/demo" className={styles.demoLink}>
             Interactive Exhibition Demo ➔
           </Link>
         </div>
       </aside>
 
-      {/* Main Content Area */}
+      {/* Main Content Shell */}
       <div className={styles.mainWrapper}>
         <header className={styles.topHeader}>
-          <div className={styles.headerInfo}>
-            <span className={styles.sysTag}>MEMORYMAP DIGITAL MUSEUM & ARCHIVE</span>
-          </div>
-          <div className={styles.headerRight}>
-            <Link href="/app/record" className={styles.recordActionBtn}>
-              🎙️ Record Oral Account
+          <span className={styles.headerTitle}>MemoryMap Digital Archive</span>
+          <div className={styles.headerActions}>
+            <Link href="/app/record" className={styles.recordBtn}>
+              🎙️ Record Account
             </Link>
-            <div className={styles.expertAvatar}>👨‍🔧</div>
           </div>
         </header>
 
