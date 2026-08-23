@@ -2,8 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Card } from '@/components/ui/Card/Card';
-import { Tag } from '@/components/ui/Tag/Tag';
+import { ExpertAvatar } from '@/components/ui/Avatar/ExpertAvatar';
 import { EXPERTS } from '@/lib/data';
 import styles from './page.module.css';
 
@@ -11,49 +10,41 @@ export default function ExpertsPage() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <span className={styles.badge}>DOCUMENTARY PRACTITIONER DIRECTORY</span>
-        <h1 className={styles.title}>The People Behind the Knowledge</h1>
+        <h1 className={styles.title}>People</h1>
         <p className={styles.subtitle}>
-          Master mechanics, artisans, teachers, and organic farmers whose oral accounts form the foundation of the MemoryMap archive.
+          The people behind the knowledge — master mechanics, teachers, artisans, and organic farmers whose unwritten intuition is preserved.
         </p>
       </div>
 
-      <div className={styles.grid}>
-        {EXPERTS.map((expert) => (
-          <Card key={expert.id} variant="default" catalogId={expert.catalogId} className={styles.card}>
-            <div className={styles.cardHeader}>
-              <div className={styles.avatarFrame}>
-                <img src={expert.photoUrl} alt={expert.name} className={styles.avatarImg} />
-              </div>
-              <div className={styles.headerMeta}>
-                <h2 className={styles.name}>
-                  <Link href={`/app/experts/${expert.id}`}>{expert.name}</Link>
+      <div className={styles.peopleGrid}>
+        {EXPERTS.map((person) => (
+          <div key={person.id} className={styles.personCard}>
+            <div className={styles.cardTop}>
+              <ExpertAvatar src={person.photoUrl} name={person.name} size="lg" />
+              <div className={styles.personMeta}>
+                <h2 className={styles.personName}>
+                  <Link href={`/app/experts/${person.id}`}>{person.name}</Link>
                 </h2>
-                <span className={styles.role}>{expert.role}</span>
-                <span className={styles.experience}>{expert.yearsExperience} years in field · {expert.location}</span>
+                <span className={styles.personRole}>{person.role}</span>
+                <span className={styles.personExp}>{person.yearsExperience} years practice · {person.location}</span>
               </div>
             </div>
 
-            <p className={styles.bio}>{expert.bio}</p>
+            <p className={styles.bioText}>{person.bio}</p>
 
-            <div className={styles.skillsSection}>
-              <span className={styles.skillsTitle}>MASTERED SKILLS & INSTINCTS:</span>
-              <div className={styles.skillsRow}>
-                {expert.skills.map((skill) => (
-                  <Tag key={skill} label={skill} variant="amber" />
-                ))}
-              </div>
+            <div className={styles.skillsRow}>
+              {person.skills.map((skill) => (
+                <span key={skill} className={styles.skillTag}>{skill}</span>
+              ))}
             </div>
 
             <div className={styles.cardFooter}>
-              <span className={styles.memoriesCount}>
-                📝 {expert.memoriesCount} cataloged accounts
-              </span>
-              <Link href={`/app/experts/${expert.id}`} className={styles.viewProfileBtn}>
-                Inspect Timeline & Archive →
+              <span className={styles.memoriesCount}>{person.memoriesCount} memories preserved</span>
+              <Link href={`/app/experts/${person.id}`} className={styles.viewBtn}>
+                View Profile & Timeline →
               </Link>
             </div>
-          </Card>
+          </div>
         ))}
       </div>
     </div>

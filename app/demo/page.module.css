@@ -1,155 +1,88 @@
 .container {
-  max-width: 1040px;
+  max-width: 960px;
   margin: 0 auto;
-  padding: var(--space-8) var(--space-6);
+  padding: 3rem 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
+  gap: 2.5rem;
 }
 
-.demoBanner {
-  background-color: var(--env-dark-bg);
-  color: var(--env-dark-text);
-  border: 1px solid var(--env-dark-border);
-  padding: var(--space-8);
+.demoHeader {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
-  position: relative;
-}
-
-.badgeRow {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
+  gap: 0.5rem;
 }
 
 .exhibitionTag {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  color: var(--color-brass);
-  letter-spacing: 0.08em;
-}
-
-.stepProgressTag {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: #6B8F68;
-  background-color: rgba(39, 56, 39, 0.3);
-  padding: 0.15rem 0.5rem;
-  font-weight: 700;
+  color: var(--color-amber);
+  letter-spacing: 0.04em;
 }
 
 .title {
   font-family: var(--font-serif);
-  font-size: clamp(2rem, 3.5vw, 2.75rem);
-  color: var(--env-dark-text);
+  font-size: clamp(2.25rem, 3.5vw, 3rem);
+  color: var(--text-primary);
 }
 
 .subtitle {
-  font-size: 1rem;
-  color: var(--env-dark-muted);
+  font-size: 1.0625rem;
+  color: var(--text-secondary);
   max-width: 620px;
 }
 
 .homeLink {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--color-brass);
-  margin-top: var(--space-2);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-top: 0.5rem;
 }
 
 .expertSpotlight {
-  background-color: #FFFFFF;
-  border: 1px solid var(--env-paper-border);
-  padding: var(--space-6);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 2rem;
   display: flex;
   align-items: center;
-  gap: var(--space-6);
-}
-
-.expertPhotoFrame {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 2px solid var(--color-brass);
-  flex-shrink: 0;
+  gap: 1.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
 }
 
 .expertMeta {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  flex: 1;
-}
-
-.catId {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--color-brass);
-  font-weight: 700;
 }
 
 .expertName {
   font-family: var(--font-serif);
-  font-size: 1.75rem;
-  color: var(--env-paper-text);
+  font-size: 1.5rem;
+  color: var(--text-primary);
 }
 
 .expertRole {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--color-brass);
-}
-
-.expertBio {
-  font-size: 0.8125rem;
-  color: var(--env-paper-muted);
-  line-height: 1.4;
-}
-
-.expertStats {
-  display: flex;
-  gap: var(--space-4);
-  padding-left: var(--space-6);
-  border-left: 1px solid var(--env-paper-border);
-}
-
-.eStat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.eVal {
-  font-family: var(--font-serif);
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--env-paper-text);
-}
-
-.eLabel {
-  font-size: 0.65rem;
-  color: var(--env-paper-muted);
+  font-size: 0.875rem;
+  color: var(--text-muted);
 }
 
 .interactiveBox {
-  background-color: #FFFFFF;
-  border: 1px solid var(--env-paper-border);
-  padding: var(--space-6);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  gap: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
 }
 
 .stepsBar {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: var(--space-2);
-  border-bottom: 1px solid var(--env-paper-border);
-  padding-bottom: var(--space-4);
+  gap: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1.5rem;
 }
 
 .stepTab {
@@ -157,78 +90,65 @@
   flex-direction: column;
   align-items: center;
   gap: 2px;
-  padding: var(--space-2);
-  border: 1px solid var(--env-paper-border);
-  background-color: var(--env-paper-bg);
+  padding: 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  background-color: var(--bg-main);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all var(--transition-fast);
   text-align: center;
 }
 
 .stepTabActive {
-  background-color: var(--color-brass-pale);
-  border-color: var(--color-brass);
+  background-color: var(--color-amber-light);
+  border-color: var(--color-amber);
 }
 
 .stepCompleted {
-  border-color: #6B8F68;
+  border-color: var(--text-primary);
 }
 
 .stepTabTitle {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  color: var(--env-paper-text);
+  color: var(--text-primary);
 }
 
 .stepTabDesc {
-  font-size: 0.65rem;
-  color: var(--env-paper-muted);
+  font-size: 0.7rem;
+  color: var(--text-muted);
 }
 
 .stepContent {
-  padding: var(--space-2) 0;
+  padding: 0.5rem 0;
 }
 
 .stepPane {
   display: flex;
   flex-direction: column;
-  gap: var(--space-6);
+  gap: 1.5rem;
   animation: fadeIn 0.3s ease forwards;
-}
-
-.paneHeader {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.paneStepTag {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--color-brass);
-  letter-spacing: 0.08em;
-  font-weight: 700;
 }
 
 .paneTitle {
   font-family: var(--font-serif);
-  font-size: 1.75rem;
-  color: var(--env-paper-text);
+  font-size: 1.5rem;
+  color: var(--text-primary);
 }
 
 .paneDesc {
-  font-size: 0.875rem;
-  color: var(--env-paper-muted);
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
 }
 
 .audioPlayerCard {
-  background-color: var(--env-paper-bg);
-  border: 1px solid var(--env-paper-border);
-  padding: var(--space-6);
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: 1rem;
 }
 
 .playerTop {
@@ -244,57 +164,42 @@
 
 .trackTitle {
   font-family: var(--font-serif);
-  font-size: 1.25rem;
-  color: var(--env-paper-text);
+  font-size: 1.15rem;
+  color: var(--text-primary);
 }
 
 .trackMeta {
-  font-size: 0.75rem;
-  color: var(--env-paper-muted);
+  font-size: 0.8125rem;
+  color: var(--text-muted);
 }
 
-.playBtnBig {
-  padding: 0.5rem 1.25rem;
-  background-color: var(--color-brass);
-  color: #0F0F0E;
-  font-family: var(--font-sans);
-  font-weight: 700;
+.playBtn {
+  padding: 0.45rem 1rem;
+  background-color: var(--text-primary);
+  color: #FFFFFF;
   font-size: 0.8125rem;
-  border: none;
-  cursor: pointer;
+  font-weight: 600;
+  border-radius: var(--radius-md);
 }
 
 .waveformWrapper {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-
-.timeLine {
-  display: flex;
-  justify-content: space-between;
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--color-brass);
+  padding: 0.5rem 0;
 }
 
 .transcriptCard {
-  background-color: var(--env-paper-bg);
-  border: 1px solid var(--env-paper-border);
-  padding: var(--space-6);
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: 1rem;
 }
 
 .toggleTranscriptBtn {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--color-brass);
-  background: none;
-  border: none;
-  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-amber);
   text-align: left;
 }
 
@@ -302,123 +207,99 @@
   font-family: var(--font-serif);
   font-style: italic;
   font-size: 1.05rem;
-  color: var(--env-paper-text);
+  color: var(--text-primary);
   line-height: 1.6;
-  padding-left: var(--space-4);
-  border-left: 3px solid var(--color-brass);
+  padding-left: 1rem;
+  border-left: 3px solid var(--color-amber);
 }
 
 .transcriptPlaceholder {
-  font-size: 0.8125rem;
-  color: var(--env-paper-muted);
+  font-size: 0.875rem;
+  color: var(--text-muted);
 }
 
 .extractionResultGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--space-4);
+  gap: 1rem;
 }
 
 .resultBox {
-  background-color: var(--env-paper-bg);
-  border: 1px solid var(--env-paper-border);
-  padding: var(--space-4);
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: 0.5rem;
 }
 
-.boxHeader {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--color-brass);
-  font-weight: 700;
-}
+.boxTag { font-size: 0.75rem; font-weight: 700; color: var(--text-primary); }
+.boxTagAmber { font-size: 0.75rem; font-weight: 700; color: var(--color-amber); }
 
 .numList, .bulletList {
-  font-size: 0.8125rem;
-  color: var(--env-paper-text);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
   line-height: 1.5;
-  padding-left: var(--space-4);
+  padding-left: 1.25rem;
 }
 
 .fullMemoryLink {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--color-brass);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
 .qaDemoBox {
-  background-color: var(--env-paper-bg);
-  border: 1px solid var(--env-paper-border);
-  padding: var(--space-6);
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: 1rem;
 }
 
 .qHeader {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 0.25rem;
 }
 
-.qLabel {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--env-paper-muted);
-}
-
-.qText {
-  font-family: var(--font-serif);
-  font-size: 1.25rem;
-  color: var(--env-paper-text);
-}
+.qLabel { font-size: 0.75rem; color: var(--text-muted); }
+.qText { font-family: var(--font-serif); font-size: 1.15rem; color: var(--text-primary); }
 
 .triggerAnswerBtn {
   align-self: flex-start;
   padding: 0.45rem 0.85rem;
-  background-color: var(--color-brass);
-  color: #0F0F0E;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 700;
-  border: none;
-  cursor: pointer;
+  background-color: var(--text-primary);
+  color: #FFFFFF;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
 }
 
 .aCard {
   background-color: #FFFFFF;
-  border: 1px solid var(--env-paper-border);
-  padding: var(--space-4);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1rem;
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: 0.35rem;
 }
 
-.aLabel {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: #6B8F68;
-  font-weight: 700;
-}
-
-.aText {
-  font-family: var(--font-serif);
-  font-size: 1.05rem;
-  color: var(--env-paper-text);
-  line-height: 1.5;
-  font-style: italic;
-}
+.aLabel { font-size: 0.75rem; color: var(--color-amber); }
+.aText { font-family: var(--font-serif); font-style: italic; font-size: 1rem; color: var(--text-primary); }
 
 .attributionCard {
-  background-color: var(--env-paper-bg);
-  border: 1px solid var(--env-paper-border);
-  padding: var(--space-6);
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: 0.75rem;
 }
 
 .attrHeader {
@@ -427,78 +308,37 @@
   justify-content: space-between;
 }
 
-.attrTag {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--color-brass);
-  font-weight: 700;
-}
-
-.stampBadge {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: #273827;
-  background-color: #EEF3EE;
-  padding: 0.15rem 0.5rem;
-}
-
-.attrMeta {
-  display: flex;
-  flex-direction: column;
-  font-size: 0.8125rem;
-  color: var(--env-paper-muted);
-}
-
-.listenFullBtn {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--color-brass);
-  margin-top: var(--space-2);
-}
+.attrTag { font-size: 0.75rem; font-weight: 700; color: var(--color-amber); }
+.stampBadge { font-size: 0.75rem; font-weight: 600; color: var(--text-primary); }
+.attrMeta { display: flex; flex-direction: column; font-size: 0.8125rem; color: var(--text-muted); }
+.listenFullBtn { font-size: 0.875rem; font-weight: 600; color: var(--text-primary); margin-top: 0.25rem; }
 
 .demoCompleteBox {
-  background-color: #EEF3EE;
-  border: 1px solid rgba(39, 56, 39, 0.3);
-  padding: var(--space-6);
+  background-color: var(--color-forest-pale);
+  border: 1px solid rgba(30, 44, 30, 0.2);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-3);
-  margin-top: var(--space-4);
+  gap: 1rem;
 }
 
-.completeTitle {
-  font-family: var(--font-serif);
-  font-size: 1.5rem;
-  color: #273827;
-}
-
-.completeText {
-  font-size: 0.875rem;
-  color: var(--env-paper-muted);
-  max-width: 480px;
-}
-
-.finalBtns {
-  display: flex;
-  gap: var(--space-4);
-  margin-top: var(--space-2);
-}
+.completeTitle { font-family: var(--font-serif); font-size: 1.5rem; color: var(--color-forest); }
+.completeText { font-size: 0.9375rem; color: var(--text-secondary); max-width: 480px; }
+.finalBtns { display: flex; gap: 1rem; margin-top: 0.5rem; }
 
 .paneActions {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: var(--space-4);
-  padding-top: var(--space-4);
-  border-top: 1px solid var(--env-paper-border);
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
 }
 
 @media (max-width: 768px) {
   .stepsBar { grid-template-columns: 1fr; }
-  .expertSpotlight { flex-direction: column; text-align: center; }
-  .expertStats { border-left: none; border-top: 1px solid var(--env-paper-border); padding-left: 0; padding-top: var(--space-4); }
   .extractionResultGrid { grid-template-columns: 1fr; }
+  .expertSpotlight { flex-direction: column; text-align: center; }
 }

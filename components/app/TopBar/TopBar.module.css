@@ -1,0 +1,30 @@
+.topBar {
+  height: 64px;
+  background-color: var(--bg-main);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+}
+
+.titleText {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.rightActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}

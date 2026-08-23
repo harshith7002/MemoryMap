@@ -1,32 +1,29 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { Waveform } from '@/components/ui/Waveform/Waveform';
 import { Button } from '@/components/ui/Button/Button';
 import { useAudioRecorder } from '@/lib/hooks';
 import styles from './page.module.css';
 
 export default function RecordPage() {
-  const router = useRouter();
   const { state, formattedTime, start, pause, resume, stop, reset } = useAudioRecorder();
-  const [selectedPrompt, setSelectedPrompt] = useState<string | null>(null);
+  const [selectedPrompt, setSelectedPrompt] = useState<string>('What is something you know that took years to learn?');
   const [processingStep, setProcessingStep] = useState(0);
 
   const prompts = [
-    'A diagnostic process only you know how to do',
-    'Something that took you years to master by trial and error',
-    'A common mistake beginners in your field always make',
-    'The most important lesson passed down from your mentor'
+    'What is something you know that took years to learn?',
+    'What is a diagnostic trick only experience teaches?',
+    'What common mistake do beginners in your trade make?',
+    'What lesson did your mentor pass down to you?'
   ];
 
   const processingMessages = [
-    'RECORDING // Cataloging acoustic frequency map...',
-    'ANALYSIS // Extracting step-by-step diagnostic procedures...',
-    'STRUCTURING // Identifying master practical tips & warnings...',
-    'INDEXING // Formulating catalog tools & required materials...',
-    'ARCHIVING // Linking source timestamp attribution...',
-    'COMPLETE // Generating permanent archive catalog entry...'
+    'Listening to spoken account...',
+    'Identifying procedure steps...',
+    'Extracting practical tips...',
+    'Formatting tools and story...'
   ];
 
   useEffect(() => {
@@ -37,39 +34,32 @@ export default function RecordPage() {
             return prev + 1;
           } else {
             clearInterval(interval);
-            setTimeout(() => {
-              router.push('/app/knowledge/demo-memory-1');
-            }, 800);
             return prev;
           }
         });
-      }, 900);
+      }, 1000);
 
       return () => clearInterval(interval);
     }
-  }, [state, router, processingMessages.length]);
+  }, [state, processingMessages.length]);
 
   return (
     <div className={styles.container}>
-      {/* Studio Header */}
       <div className={styles.header}>
-        <span className={styles.badge}>FIELD AUDIO ARCHIVE STUDIO // STUDIO-01</span>
-        <h1 className={styles.title}>Preserve an Oral Account</h1>
+        <h1 className={styles.title}>Preserve a memory.</h1>
         <p className={styles.subtitle}>
-          No documentation marathon. Speak naturally as if teaching an apprentice.
+          You don't need to write it down. Just tell the story.
         </p>
       </div>
 
       {/* IDLE STATE */}
       {state === 'idle' && (
-        <div className={styles.idleState}>
-          <div className={styles.promptCard}>
-            <span className={styles.promptHeader}>SELECT ORAL ARCHIVE PROMPT:</span>
-            <p className={styles.promptMain}>
-              {selectedPrompt ? `“${selectedPrompt}”` : '“Tell us about something you know that took years to learn.”'}
-            </p>
+        <div className={styles.idleCard}>
+          <div className={styles.promptHeader}>
+            <span className={styles.promptLabel}>GUIDED RECORDING PROMPT</span>
+            <h2 className={styles.promptTitle}>“{selectedPrompt}”</h2>
 
-            <div className={styles.chipsRow}>
+            <div className={styles.promptChips}>
               {prompts.map((p, idx) => (
                 <button
                   key={idx}
@@ -82,72 +72,45 @@ export default function RecordPage() {
             </div>
           </div>
 
-          {/* Archival Mic Trigger */}
-          <div className={styles.micContainer}>
-            <button className={styles.bigMicButton} onClick={start} aria-label="Start recording">
+          <div className={styles.recordTriggerBox}>
+            <button className={styles.recordCircleBtn} onClick={start} aria-label="Start recording">
               🎙️
             </button>
-            <span className={styles.micActionText}>Click to Initiate Voice Recording</span>
-          </div>
-
-          <div className={styles.privacyNote}>
-            🔒 FIELD NOTE: Audio is captured with high-fidelity acoustic indexing & source timestamp attribution.
+            <span className={styles.triggerText}>Click to start speaking</span>
           </div>
         </div>
       )}
 
-      {/* RECORDING STATE */}
-      {state === 'recording' && (
-        <div className={styles.activeState}>
-          <div className={styles.liveIndicatorRow}>
-            <span className={styles.redBlinkDot} />
-            <span className={styles.liveText}>FIELD RECORDER ACTIVE</span>
-            <span className={styles.timerDisplay}>{formattedTime}</span>
+      {/* RECORDING / PAUSED STATE */}
+      {(state === 'recording' || state === 'paused') && (
+        <div className={styles.activeRecordCard}>
+          <div className={styles.timerHeader}>
+            <span className={state === 'recording' ? styles.liveBadge : styles.pauseBadge}>
+              {state === 'recording' ? '● RECORDING' : 'PAUSED'}
+            </span>
+            <span className={styles.timerVal}>{formattedTime}</span>
           </div>
 
           <div className={styles.waveformContainer}>
-            <Waveform isAnimating={true} barCount={40} height={50} color="var(--color-brass)" />
+            <Waveform isAnimating={state === 'recording'} barCount={36} height={40} color="var(--color-amber)" />
           </div>
 
-          <p className={styles.recordingAdvice}>
-            “Speak naturally. MemoryMap AI automatically identifies procedures, tips, tools, and backstory.”
-          </p>
-
           <div className={styles.controlsRow}>
-            <Button onClick={pause} variant="secondary" size="md">
-              ⏸ Pause
-            </Button>
+            {state === 'recording' ? (
+              <Button onClick={pause} variant="secondary" size="md">
+                ⏸ Pause
+              </Button>
+            ) : (
+              <Button onClick={resume} variant="primary" size="md">
+                ▶ Resume
+              </Button>
+            )}
+
             <Button onClick={stop} variant="brass" size="lg">
-              ⏹ Finish & Catalog Knowledge
-            </Button>
-            <Button onClick={reset} variant="ghost" size="md">
-              ✕ Cancel
-            </Button>
-          </div>
-        </div>
-      )}
-
-      {/* PAUSED STATE */}
-      {state === 'paused' && (
-        <div className={styles.activeState}>
-          <div className={styles.liveIndicatorRow}>
-            <span className={styles.pauseBadge}>PAUSED</span>
-            <span className={styles.timerDisplay}>{formattedTime}</span>
-          </div>
-
-          <div className={styles.waveformContainer}>
-            <Waveform isAnimating={false} barCount={40} height={50} color="var(--color-text-muted)" />
-          </div>
-
-          <div className={styles.controlsRow}>
-            <Button onClick={resume} variant="brass" size="lg">
-              ▶ Resume Recording
-            </Button>
-            <Button onClick={stop} variant="primary" size="md">
-              ⏹ Finish & Catalog
+              Finish & Preserve Memory
             </Button>
             <Button onClick={reset} variant="ghost" size="sm">
-              ✕ Cancel
+              Cancel
             </Button>
           </div>
         </div>
@@ -155,19 +118,45 @@ export default function RecordPage() {
 
       {/* PROCESSING STATE */}
       {state === 'processing' && (
-        <div className={styles.processingState}>
-          <div className={styles.spinnerBox}>
-            <span className={styles.spinner} />
+        <div className={styles.processingCard}>
+          <div className={styles.spinner} />
+          <h2 className={styles.procTitle}>Understanding your experience...</h2>
+          <p className={styles.procSub}>{processingMessages[processingStep]}</p>
+        </div>
+      )}
+
+      {/* FINISHED STATE */}
+      {state === 'done' && (
+        <div className={styles.doneCard}>
+          <div className={styles.doneHeader}>
+            <h2 className={styles.doneTitle}>Your knowledge has been preserved.</h2>
+            <p className={styles.doneSub}>Here is what MemoryMap extracted from your spoken account:</p>
           </div>
 
-          <h2 className={styles.processingTitle}>Cataloging Spoken Knowledge...</h2>
-          <p className={styles.processingStepText}>{processingMessages[processingStep]}</p>
+          <div className={styles.extractedGrid}>
+            <div className={styles.extractedBox}>
+              <strong className={styles.boxTag}>PROCEDURE</strong>
+              <p className={styles.boxText}>Check coolant circulation flow before replacing the thermostat housing.</p>
+            </div>
 
-          <div className={styles.progressBar}>
-            <div
-              className={styles.progressFill}
-              style={{ width: `${((processingStep + 1) / processingMessages.length) * 100}%` }}
-            />
+            <div className={styles.extractedBox}>
+              <strong className={styles.boxTagAmber}>EXPERT TIP</strong>
+              <p className={styles.boxText}>Feel upper vs lower radiator hose temperatures — if lower is cold while upper is scalding, test water pump vanes.</p>
+            </div>
+
+            <div className={styles.extractedBox}>
+              <strong className={styles.boxTagRed}>COMMON MISTAKE</strong>
+              <p className={styles.boxText}>Replacing the thermostat immediately without verifying actual impeller cavitation.</p>
+            </div>
+          </div>
+
+          <div className={styles.doneActions}>
+            <Link href="/app/knowledge/demo-memory-1" className={styles.viewRecordBtn}>
+              View Full Preserved Document →
+            </Link>
+            <Button onClick={reset} variant="secondary" size="md">
+              Record Another Memory
+            </Button>
           </div>
         </div>
       )}

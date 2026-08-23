@@ -7,85 +7,74 @@ import styles from './page.module.css';
 export default function SettingsPage() {
   const [autoTranscribe, setAutoTranscribe] = useState(true);
   const [notifyOnMatch, setNotifyOnMatch] = useState(true);
-  const [publicProfile, setPublicProfile] = useState(true);
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1 className={styles.title}>Archive Configuration</h1>
-        <p className={styles.subtitle}>Manage your practitioner profile, voice processing preferences, and privacy controls.</p>
+        <h1 className={styles.title}>Settings</h1>
+        <p className={styles.subtitle}>Manage your profile, recording preferences, and privacy controls.</p>
       </div>
 
+      {/* Profile */}
       <div className={styles.sectionCard}>
-        <h2 className={styles.sectionTitle}>👤 Practitioner Profile Metadata</h2>
+        <h2 className={styles.sectionTitle}>Profile</h2>
         <div className={styles.formRow}>
           <div className={styles.field}>
-            <label className={styles.label}>Full Name</label>
+            <label className={styles.label}>Name</label>
             <input type="text" className={styles.input} defaultValue="Ramesh Kumar" />
           </div>
           <div className={styles.field}>
-            <label className={styles.label}>Master Role / Trade</label>
+            <label className={styles.label}>Role / Trade</label>
             <input type="text" className={styles.input} defaultValue="Master Mechanic" />
-          </div>
-        </div>
-
-        <div className={styles.formRow}>
-          <div className={styles.field}>
-            <label className={styles.label}>Years of Experience</label>
-            <input type="number" className={styles.input} defaultValue="35" />
-          </div>
-          <div className={styles.field}>
-            <label className={styles.label}>Location / Base Workshop</label>
-            <input type="text" className={styles.input} defaultValue="Mumbai, India" />
           </div>
         </div>
       </div>
 
+      {/* Recording */}
       <div className={styles.sectionCard}>
-        <h2 className={styles.sectionTitle}>🎙️ Voice Recording & AI Indexing Preferences</h2>
-
+        <h2 className={styles.sectionTitle}>Recording</h2>
         <div className={styles.toggleRow}>
           <div className={styles.toggleText}>
-            <span className={styles.toggleTitle}>Automatic AI Knowledge Extraction</span>
-            <span className={styles.toggleSub}>Automatically extract procedures, tips, and tools after audio recording completes.</span>
+            <span className={styles.toggleTitle}>Automatic Memory Extraction</span>
+            <span className={styles.toggleSub}>Extract procedures and tips automatically after voice recording finishes.</span>
           </div>
           <input
             type="checkbox"
-            className={styles.toggleInput}
+            className={styles.checkbox}
             checked={autoTranscribe}
             onChange={() => setAutoTranscribe(!autoTranscribe)}
           />
         </div>
+      </div>
 
+      {/* Privacy */}
+      <div className={styles.sectionCard}>
+        <h2 className={styles.sectionTitle}>Privacy</h2>
         <div className={styles.toggleRow}>
           <div className={styles.toggleText}>
-            <span className={styles.toggleTitle}>Apprentice Query Notifications</span>
-            <span className={styles.toggleSub}>Receive notifications when a student or apprentice queries your archived memories.</span>
+            <span className={styles.toggleTitle}>Archive Access</span>
+            <span className={styles.toggleSub}>Allow preserved memories to be searchable by learners in the MemoryMap archive.</span>
           </div>
           <input
             type="checkbox"
-            className={styles.toggleInput}
+            className={styles.checkbox}
             checked={notifyOnMatch}
             onChange={() => setNotifyOnMatch(!notifyOnMatch)}
           />
         </div>
+      </div>
 
-        <div className={styles.toggleRow}>
-          <div className={styles.toggleText}>
-            <span className={styles.toggleTitle}>Public Archive Visibility</span>
-            <span className={styles.toggleSub}>Allow your preserved memories to be searchable in the public MemoryMap Digital Museum.</span>
-          </div>
-          <input
-            type="checkbox"
-            className={styles.toggleInput}
-            checked={publicProfile}
-            onChange={() => setPublicProfile(!publicProfile)}
-          />
+      {/* Archive Actions */}
+      <div className={styles.sectionCard}>
+        <h2 className={styles.sectionTitle}>Archive</h2>
+        <div className={styles.actionsRow}>
+          <Button variant="secondary" size="sm">Export All Knowledge Records</Button>
+          <Button variant="ghost" size="sm" style={{ color: '#C0392B' }}>Delete Archive</Button>
         </div>
       </div>
 
-      <div className={styles.actionsRow}>
-        <Button variant="brass" size="md">Save Preference Changes</Button>
+      <div className={styles.saveRow}>
+        <Button variant="primary" size="md">Save changes</Button>
       </div>
     </div>
   );

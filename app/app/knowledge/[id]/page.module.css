@@ -1,157 +1,187 @@
 .container {
-  max-width: 960px;
+  max-width: 860px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
+  gap: 2.5rem;
 }
 
-.backBtn {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
+.backLink {
+  font-size: 0.875rem;
   font-weight: 600;
-  color: var(--color-brass);
+  color: var(--text-primary);
 }
 
-.documentHeader {
+.docHeader {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
-  border-bottom: 1px solid var(--color-border);
-  padding-bottom: var(--space-6);
+  gap: 1rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
 }
 
-.catalogMetaRow {
+.docMetaRow {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
-  flex-wrap: wrap;
+  gap: 0.75rem;
 }
 
-.catalogIdTag {
+.catalogId {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  color: var(--color-brass);
+  color: var(--color-amber);
 }
 
-.catBadge {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  padding: 0.15rem 0.5rem;
-  background-color: var(--color-forest-pale);
-  color: var(--color-forest);
+.categoryBadge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
-.dateStamp {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--color-text-muted);
+.dateRecorded {
+  font-size: 0.75rem;
+  color: var(--text-muted);
 }
 
-.title {
+.docTitle {
   font-family: var(--font-serif);
-  font-size: clamp(2rem, 3.5vw, 2.75rem);
-  color: var(--color-text-primary);
+  font-size: clamp(2.25rem, 3.5vw, 3rem);
+  color: var(--text-primary);
 }
 
-.sourceBar {
+.authorBar {
   display: flex;
   align-items: center;
-  gap: var(--space-4);
-  background-color: #FFFFFF;
-  padding: var(--space-4) var(--space-6);
-  border: 1px solid var(--color-border);
+  gap: 1rem;
+  padding-top: 0.5rem;
 }
 
-.authorAvatar {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background-color: var(--color-brass-pale);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-}
-
-.authorMeta {
+.authorDetails {
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
 .authorName {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--color-text-primary);
+  font-size: 1rem;
+  color: var(--text-primary);
 }
 
-.authorName a {
-  color: var(--color-brass);
-}
-
-.authorRole {
-  font-size: 0.75rem;
-  color: var(--color-text-secondary);
+.authorSub {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
 }
 
 .durationChip {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--color-text-muted);
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+/* Audio Card */
+.audioCard {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.03);
+}
+
+.audioCardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.trackMeta {
+  display: flex;
+  flex-direction: column;
+}
+
+.trackTitle {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--text-primary);
+}
+
+.timeMeta {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.playToggleBtn {
+  padding: 0.45rem 1rem;
+  background-color: var(--text-primary);
+  color: #FFFFFF;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+}
+
+.waveformContainer {
+  padding: 0.5rem 0;
 }
 
 .sectionCard {
-  background-color: #FFFFFF;
-  border: 1px solid var(--color-border);
-  padding: var(--space-6);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: 1rem;
 }
 
-.sectionHeader {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--color-brass);
-  letter-spacing: 0.08em;
-  border-bottom: 1px solid var(--color-border-subtle);
-  padding-bottom: var(--space-2);
+.sectionTitle {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  color: var(--text-primary);
 }
 
-.summaryText {
+.sectionTitleAmber {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  color: var(--color-amber);
+}
+
+.sectionTitleRed {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  color: #C0392B;
+}
+
+.summaryQuote {
   font-family: var(--font-serif);
   font-style: italic;
   font-size: 1.15rem;
-  color: var(--color-text-primary);
+  color: var(--text-primary);
   line-height: 1.6;
-  padding-left: var(--space-4);
-  border-left: 3px solid var(--color-brass);
+  padding-left: 1rem;
+  border-left: 3px solid var(--color-amber);
 }
 
 .stepsList {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: 1rem;
 }
 
-.stepItem {
+.stepRow {
   display: flex;
   align-items: flex-start;
-  gap: var(--space-4);
-  background-color: var(--color-archive-paper);
-  padding: var(--space-3) var(--space-4);
-  border: 1px solid var(--color-border-subtle);
+  gap: 1rem;
 }
 
-.stepSquare {
+.stepNum {
   width: 24px;
   height: 24px;
-  background-color: var(--color-archive-charcoal);
-  color: var(--color-archive-paper);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
+  border-radius: 50%;
+  background-color: var(--bg-subtle);
+  color: var(--text-primary);
+  font-size: 0.8125rem;
   font-weight: 700;
   display: flex;
   align-items: center;
@@ -164,170 +194,84 @@
   flex-direction: column;
 }
 
-.stepInstruction {
-  font-size: 0.875rem;
-  color: var(--color-text-primary);
-  line-height: 1.5;
+.stepText {
+  font-size: 0.9375rem;
+  color: var(--text-primary);
 }
 
 .stepNote {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--color-brass);
+  font-size: 0.8125rem;
+  color: var(--text-muted);
 }
 
-.twoCol {
+.twoColGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--space-6);
+  gap: 1.5rem;
 }
 
-.tipsList, .mistakesList {
+.bulletList {
+  list-style: none;
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
-  list-style: none;
+  gap: 0.5rem;
 }
-
-.tipItem, .mistakeItem {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-2);
-  font-size: 0.875rem;
-  line-height: 1.5;
-}
-
-.starIcon { color: var(--color-forest); font-weight: bold; }
-.warnIcon { color: var(--color-rust); }
 
 .toolsRow {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
+  gap: 0.5rem;
 }
 
-.sectionCardStory {
-  background-color: var(--color-archive-paper-dark);
-  border: 1px solid var(--color-border);
-  padding: var(--space-6);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-
-.sectionHeaderStory {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--color-brass);
-  letter-spacing: 0.08em;
-}
-
-.storyQuote {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 1.05rem;
-  color: var(--color-text-primary);
-  line-height: 1.7;
-}
-
-/* Audio Player */
-.audioPlayerCard {
-  background-color: var(--color-archive-charcoal);
-  color: var(--color-archive-paper);
-  border: 1px solid var(--color-border-dark);
-  padding: var(--space-8);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-}
-
-.playerHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.playerTitleRow {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-}
-
-.playerIcon { font-size: 1.5rem; }
-
-.playerTitle {
-  font-family: var(--font-serif);
-  font-size: 1.25rem;
-  color: var(--color-archive-paper);
-}
-
-.playerSubtitle {
-  font-size: 0.75rem;
-  color: var(--color-text-inverse-muted);
-}
-
-.playButtonBig {
-  padding: 0.5rem 1.25rem;
-  background-color: var(--color-brass);
-  color: var(--color-archive-black);
-  font-family: var(--font-sans);
-  font-weight: 600;
+.toolTag {
   font-size: 0.8125rem;
-  border: none;
-  cursor: pointer;
+  padding: 0.35rem 0.75rem;
+  background-color: var(--bg-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
 }
 
-.waveformBox {
-  background-color: var(--color-archive-black);
-  border: 1px solid var(--color-border-dark);
-  padding: var(--space-4);
+.sourceCard {
+  background-color: var(--color-amber-light);
+  border: 1px solid rgba(197, 155, 39, 0.4);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: 0.75rem;
 }
 
-.timeMeta {
-  display: flex;
-  justify-content: space-between;
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--color-brass);
-}
-
-.timestampSection {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-
-.timestampLabel {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--color-brass);
+.sourceSub {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
 }
 
 .timestampButtons {
   display: flex;
-  gap: var(--space-3);
+  gap: 0.75rem;
   flex-wrap: wrap;
+  margin-top: 0.5rem;
 }
 
-.timeBtn {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  padding: 0.35rem 0.75rem;
-  background-color: var(--color-archive-dark);
-  color: var(--color-archive-paper);
-  border: 1px solid var(--color-border-dark);
+.stampBtn {
+  font-size: 0.8125rem;
+  padding: 0.4rem 0.85rem;
+  background-color: #FFFFFF;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-weight: 600;
   cursor: pointer;
 }
 
-.timeBtn:hover {
-  border-color: var(--color-brass);
-  color: var(--color-brass);
+.stampBtn:hover {
+  border-color: var(--text-primary);
 }
 
 @media (max-width: 768px) {
-  .twoCol { grid-template-columns: 1fr; }
-  .sourceBar { flex-direction: column; align-items: flex-start; }
+  .twoColGrid { grid-template-columns: 1fr; }
 }

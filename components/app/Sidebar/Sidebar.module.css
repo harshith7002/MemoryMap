@@ -1,0 +1,85 @@
+.sidebar {
+  width: 250px;
+  background-color: var(--bg-card);
+  border-right: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 50;
+  padding: 2rem 1.25rem;
+}
+
+.brandSection {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.logoLink {
+  display: flex;
+  flex-direction: column;
+}
+
+.logoTitle {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.logoSubtitle {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.navMenu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 1.75rem;
+  flex: 1;
+}
+
+.navItem {
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.navItem:hover {
+  background-color: var(--bg-subtle);
+  color: var(--text-primary);
+}
+
+.active {
+  background-color: var(--color-amber-light);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.sidebarFooter {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.demoLink {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-amber);
+  padding: 0.25rem 0.85rem;
+}
+
+@media (max-width: 768px) {
+  .sidebar { width: 60px; padding: 1rem 0.5rem; }
+  .logoSubtitle, .navItem span, .sidebarFooter { display: none; }
+}

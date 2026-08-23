@@ -4,121 +4,21 @@
   background-color: var(--bg-main);
 }
 
-.sidebar {
-  width: 240px;
-  background-color: var(--bg-card);
-  border-right: 1px solid var(--border-color);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 50;
-  padding: 1.5rem 1.25rem;
-}
-
-.sidebarHeader {
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 1.25rem;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.brandTitle {
-  font-family: var(--font-serif);
-  font-size: 1.35rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.brandSub {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-}
-
-.navMenu {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  margin-top: 1.5rem;
-  flex: 1;
-}
-
-.navItem {
-  padding: 0.65rem 0.85rem;
-  border-radius: var(--radius-md);
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  transition: all var(--transition-fast);
-}
-
-.navItem:hover {
-  background-color: var(--bg-subtle);
-  color: var(--text-primary);
-}
-
-.active {
-  background-color: var(--bg-subtle);
-  color: var(--text-primary);
-  font-weight: 600;
-}
-
-.sidebarFooter {
-  padding-top: 1rem;
-  border-top: 1px solid var(--border-color);
-}
-
-.demoLink {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--color-amber);
-}
-
 .mainWrapper {
-  margin-left: 240px;
+  margin-left: 250px;
   flex: 1;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-.topHeader {
-  height: 60px;
-  background-color: var(--bg-main);
-  border-bottom: 1px solid var(--border-color);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 2rem;
-  position: sticky;
-  top: 0;
-  z-index: 40;
-}
-
-.headerTitle {
-  font-size: 0.875rem;
-  color: var(--text-muted);
-}
-
-.recordBtn {
-  font-size: 0.8125rem;
-  font-weight: 600;
-  background-color: var(--text-primary);
-  color: #FFFFFF;
-  padding: 0.4rem 0.85rem;
-  border-radius: var(--radius-md);
-}
-
 .content {
-  padding: 2rem;
+  padding: 2.5rem 2rem;
   flex: 1;
 }
 
 @media (max-width: 768px) {
-  .sidebar { width: 60px; padding: 1rem 0.5rem; }
-  .brandSub, .navItem span, .sidebarFooter { display: none; }
-  .mainWrapper { margin-left: 60px; }
+  .mainWrapper {
+    margin-left: 60px;
+  }
 }

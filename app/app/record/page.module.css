@@ -1,273 +1,263 @@
 .container {
-  max-width: 780px;
+  max-width: 800px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: var(--space-8);
-  padding: var(--space-4) 0;
+  gap: 2.5rem;
 }
 
 .header {
-  text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.badge {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--color-brass);
-  letter-spacing: 0.08em;
+  gap: 0.5rem;
 }
 
 .title {
   font-family: var(--font-serif);
-  font-size: clamp(2rem, 3.5vw, 2.75rem);
-  color: var(--color-text-primary);
+  font-size: clamp(2.25rem, 3.5vw, 3rem);
+  color: var(--text-primary);
 }
 
 .subtitle {
-  font-size: var(--text-base);
-  color: var(--color-text-secondary);
-  max-width: 520px;
+  font-size: 1.125rem;
+  color: var(--text-secondary);
 }
 
-/* Idle State */
-.idleState {
-  width: 100%;
+.idleCard {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-8);
-}
-
-.promptCard {
-  width: 100%;
-  background-color: #FFFFFF;
-  border: 1px solid var(--color-border);
-  padding: var(--space-6);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
+  gap: 3rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
 }
 
 .promptHeader {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--color-brass);
-  letter-spacing: 0.08em;
-}
-
-.promptMain {
-  font-family: var(--font-serif);
-  font-size: 1.25rem;
-  color: var(--color-text-primary);
-  font-style: italic;
-}
-
-.chipsRow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
-  margin-top: var(--space-2);
-}
-
-.chip {
-  font-size: 0.75rem;
-  padding: 0.35rem 0.75rem;
-  background-color: var(--color-archive-paper);
-  border: 1px solid var(--color-border);
-  color: var(--color-text-secondary);
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.chip:hover {
-  background-color: var(--color-archive-paper-dark);
-  border-color: var(--color-text-primary);
-  color: var(--color-text-primary);
-}
-
-.chipActive {
-  background-color: var(--color-brass-pale);
-  border-color: var(--color-brass);
-  color: var(--color-brass);
-  font-weight: 600;
-}
-
-.micContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-4);
-}
-
-.bigMicButton {
-  width: 90px;
-  height: 90px;
-  border-radius: 50%;
-  background-color: var(--color-brass);
-  color: var(--color-archive-black);
-  font-size: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 4px 20px rgba(197, 155, 39, 0.3);
-  transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.bigMicButton:hover {
-  transform: scale(1.05);
-  background-color: var(--color-brass-light);
-}
-
-.micActionText {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--color-text-primary);
-  letter-spacing: 0.05em;
-}
-
-.privacyNote {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--color-text-muted);
+  gap: 1rem;
   text-align: center;
 }
 
-/* Active Recording State */
-.activeState {
-  width: 100%;
-  background-color: var(--color-archive-charcoal);
-  color: var(--color-archive-paper);
-  border: 1px solid var(--color-border-dark);
-  padding: var(--space-8);
+.promptLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-amber);
+  letter-spacing: 0.04em;
+}
+
+.promptTitle {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.promptChips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.chip {
+  font-size: 0.8125rem;
+  padding: 0.35rem 0.75rem;
+  background-color: var(--bg-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.chipActive {
+  background-color: var(--color-amber-light);
+  border-color: var(--color-amber);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.recordTriggerBox {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-6);
+  gap: 1rem;
 }
 
-.liveIndicatorRow {
+.recordCircleBtn {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: var(--color-amber);
+  color: #FFFFFF;
+  font-size: 2rem;
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(197, 155, 39, 0.3);
+  transition: transform var(--transition-fast);
 }
 
-.redBlinkDot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: #E74C3C;
-  animation: blinkDot 1s infinite;
+.recordCircleBtn:hover {
+  transform: scale(1.05);
 }
 
-.liveText {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: #E74C3C;
-  letter-spacing: 0.08em;
+.triggerText {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Active Recording */
+.activeRecordCard {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
+}
+
+.timerHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.liveBadge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #C0392B;
 }
 
 .pauseBadge {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--color-text-inverse-muted);
-  background-color: var(--color-archive-dark);
-  padding: 0.2rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
 }
 
-.timerDisplay {
-  font-family: var(--font-mono);
-  font-size: 2.25rem;
-  font-weight: 700;
-  color: var(--color-archive-paper);
+.timerVal {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
 .waveformContainer {
   width: 100%;
-  padding: var(--space-4);
-  background-color: var(--color-archive-black);
-  border: 1px solid var(--color-border-dark);
-  display: flex;
-  justify-content: center;
-}
-
-.recordingAdvice {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 0.9375rem;
-  color: var(--color-text-inverse-muted);
-  text-align: center;
-  max-width: 480px;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
 }
 
 .controlsRow {
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  gap: 1rem;
 }
 
-/* Processing State */
-.processingState {
-  width: 100%;
-  background-color: #FFFFFF;
-  border: 1px solid var(--color-border);
-  padding: var(--space-12) var(--space-8);
+/* Processing */
+.processingCard {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 4rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-6);
+  gap: 1rem;
   text-align: center;
-}
-
-.spinnerBox {
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .spinner {
   width: 32px;
   height: 32px;
-  border: 3px solid var(--color-border);
-  border-top-color: var(--color-brass);
+  border: 3px solid var(--border-color);
+  border-top-color: var(--color-amber);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
 
-.processingTitle {
+.procTitle {
   font-family: var(--font-serif);
   font-size: 1.75rem;
-  color: var(--color-text-primary);
+  color: var(--text-primary);
 }
 
-.processingStepText {
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  color: var(--color-brass);
+.procSub {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+}
+
+/* Done State */
+.doneCard {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
+}
+
+.doneHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.doneTitle {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  color: var(--text-primary);
+}
+
+.doneSub {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.extractedGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.extractedBox {
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.boxTag { font-size: 0.75rem; font-weight: 700; color: var(--text-primary); }
+.boxTagAmber { font-size: 0.75rem; font-weight: 700; color: var(--color-amber); }
+.boxTagRed { font-size: 0.75rem; font-weight: 700; color: #C0392B; }
+
+.boxText { font-size: 0.9375rem; color: var(--text-secondary); }
+
+.doneActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.viewRecordBtn {
+  font-size: 0.9375rem;
   font-weight: 600;
-}
-
-.progressBar {
-  width: 100%;
-  max-width: 400px;
-  height: 6px;
-  background-color: var(--color-archive-paper);
-  border-radius: 0;
-  overflow: hidden;
-}
-
-.progressFill {
-  height: 100%;
-  background-color: var(--color-brass);
-  transition: width 0.8s ease;
+  color: var(--text-primary);
 }
