@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { getQAResponse, QAEntry } from '@/lib/data';
+import { queryArchive } from '@/lib/store';
+import { QAEntry } from '@/lib/data';
 import styles from './page.module.css';
 
 export default function AskPage() {
@@ -24,29 +25,43 @@ export default function AskPage() {
     setIsLoading(true);
     setResult(null);
 
-    setTimeout(() => {
-      const response = getQAResponse(q);
-      setResult(response);
-      setIsLoading(false);
-    }, 900);
+    // Call API or local query engine
+    fetch('/api/ask', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question: q })
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.success && data.data) {
+          setResult(data.data);
+        } else {
+          setResult(queryArchive(q));
+        }
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setResult(queryArchive(q));
+        setIsLoading(false);
+      });
   };
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1 className={styles.title}>Ask the archive.</h1>
+        <h1 className={styles.title}>Ask the Archive</h1>
         <p className={styles.subtitle}>
-          Search across decades of unwritten practical experience. Answers are retrieved directly from original oral accounts.
+          Search across the experience people have chosen to preserve.
         </p>
       </div>
 
-      {/* Clean Single Search Input Box */}
+      {/* Single Search Card */}
       <div className={styles.searchCard}>
         <div className={styles.inputRow}>
           <input
             type="text"
             className={styles.searchInput}
-            placeholder="e.g. What should I check first when an engine overheats?"
+            placeholder="What would you like to know? (e.g. What should I check first when an engine overheats?)"
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleAsk()}
@@ -70,19 +85,19 @@ export default function AskPage() {
         </div>
       </div>
 
-      {/* Loading State */}
+      {/* Loading */}
       {isLoading && (
         <div className={styles.loadingState}>
           <span className={styles.spinner} />
-          <span>Searching 12 preserved oral accounts...</span>
+          <span>Searching preserved oral accounts...</span>
         </div>
       )}
 
-      {/* Clean Answer Card */}
+      {/* Result Card */}
       {result && !isLoading && (
         <div className={styles.resultCard}>
           <div className={styles.authorHeader}>
-            <strong className={styles.expertName}>{result.sourceExpert}</strong>
+            <strong className={styles.expertName}>From {result.sourceExpert}</strong>
             <span className={styles.expertRole}>{result.sourceRole} · {result.sourceExperience} years experience</span>
           </div>
 
@@ -92,13 +107,18 @@ export default function AskPage() {
 
           <div className={styles.sourceFooter}>
             <div className={styles.sourceRef}>
-              <span className={styles.refTitle}>{result.memoryTitle}</span>
-              <span className={styles.refTime}>Timestamp: {result.recordingTimestamp}</span>
+              <span className={styles.refTitle}>Source recording · {result.recordingTimestamp}</span>
+              <span className={styles.refTime}>{result.memoryTitle}</span>
             </div>
 
             <Link href={`/app/knowledge/${result.memoryId}`} className={styles.listenLink}>
-              ▶ Listen to original audio source →
+              ▶ Listen to source →
             </Link>
+          </div>
+
+          <div className={styles.whyBox}>
+            <span className={styles.whyTitle}>Why this answer:</span>
+            <span className={styles.whyTag}>Procedure · {result.sourceRole} · Verified Oral Source</span>
           </div>
         </div>
       )}

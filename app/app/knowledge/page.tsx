@@ -1,32 +1,37 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { MEMORIES, searchMemories } from '@/lib/data';
+import { searchAllMemories } from '@/lib/store';
+import { Memory } from '@/lib/data';
 import styles from './page.module.css';
 
 export default function KnowledgePage() {
   const [query, setQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [filteredMemories, setFilteredMemories] = useState<Memory[]>([]);
 
   const categories = ['All', 'Automotive Repair', 'Pedagogy & Teaching', 'Handloom Craft', 'Agriculture'];
-  const filteredMemories = searchMemories(query, selectedCategory);
+
+  useEffect(() => {
+    setFilteredMemories(searchAllMemories(query, selectedCategory));
+  }, [query, selectedCategory]);
 
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1 className={styles.title}>Explore preserved knowledge</h1>
+        <h1 className={styles.title}>Knowledge Archive</h1>
         <p className={styles.subtitle}>
-          Thousands of small lessons and diagnostic insights captured directly from experienced practitioners.
+          {filteredMemories.length} preserved memories captured directly from experienced practitioners.
         </p>
 
-        {/* Clean Search Input */}
+        {/* Search Input */}
         <div className={styles.searchBar}>
           <span className={styles.searchIcon}>🔍</span>
           <input
             type="text"
             className={styles.searchInput}
-            placeholder="Search memories, people and expertise..."
+            placeholder="Search people, skills, stories and knowledge..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
@@ -46,7 +51,7 @@ export default function KnowledgePage() {
         </div>
       </div>
 
-      {/* Clean Subtle Separator List */}
+      {/* Clean List */}
       <div className={styles.cleanList}>
         {filteredMemories.map((m) => (
           <article key={m.id} className={styles.entryRow}>
@@ -79,7 +84,7 @@ export default function KnowledgePage() {
 
         {filteredMemories.length === 0 && (
           <div className={styles.emptyState}>
-            <p>No preserved memories match your search.</p>
+            <p>No preserved memories match your search query.</p>
           </div>
         )}
       </div>

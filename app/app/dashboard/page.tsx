@@ -1,14 +1,22 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button/Button';
 import { ExpertAvatar } from '@/components/ui/Avatar/ExpertAvatar';
-import { MEMORIES, getDemoStats, getExpertById } from '@/lib/data';
+import { getStoredMemories } from '@/lib/store';
+import { getDemoStats, getExpertById, Memory } from '@/lib/data';
 import styles from './page.module.css';
 
 export default function DashboardPage() {
+  const [memories, setMemories] = useState<Memory[]>([]);
+
+  useEffect(() => {
+    setMemories(getStoredMemories());
+  }, []);
+
   const stats = getDemoStats();
+  const totalCount = memories.length > 0 ? memories.length : stats.memoriesPreserved;
 
   return (
     <div className={styles.container}>
@@ -16,7 +24,7 @@ export default function DashboardPage() {
       <div className={styles.headerBlock}>
         <h1 className={styles.pageTitle}>Your knowledge archive</h1>
         <p className={styles.statsSummary}>
-          <strong>{stats.memoriesPreserved} memories preserved</strong> · {stats.proceduresExtracted} procedures · {stats.minutesRecorded} minutes recorded · {stats.storiesRecorded} experts
+          <strong>{totalCount} memories preserved</strong> · {stats.proceduresExtracted} procedures · {stats.minutesRecorded} minutes recorded · {stats.storiesRecorded} experts
         </p>
       </div>
 
@@ -43,7 +51,7 @@ export default function DashboardPage() {
         </div>
 
         <div className={styles.memoriesList}>
-          {MEMORIES.map((m) => {
+          {memories.slice(0, 5).map((m) => {
             const expert = getExpertById(m.expertId);
 
             return (
