@@ -2,6 +2,7 @@
 
 import React, { useState, use } from 'react';
 import Link from 'next/link';
+import { getStoredMemoryById } from '@/lib/store';
 import { getMemoryById } from '@/lib/data';
 import { ExpertAvatar } from '@/components/ui/Avatar/ExpertAvatar';
 import { Waveform } from '@/components/ui/Waveform/Waveform';
@@ -9,7 +10,7 @@ import styles from './page.module.css';
 
 export default function MemoryDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = use(params);
-  const memory = getMemoryById(resolvedParams.id) || getMemoryById('demo-memory-1')!;
+  const memory = getStoredMemoryById(resolvedParams.id) || getMemoryById(resolvedParams.id) || getMemoryById('demo-memory-1')!;
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState('02:17');
 
@@ -66,12 +67,12 @@ export default function MemoryDetailPage({ params }: { params: Promise<{ id: str
 
       {/* Summary */}
       <div className={styles.sectionCard}>
-        <h2 className={styles.sectionTitle}>What Ramesh learned</h2>
+        <h2 className={styles.sectionTitle}>What {memory.expertName.split(' ')[0]} learned</h2>
         <blockquote className={styles.summaryQuote}>“{memory.summary}”</blockquote>
       </div>
 
       {/* Procedure */}
-      {memory.procedure && (
+      {memory.procedure && memory.procedure.length > 0 && (
         <div className={styles.sectionCard}>
           <h2 className={styles.sectionTitle}>Procedure</h2>
           <div className={styles.stepsList}>
@@ -90,7 +91,7 @@ export default function MemoryDetailPage({ params }: { params: Promise<{ id: str
 
       {/* Expert Insight & Common Mistake */}
       <div className={styles.twoColGrid}>
-        {memory.expertTips && (
+        {memory.expertTips && memory.expertTips.length > 0 && (
           <div className={styles.sectionCard}>
             <h2 className={styles.sectionTitleAmber}>Expert insight</h2>
             <ul className={styles.bulletList}>
@@ -101,7 +102,7 @@ export default function MemoryDetailPage({ params }: { params: Promise<{ id: str
           </div>
         )}
 
-        {memory.commonMistakes && (
+        {memory.commonMistakes && memory.commonMistakes.length > 0 && (
           <div className={styles.sectionCard}>
             <h2 className={styles.sectionTitleRed}>Common mistake</h2>
             <ul className={styles.bulletList}>
@@ -114,7 +115,7 @@ export default function MemoryDetailPage({ params }: { params: Promise<{ id: str
       </div>
 
       {/* Tools */}
-      {memory.tools && (
+      {memory.tools && memory.tools.length > 0 && (
         <div className={styles.sectionCard}>
           <h2 className={styles.sectionTitle}>Tools & materials</h2>
           <div className={styles.toolsRow}>
@@ -135,7 +136,7 @@ export default function MemoryDetailPage({ params }: { params: Promise<{ id: str
             🔊 02:17 — Diagnostic procedure
           </button>
           <button className={styles.stampBtn} onClick={() => handleJumpToTimestamp('03:45')}>
-            🔊 03:45 — Radiator cap aroma test
+            🔊 03:45 — Tactile inspection test
           </button>
           <button className={styles.stampBtn} onClick={() => handleJumpToTimestamp('04:10')}>
             🔊 04:10 — Apprenticeship story

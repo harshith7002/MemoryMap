@@ -17,6 +17,11 @@ export function getStoredMemories(): Memory[] {
   }
 }
 
+export function getStoredMemoryById(id: string): Memory | undefined {
+  const all = getStoredMemories();
+  return all.find((m) => m.id === id);
+}
+
 export function saveNewMemory(newMemory: Omit<Memory, 'id' | 'catalogId' | 'createdAt'>): Memory {
   const allCurrent = getStoredMemories();
   const nextNum = allCurrent.length + 48;
