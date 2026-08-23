@@ -1,9 +1,9 @@
-.container {
-  max-width: 800px;
+.page {
+  max-width: 1080px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 2rem;
 }
 
 .header {
@@ -23,6 +23,60 @@
   color: var(--text-secondary);
 }
 
+/* Progress */
+.progressRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.progressLabel {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.progressTrack {
+  display: flex;
+  gap: 0.375rem;
+  flex: 1;
+}
+
+.progressSeg {
+  height: 4px;
+  flex: 1;
+  border-radius: var(--radius-full);
+  background-color: var(--border-color);
+  transition: background-color var(--transition-base);
+}
+
+.progressSegDone {
+  background-color: var(--color-amber);
+}
+
+/* Layout */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  align-items: start;
+  gap: 1.75rem;
+}
+
+.layoutSingle {
+  grid-template-columns: 1fr;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.mainCol {
+  min-width: 0;
+}
+
+/* Idle card */
 .idleCard {
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
@@ -31,7 +85,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 3rem;
+  gap: 2.5rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
 }
 
@@ -44,42 +98,21 @@
 }
 
 .promptLabel {
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--color-amber);
-  letter-spacing: 0.04em;
 }
 
 .promptTitle {
   font-family: var(--font-serif);
   font-size: 1.75rem;
   color: var(--text-primary);
-  line-height: 1.3;
-}
-
-.promptChips {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-top: 0.5rem;
-}
-
-.chip {
-  font-size: 0.8125rem;
-  padding: 0.35rem 0.75rem;
-  background-color: var(--bg-subtle);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-full);
-  color: var(--text-secondary);
-  cursor: pointer;
-}
-
-.chipActive {
-  background-color: var(--color-amber-light);
-  border-color: var(--color-amber);
-  color: var(--text-primary);
-  font-weight: 600;
+  line-height: 1.35;
+  text-align: center;
+  max-width: 34ch;
 }
 
 .recordTriggerBox {
@@ -90,21 +123,21 @@
 }
 
 .recordCircleBtn {
-  width: 80px;
-  height: 80px;
+  width: 84px;
+  height: 84px;
   border-radius: 50%;
   background-color: var(--color-amber);
   color: #FFFFFF;
-  font-size: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 8px 24px rgba(197, 155, 39, 0.3);
-  transition: transform var(--transition-fast);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .recordCircleBtn:hover {
   transform: scale(1.05);
+  box-shadow: 0 10px 28px rgba(197, 155, 39, 0.4);
 }
 
 .triggerText {
@@ -113,17 +146,62 @@
   color: var(--text-primary);
 }
 
-/* Active Recording */
+/* Saved / advancing transition */
+.savedCard {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 4rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
+}
+
+.savedTick {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: var(--color-forest-pale);
+  color: var(--color-forest);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.savedTitle {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  color: var(--text-primary);
+}
+
+.savedSub {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+}
+
+/* Active recording */
 .activeRecordCard {
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  padding: 3rem;
+  padding: 2.75rem 3rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 1.75rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
+}
+
+.activePromptLabel {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  text-align: center;
+  max-width: 40ch;
 }
 
 .timerHeader {
@@ -133,14 +211,18 @@
 }
 
 .liveBadge {
+  font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 700;
+  letter-spacing: 0.04em;
   color: #C0392B;
 }
 
 .pauseBadge {
+  font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 700;
+  letter-spacing: 0.04em;
   color: var(--text-muted);
 }
 
@@ -161,6 +243,8 @@
 .controlsRow {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1rem;
 }
 
@@ -186,6 +270,10 @@
   animation: spin 0.8s linear infinite;
 }
 
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 .procTitle {
   font-family: var(--font-serif);
   font-size: 1.75rem;
@@ -197,7 +285,7 @@
   color: var(--text-muted);
 }
 
-/* Done State */
+/* Done state */
 .doneCard {
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
@@ -212,7 +300,7 @@
 .doneHeader {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.35rem;
 }
 
 .doneTitle {
@@ -224,6 +312,48 @@
 .doneSub {
   font-size: 1rem;
   color: var(--text-secondary);
+}
+
+.answeredList {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.answeredRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--bg-main);
+}
+
+.answeredRow:not(:last-child) {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.answeredIndex {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-amber);
+  font-weight: 600;
+  width: 1.2rem;
+  flex-shrink: 0;
+}
+
+.answeredQuestion {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+.answeredDuration {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
 }
 
 .extractedGrid {
@@ -242,9 +372,9 @@
   gap: 0.25rem;
 }
 
-.boxTag { font-size: 0.75rem; font-weight: 700; color: var(--text-primary); }
-.boxTagAmber { font-size: 0.75rem; font-weight: 700; color: var(--color-amber); }
-.boxTagRed { font-size: 0.75rem; font-weight: 700; color: #C0392B; }
+.boxTag { font-size: 0.75rem; font-weight: 700; color: var(--text-primary); letter-spacing: 0.03em; }
+.boxTagAmber { font-size: 0.75rem; font-weight: 700; color: var(--color-amber); letter-spacing: 0.03em; }
+.boxTagRed { font-size: 0.75rem; font-weight: 700; color: #C0392B; letter-spacing: 0.03em; }
 
 .boxText { font-size: 0.9375rem; color: var(--text-secondary); }
 
@@ -252,6 +382,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
   padding-top: 1rem;
   border-top: 1px solid var(--border-color);
 }
@@ -260,4 +392,141 @@
   font-size: 0.9375rem;
   font-weight: 600;
   color: var(--text-primary);
+}
+
+/* Outline panel */
+.outlinePanel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  position: sticky;
+  top: 1.5rem;
+}
+
+.sessionCard {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.sessionInfo {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.sessionExpert {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.sessionRole {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.outlineEyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.outlineList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  list-style: none;
+}
+
+.outlineItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.6rem 0.5rem;
+  border-radius: var(--radius-sm);
+}
+
+.outlineMarker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid var(--border-color);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.outlineTextCol {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.outlineQuestion {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.outlineDuration {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--text-muted);
+}
+
+.outlineDone .outlineMarker {
+  background-color: var(--color-forest-pale);
+  border-color: var(--color-forest-pale);
+  color: var(--color-forest);
+}
+
+.outlineDone .outlineQuestion {
+  color: var(--text-muted);
+}
+
+.outlineCurrent {
+  background-color: var(--color-amber-light);
+}
+
+.outlineCurrent .outlineMarker {
+  border-color: var(--color-amber);
+  color: var(--color-amber);
+  font-weight: 700;
+}
+
+.outlineCurrent .outlineQuestion {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+@media (max-width: 860px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .outlinePanel {
+    position: static;
+    order: -1;
+  }
+
+  .idleCard,
+  .activeRecordCard {
+    padding: 2rem 1.5rem;
+  }
 }
