@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { Button } from '@/components/ui/Button/Button';
 import { Waveform } from '@/components/ui/Waveform/Waveform';
 import styles from './HeroSection.module.css';
@@ -8,95 +9,69 @@ import styles from './HeroSection.module.css';
 export const HeroSection: React.FC = () => {
   return (
     <section className={styles.hero}>
+      {/* Top Archive Registry Classification Header */}
+      <div className={styles.metaTop}>
+        <span className={styles.catalogNum}>CATALOG REGISTRY // VOL. 2026</span>
+        <span className={styles.archiveType}>DOCUMENTARY ORAL ARCHIVE</span>
+      </div>
+
       <div className={styles.container}>
-        {/* Left Column: Text & CTAs */}
-        <div className={styles.textContent}>
-          <div className={styles.taglineBadge}>
-            <span className={styles.badgePulse} />
-            <span>Preserve human knowledge before it leaves</span>
+        {/* Editorial Typography Banner */}
+        <div className={styles.headerBlock}>
+          <h1 className={styles.titleStatement}>Some knowledge disappears quietly.</h1>
+
+          <div className={styles.narrativeStanza}>
+            <p className={styles.stanzaLine}>A mechanic retires.</p>
+            <p className={styles.stanzaLine}>A teacher leaves the classroom.</p>
+            <p className={styles.stanzaLine}>An artisan puts down their tools.</p>
+            <p className={styles.stanzaHighlight}>And decades of unwritten experience leave with them.</p>
           </div>
 
-          <h1 className={styles.title}>
-            What if decades of knowledge disappeared with the person who carried it?
-          </h1>
-
-          <p className={styles.subtitle}>
-            MemoryMap preserves human expertise through natural voice conversations. Capture an expert's voice, transform their experience into structured, searchable knowledge, and pass it on to the next generation.
+          <p className={styles.missionSummary}>
+            MemoryMap preserves what experience taught them through natural voice recordings, transforming spoken stories into verified, searchable institutional knowledge.
           </p>
 
-          <div className={styles.actions}>
-            <Button href="/app/record" variant="amber" size="lg">
-              Preserve a Story
+          <div className={styles.ctaRow}>
+            <Button href="/app/record" variant="primary" size="lg">
+              Preserve someone's knowledge →
             </Button>
             <Button href="/app/knowledge" variant="secondary" size="lg">
-              Explore Knowledge
+              Explore the archive
             </Button>
-          </div>
-
-          <div className={styles.trustBadge}>
-            <div className={styles.avatarsGroup}>
-              <span className={styles.avatar}>👨‍🔧</span>
-              <span className={styles.avatar}>👩‍🌾</span>
-              <span className={styles.avatar}>👨‍🏫</span>
-            </div>
-            <span className={styles.trustText}>
-              Over <strong>47 expert memories</strong> preserved this month
-            </span>
           </div>
         </div>
 
-        {/* Right Column: Split Visual Transformation Card */}
-        <div className={styles.visualColumn}>
-          <div className={styles.transformationCard}>
-            {/* Top Section: Voice Input */}
-            <div className={styles.voiceSection}>
-              <div className={styles.voiceHeader}>
-                <span className={styles.sectionBadge}>VOICE</span>
-                <span className={styles.expertMeta}>Ramesh Kumar • Master Mechanic</span>
+        {/* Archival Documentary Visual Unit */}
+        <div className={styles.archivalFrame}>
+          <div className={styles.photoContainer}>
+            {/* Visual Grain & Photo Crop Treatment */}
+            <div className={styles.archivalImageWrap}>
+              <div className={styles.portraitPlaceholder}>
+                <span className={styles.expertEmoji}>👨‍🔧</span>
+                <div className={styles.photoOverlayGradient} />
               </div>
-              <blockquote className={styles.voiceQuote}>
-                “When this engine starts making that sound, the manual points to the thermostat. But put your palm right here — 80% of the time, it's the water pump.”
+            </div>
+
+            {/* Audio & Archival Metadata Unit */}
+            <div className={styles.archivalMetaCard}>
+              <div className={styles.metaTopRow}>
+                <span className={styles.liveAudioBadge}>● FIELD RECORDING #0047</span>
+                <span className={styles.recDate}>18 August 2026</span>
+              </div>
+
+              <blockquote className={styles.spokenQuote}>
+                “When this engine starts making that sound... you put your palm on the lower hose. 80% of the time, the manual is wrong about the thermostat.”
               </blockquote>
-              <div className={styles.waveformWrapper}>
-                <Waveform isAnimating={true} barCount={26} height={32} color="var(--color-amber)" />
-                <span className={styles.timeBadge}>02:17</span>
-              </div>
-            </div>
 
-            {/* Middle Divider: AI Process */}
-            <div className={styles.aiDivider}>
-              <div className={styles.dividerLine} />
-              <div className={styles.aiPill}>
-                <span className={styles.sparkleIcon}>✨</span>
-                <span>MEMORYMAP AI</span>
-              </div>
-              <div className={styles.dividerLine} />
-            </div>
-
-            {/* Bottom Section: Structured Knowledge Output */}
-            <div className={styles.knowledgeSection}>
-              <div className={styles.knowledgeHeader}>
-                <span className={styles.knowledgeTitle}>Diagnosing Engine Overheating</span>
-                <span className={styles.categoryBadge}>Automotive</span>
+              <div className={styles.waveformPlayerBar}>
+                <span className={styles.playIcon}>▶</span>
+                <Waveform isAnimating={true} barCount={36} height={28} color="var(--color-brass)" />
+                <span className={styles.timeTag}>02:17 / 04:32</span>
               </div>
 
-              <div className={styles.gridCards}>
-                <div className={styles.kCard}>
-                  <span className={styles.kLabel}>📋 PROCEDURE</span>
-                  <span className={styles.kVal}>Check water pump lower hose temperature prior to thermostat replacement</span>
-                </div>
-                <div className={styles.kCard}>
-                  <span className={styles.kLabel}>✦ EXPERT TIP</span>
-                  <span className={styles.kVal}>Burnt sweet smell at radiator cap indicates head gasket pressure loss</span>
-                </div>
-                <div className={styles.kCard}>
-                  <span className={styles.kLabel}>⚠️ COMMON MISTAKE</span>
-                  <span className={styles.kVal}>Swapping thermostat immediately without checking coolant flow</span>
-                </div>
-                <div className={styles.kCard}>
-                  <span className={styles.kLabel}>🛠️ TOOLS EXTRACTED</span>
-                  <span className={styles.kVal}>Pressure kit, IR Temp Gun</span>
-                </div>
+              <div className={styles.subjectCaption}>
+                <strong className={styles.subjectName}>Ramesh Kumar</strong>
+                <span className={styles.subjectRole}>Master Mechanic · 35 years experience · Mumbai Workshop</span>
               </div>
             </div>
           </div>

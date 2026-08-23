@@ -3,7 +3,7 @@ import styles from './Tag.module.css';
 
 export interface TagProps {
   label: string;
-  variant?: 'green' | 'amber' | 'brown' | 'default';
+  variant?: 'green' | 'amber' | 'brown' | 'dark' | 'default';
   size?: 'sm' | 'md';
   className?: string;
 }
@@ -16,7 +16,7 @@ export const Tag: React.FC<TagProps> = ({
 }) => {
   return (
     <span className={`${styles.tag} ${styles[variant]} ${styles[size]} ${className}`}>
-      #{label}
+      {label}
     </span>
   );
 };

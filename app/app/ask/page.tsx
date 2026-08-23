@@ -11,7 +11,7 @@ export default function AskPage() {
   const [result, setResult] = useState<QAEntry | null>(null);
 
   const exampleQuestions = [
-    'My engine overheats after 30 minutes. What should I check first?',
+    'What should I check first when an engine overheats?',
     'How do I know if soil is ready for planting without digital sensors?',
     'What is the pencil pause in classroom teaching?'
   ];
@@ -33,28 +33,28 @@ export default function AskPage() {
 
   return (
     <div className={styles.container}>
-      {/* Header */}
+      {/* Search Engine Header */}
       <div className={styles.header}>
-        <span className={styles.badge}>INTELLIGENT ARCHIVE SEARCH</span>
-        <h1 className={styles.title}>Ask the people who already know.</h1>
+        <span className={styles.badge}>ORAL ARCHIVE QUERY ENGINE</span>
+        <h1 className={styles.title}>Ask the archive.</h1>
         <p className={styles.subtitle}>
-          Query thousands of preserved memories. Every answer is directly attributed to an expert with original audio timestamps.
+          Search across decades of unwritten practical experience. Answers are retrieved verbatim with original voice audio timestamps.
         </p>
       </div>
 
-      {/* Input Box */}
+      {/* Query Entry Console */}
       <div className={styles.inputCard}>
-        <label className={styles.inputLabel}>What question do you want to ask the archive?</label>
+        <span className={styles.inputLabel}>ENTER ARCHIVAL QUERY:</span>
         <textarea
           className={styles.textarea}
           rows={3}
-          placeholder="e.g. My engine overheats after 30 minutes. What should I check first?"
+          placeholder="e.g. What should I check first when an engine overheats after 30 minutes of highway driving?"
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
         />
 
         <div className={styles.exampleChips}>
-          <span className={styles.exampleLabel}>Try asking:</span>
+          <span className={styles.exampleLabel}>SUGGESTED ARCHIVE SEARCHES:</span>
           {exampleQuestions.map((eq, idx) => (
             <button
               key={idx}
@@ -68,14 +68,14 @@ export default function AskPage() {
 
         <div className={styles.actionRow}>
           <span className={styles.privacyNote}>
-            🔒 Queries search indexed human memories, not generic internet text.
+            🔒 Query returns indexed oral testimony, not generated web summary text.
           </span>
           <button
             className={styles.askButton}
             onClick={() => handleAsk()}
             disabled={isLoading || !question.trim()}
           >
-            {isLoading ? 'Searching Archive...' : '🔍 Query MemoryMap Archive'}
+            {isLoading ? 'Querying Index...' : '🔍 Query Oral Archive'}
           </button>
         </div>
       </div>
@@ -83,25 +83,25 @@ export default function AskPage() {
       {/* Loading State */}
       {isLoading && (
         <div className={styles.loadingBox}>
-          <div className={styles.spinner} />
-          <span>Searching 12 preserved expert memories and voice transcripts...</span>
+          <span className={styles.spinner} />
+          <span>Searching 12 preserved oral accounts and field recording transcripts...</span>
         </div>
       )}
 
-      {/* Result Display */}
+      {/* Researched Archive Response Card */}
       {result && !isLoading && (
         <div className={styles.resultCard}>
           <div className={styles.resultHeader}>
-            <span className={styles.answerBadge}>✦ VERIFIED EXPERT ANSWER</span>
-            <span className={styles.attrBadge}>Source Attributed</span>
+            <span className={styles.answerBadge}>VERIFIED ORAL ACCOUNT // {result.catalogId}</span>
+            <span className={styles.attrBadge}>SOURCE VERIFIED</span>
           </div>
 
           <blockquote className={styles.answerText}>“{result.answer}”</blockquote>
 
-          {/* Source Attribution Box */}
+          {/* Source Attribution Record Box */}
           <div className={styles.sourceBox}>
             <div className={styles.sourceHeader}>
-              <span className={styles.sourceLabel}>ORIGINAL SOURCE ATTRIBUTION</span>
+              <span className={styles.sourceLabel}>SOURCE ATTRIBUTION & AUDIO VERIFICATION</span>
             </div>
 
             <div className={styles.sourceContent}>
@@ -118,14 +118,14 @@ export default function AskPage() {
               <div className={styles.memoryRefBox}>
                 <div className={styles.refInfo}>
                   <span className={styles.refTitle}>{result.memoryTitle}</span>
-                  <span className={styles.refTime}>Audio Timestamp: {result.recordingTimestamp}</span>
+                  <span className={styles.refTime}>Exact Timestamp: {result.recordingTimestamp}</span>
                 </div>
 
                 <Link
                   href={`/app/knowledge/${result.memoryId}`}
                   className={styles.listenBtn}
                 >
-                  🔊 Listen to this recording part →
+                  🔊 Listen to original audio recording →
                 </Link>
               </div>
             </div>

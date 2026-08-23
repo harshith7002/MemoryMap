@@ -9,49 +9,59 @@ export const KnowledgeAtRiskSection: React.FC = () => {
   return (
     <section className={styles.section}>
       <div className={styles.container}>
+        {/* Header */}
         <div className={styles.header}>
-          <div className={styles.urgencyBadge}>
-            <span className={styles.redPulse} />
-            <span>KNOWLEDGE AT RISK</span>
+          <div className={styles.urgencyTag}>
+            <span className={styles.redBlink} />
+            <span>CRITICAL ARCHIVAL REGISTRY</span>
           </div>
 
-          <h2 className={styles.title}>Some knowledge is disappearing right now.</h2>
+          <h2 className={styles.title}>Some things are known by very few people.</h2>
 
           <p className={styles.disclaimer}>
-            *These are fictional demo examples illustrating the real-world urgency of capturing oral tradition and tacit expertise before it is lost.
+            *Demonstration registry illustrating real-world urgency of capturing oral accounts before practitioners retire.
           </p>
         </div>
 
-        <div className={styles.riskGrid}>
+        {/* Archival Registry Catalog List */}
+        <div className={styles.registryList}>
           {KNOWLEDGE_AT_RISK.map((item) => (
-            <div key={item.id} className={styles.card}>
-              <div className={styles.cardTop}>
-                <span className={styles.catBadge}>{item.category}</span>
-                <span className={styles.urgencyTag}>CRITICAL</span>
+            <div key={item.id} className={styles.registryEntry}>
+              <div className={styles.entryMeta}>
+                <span className={styles.catId}>{item.catalogId}</span>
+                <span className={styles.region}>{item.region}</span>
               </div>
 
-              <h3 className={styles.itemTitle}>{item.title}</h3>
-
-              <div className={styles.practitionersBox}>
-                <span className={styles.bigCount}>{item.practitionersLeft}</span>
-                <span className={styles.countText}>known practitioners remaining</span>
+              <div className={styles.titleCol}>
+                <h3 className={styles.itemTitle}>{item.title}</h3>
+                <span className={styles.categoryBadge}>{item.category}</span>
               </div>
 
-              <p className={styles.itemDesc}>{item.description}</p>
+              <div className={styles.scarcityCol}>
+                <span className={styles.countBig}>{item.practitionersLeft}</span>
+                <span className={styles.countLabel}>practitioners remaining</span>
+              </div>
 
-              <Button href="/app/record" variant="amber" size="sm" className={styles.preserveBtn}>
-                Preserve someone's knowledge →
-              </Button>
+              <div className={styles.descCol}>
+                <p className={styles.description}>{item.description}</p>
+              </div>
+
+              <div className={styles.actionCol}>
+                <Button href="/app/record" variant="brass" size="sm">
+                  Preserve this knowledge →
+                </Button>
+              </div>
             </div>
           ))}
         </div>
 
-        <div className={styles.ctaFooter}>
-          <p className={styles.ctaText}>
-            Do you know an expert retiring soon? Help them archive their life's work today.
+        {/* CTA Footer */}
+        <div className={styles.bottomBanner}>
+          <p className={styles.bannerText}>
+            Do you know an expert or elder retiring soon? Document their oral account today.
           </p>
-          <Button href="/app/record" variant="amber" size="lg">
-            Start Preserving Expertise
+          <Button href="/app/record" variant="brass" size="lg">
+            Record an Oral Account
           </Button>
         </div>
       </div>

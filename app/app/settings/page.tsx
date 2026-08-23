@@ -12,12 +12,12 @@ export default function SettingsPage() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <h1 className={styles.title}>Archive Settings</h1>
-        <p className={styles.subtitle}>Manage your profile, audio processing preferences, and privacy controls.</p>
+        <h1 className={styles.title}>Archive Configuration</h1>
+        <p className={styles.subtitle}>Manage your practitioner profile, voice processing preferences, and privacy controls.</p>
       </div>
 
       <div className={styles.sectionCard}>
-        <h2 className={styles.sectionTitle}>👤 Expert Profile Info</h2>
+        <h2 className={styles.sectionTitle}>👤 Practitioner Profile Metadata</h2>
         <div className={styles.formRow}>
           <div className={styles.field}>
             <label className={styles.label}>Full Name</label>
@@ -42,7 +42,7 @@ export default function SettingsPage() {
       </div>
 
       <div className={styles.sectionCard}>
-        <h2 className={styles.sectionTitle}>🎙️ Voice Recording & AI Preferences</h2>
+        <h2 className={styles.sectionTitle}>🎙️ Voice Recording & AI Indexing Preferences</h2>
 
         <div className={styles.toggleRow}>
           <div className={styles.toggleText}>
@@ -85,7 +85,7 @@ export default function SettingsPage() {
       </div>
 
       <div className={styles.actionsRow}>
-        <Button variant="amber" size="md">Save Preference Changes</Button>
+        <Button variant="brass" size="md">Save Preference Changes</Button>
       </div>
     </div>
   );

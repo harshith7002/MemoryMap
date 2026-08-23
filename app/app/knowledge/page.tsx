@@ -24,34 +24,35 @@ export default function KnowledgePage() {
 
   return (
     <div className={styles.container}>
-      {/* Search & Header */}
+      {/* Archive Index Header */}
       <div className={styles.header}>
-        <h1 className={styles.title}>Knowledge Library</h1>
+        <span className={styles.archiveTag}>MEMORYMAP CATALOGUE // INDEX & REGISTRY</span>
+        <h1 className={styles.title}>The Archive</h1>
         <p className={styles.subtitle}>
-          Explore structured wisdom extracted from oral recordings. Verified by experts, linked to source audio.
+          Thousands of small lessons and diagnostic insights that would otherwise disappear with time.
         </p>
 
-        {/* Large Search Bar */}
+        {/* Archival Search Input */}
         <div className={styles.searchWrapper}>
-          <span className={styles.searchIcon}>🔍</span>
+          <span className={styles.searchPrompt}>SEARCH ARCHIVE:</span>
           <input
             type="text"
             className={styles.searchInput}
-            placeholder="Ask or search anything about preserved memories (e.g. engine, soil, loom, students)..."
+            placeholder="Search human knowledge by craft, engine acoustic, soil smell, loom tension..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
           {query && (
             <button className={styles.clearBtn} onClick={() => setQuery('')}>
-              ✕
+              ✕ CLEAR
             </button>
           )}
         </div>
 
-        {/* Filters Row */}
-        <div className={styles.filtersRow}>
+        {/* Archival Filter Bar */}
+        <div className={styles.filtersBar}>
           <div className={styles.filterGroup}>
-            <span className={styles.filterLabel}>Category:</span>
+            <span className={styles.filterLabel}>TRADE / FIELD:</span>
             <div className={styles.chipsGroup}>
               {categories.map((cat) => (
                 <button
@@ -66,7 +67,7 @@ export default function KnowledgePage() {
           </div>
 
           <div className={styles.filterGroup}>
-            <span className={styles.filterLabel}>Expert:</span>
+            <span className={styles.filterLabel}>PRACTITIONER:</span>
             <select
               className={styles.selectDropdown}
               value={selectedExpert}
@@ -82,41 +83,43 @@ export default function KnowledgePage() {
         </div>
       </div>
 
-      {/* Results Section */}
+      {/* Index Count Status */}
       <div className={styles.resultsInfo}>
-        <span>Showing {filteredMemories.length} preserved memories</span>
+        <span>INDEX REGISTRY: SHOWING {filteredMemories.length} CATALOGED ACCOUNTS</span>
       </div>
 
-      {/* Cards Grid */}
-      <div className={styles.grid}>
+      {/* Archive Entries List */}
+      <div className={styles.archiveList}>
         {filteredMemories.map((m) => (
-          <Card key={m.id} variant="default" className={styles.card}>
+          <Card key={m.id} variant="default" catalogId={m.catalogId} className={styles.archiveEntryCard}>
             <div className={styles.cardHeader}>
-              <span className={styles.categoryBadge}>{m.category}</span>
-              <span className={styles.durationBadge}>⏱️ {m.duration}</span>
+              <span className={styles.catBadge}>{m.category}</span>
+              <span className={styles.durationMono}>AUDIO: {m.duration}</span>
             </div>
 
-            <h2 className={styles.cardTitle}>
+            <h2 className={styles.entryTitle}>
               <Link href={`/app/knowledge/${m.id}`}>{m.title}</Link>
             </h2>
 
-            <div className={styles.expertMeta}>
-              <span>{m.expertName}</span>
-              <span className={styles.dot}>•</span>
+            <div className={styles.practitionerMeta}>
+              <span>Practitioner: {m.expertName}</span>
+              <span className={styles.dot}>·</span>
               <span>{m.expertRole}</span>
+              <span className={styles.dot}>·</span>
+              <span>{m.expertExperience} yrs experience</span>
             </div>
 
-            <p className={styles.summary}>{m.summary}</p>
+            <p className={styles.summaryText}>“{m.summary}”</p>
 
             <div className={styles.tagsRow}>
-              {m.tags.slice(0, 3).map((t) => (
+              {m.tags.slice(0, 4).map((t) => (
                 <Tag key={t} label={t} variant="amber" />
               ))}
             </div>
 
             <div className={styles.cardFooter}>
-              <Link href={`/app/knowledge/${m.id}`} className={styles.viewLink}>
-                View Extracted Knowledge & Audio →
+              <Link href={`/app/knowledge/${m.id}`} className={styles.listenLink}>
+                Listen to Source Audio & Inspect Procedure →
               </Link>
             </div>
           </Card>
@@ -125,10 +128,10 @@ export default function KnowledgePage() {
         {filteredMemories.length === 0 && (
           <div className={styles.emptyState}>
             <span className={styles.emptyIcon}>📂</span>
-            <h3>No memories match your query</h3>
+            <h3>No catalog records match your query</h3>
             <p>Try searching for terms like "engine", "soil", "loom", or "teaching".</p>
             <button className={styles.resetBtn} onClick={() => { setQuery(''); setSelectedCategory('All'); setSelectedExpert('All'); }}>
-              Reset Filters
+              Reset Archive Index Filters
             </button>
           </div>
         )}

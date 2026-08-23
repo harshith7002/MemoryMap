@@ -9,7 +9,7 @@ import styles from './page.module.css';
 
 export default function RecordPage() {
   const router = useRouter();
-  const { state, formattedTime, start, pause, resume, stop, reset, setState } = useAudioRecorder();
+  const { state, formattedTime, start, pause, resume, stop, reset } = useAudioRecorder();
   const [selectedPrompt, setSelectedPrompt] = useState<string | null>(null);
   const [processingStep, setProcessingStep] = useState(0);
 
@@ -21,15 +21,14 @@ export default function RecordPage() {
   ];
 
   const processingMessages = [
-    'Analyzing acoustic signals and transcript...',
-    'Identifying step-by-step diagnostic procedures...',
-    'Extracting expert practical tips & warnings...',
-    'Cataloging tools and required materials...',
-    'Formatting human story & timestamp references...',
-    'Finalizing Knowledge Preservation Archive...'
+    'RECORDING // Cataloging acoustic frequency map...',
+    'ANALYSIS // Extracting step-by-step diagnostic procedures...',
+    'STRUCTURING // Identifying master practical tips & warnings...',
+    'INDEXING // Formulating catalog tools & required materials...',
+    'ARCHIVING // Linking source timestamp attribution...',
+    'COMPLETE // Generating permanent archive catalog entry...'
   ];
 
-  // Handle simulated AI processing phase
   useEffect(() => {
     if (state === 'processing') {
       const interval = setInterval(() => {
@@ -52,12 +51,12 @@ export default function RecordPage() {
 
   return (
     <div className={styles.container}>
-      {/* Header */}
+      {/* Studio Header */}
       <div className={styles.header}>
-        <span className={styles.badge}>VOICE ARCHIVE STUDIO</span>
-        <h1 className={styles.title}>Let's preserve what you know.</h1>
+        <span className={styles.badge}>FIELD AUDIO ARCHIVE STUDIO // STUDIO-01</span>
+        <h1 className={styles.title}>Preserve an Oral Account</h1>
         <p className={styles.subtitle}>
-          No forms. No typing marathon. Speak naturally as if teaching an eager apprentice.
+          No documentation marathon. Speak naturally as if teaching an apprentice.
         </p>
       </div>
 
@@ -65,7 +64,7 @@ export default function RecordPage() {
       {state === 'idle' && (
         <div className={styles.idleState}>
           <div className={styles.promptCard}>
-            <span className={styles.promptHeader}>💡 SUGGESTED PROMPT</span>
+            <span className={styles.promptHeader}>SELECT ORAL ARCHIVE PROMPT:</span>
             <p className={styles.promptMain}>
               {selectedPrompt ? `“${selectedPrompt}”` : '“Tell us about something you know that took years to learn.”'}
             </p>
@@ -83,17 +82,16 @@ export default function RecordPage() {
             </div>
           </div>
 
-          {/* Big Pulse Mic Button */}
+          {/* Archival Mic Trigger */}
           <div className={styles.micContainer}>
-            <div className={styles.pulseRing} />
             <button className={styles.bigMicButton} onClick={start} aria-label="Start recording">
               🎙️
             </button>
-            <span className={styles.micActionText}>Click to Start Recording Voice</span>
+            <span className={styles.micActionText}>Click to Initiate Voice Recording</span>
           </div>
 
           <div className={styles.privacyNote}>
-            🔒 Your audio stays encrypted. AI extracts knowledge while preserving your original voice.
+            🔒 FIELD NOTE: Audio is captured with high-fidelity acoustic indexing & source timestamp attribution.
           </div>
         </div>
       )}
@@ -103,24 +101,24 @@ export default function RecordPage() {
         <div className={styles.activeState}>
           <div className={styles.liveIndicatorRow}>
             <span className={styles.redBlinkDot} />
-            <span className={styles.liveText}>RECORDING IN PROGRESS</span>
+            <span className={styles.liveText}>FIELD RECORDER ACTIVE</span>
             <span className={styles.timerDisplay}>{formattedTime}</span>
           </div>
 
           <div className={styles.waveformContainer}>
-            <Waveform isAnimating={true} barCount={36} height={60} color="var(--color-amber)" />
+            <Waveform isAnimating={true} barCount={40} height={50} color="var(--color-brass)" />
           </div>
 
           <p className={styles.recordingAdvice}>
-            “Speak naturally. Don't worry about structuring — MemoryMap AI identifies procedures, tips, and tools automatically.”
+            “Speak naturally. MemoryMap AI automatically identifies procedures, tips, tools, and backstory.”
           </p>
 
           <div className={styles.controlsRow}>
             <Button onClick={pause} variant="secondary" size="md">
-              ⏸️ Pause
+              ⏸ Pause
             </Button>
-            <Button onClick={stop} variant="amber" size="lg">
-              ⏹️ Stop & Extract Knowledge
+            <Button onClick={stop} variant="brass" size="lg">
+              ⏹ Finish & Catalog Knowledge
             </Button>
             <Button onClick={reset} variant="ghost" size="md">
               ✕ Cancel
@@ -138,15 +136,15 @@ export default function RecordPage() {
           </div>
 
           <div className={styles.waveformContainer}>
-            <Waveform isAnimating={false} barCount={36} height={60} color="var(--color-charcoal-faint)" />
+            <Waveform isAnimating={false} barCount={40} height={50} color="var(--color-text-muted)" />
           </div>
 
           <div className={styles.controlsRow}>
-            <Button onClick={resume} variant="amber" size="lg">
+            <Button onClick={resume} variant="brass" size="lg">
               ▶ Resume Recording
             </Button>
             <Button onClick={stop} variant="primary" size="md">
-              ⏹️ Finish & Process
+              ⏹ Finish & Catalog
             </Button>
             <Button onClick={reset} variant="ghost" size="sm">
               ✕ Cancel
@@ -155,15 +153,14 @@ export default function RecordPage() {
         </div>
       )}
 
-      {/* PROCESSING STATE (AI KNOWLEDGE EXTRACTION) */}
+      {/* PROCESSING STATE */}
       {state === 'processing' && (
         <div className={styles.processingState}>
-          <div className={styles.spinnerRing}>
-            <div className={styles.spinnerInner} />
-            <span className={styles.sparkleIcon}>✨</span>
+          <div className={styles.spinnerBox}>
+            <span className={styles.spinner} />
           </div>
 
-          <h2 className={styles.processingTitle}>Transforming Voice to Knowledge...</h2>
+          <h2 className={styles.processingTitle}>Cataloging Spoken Knowledge...</h2>
           <p className={styles.processingStepText}>{processingMessages[processingStep]}</p>
 
           <div className={styles.progressBar}>
@@ -171,12 +168,6 @@ export default function RecordPage() {
               className={styles.progressFill}
               style={{ width: `${((processingStep + 1) / processingMessages.length) * 100}%` }}
             />
-          </div>
-
-          <div className={styles.aiFeaturesPreview}>
-            <span className={styles.featureItem}>✓ Voice Waveform Mapping</span>
-            <span className={styles.featureItem}>✓ Procedure Step Extraction</span>
-            <span className={styles.featureItem}>✓ Timestamp Source Linking</span>
           </div>
         </div>
       )}

@@ -1,42 +1,50 @@
 .tag {
   display: inline-flex;
   align-items: center;
+  font-family: var(--font-mono);
   font-weight: 500;
-  border-radius: var(--radius-full);
-  transition: all var(--transition-fast);
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   white-space: nowrap;
 }
 
 .sm {
-  padding: 0.15rem 0.6rem;
-  font-size: var(--text-xs);
+  padding: 0.15rem 0.5rem;
+  font-size: 0.65rem;
 }
 
 .md {
-  padding: 0.25rem 0.75rem;
-  font-size: var(--text-sm);
+  padding: 0.25rem 0.65rem;
+  font-size: 0.75rem;
 }
 
 .default {
-  background-color: var(--color-cream);
-  color: var(--color-charcoal-light);
+  background-color: var(--color-archive-paper-dark);
+  color: var(--color-text-secondary);
   border: 1px solid var(--color-border);
 }
 
 .green {
-  background-color: var(--color-green-pale);
-  color: var(--color-green);
-  border: 1px solid rgba(74, 103, 65, 0.2);
+  background-color: var(--color-forest-pale);
+  color: var(--color-forest);
+  border: 1px solid rgba(39, 56, 39, 0.2);
 }
 
 .amber {
-  background-color: var(--color-amber-pale);
-  color: var(--color-amber);
-  border: 1px solid rgba(193, 127, 36, 0.2);
+  background-color: var(--color-brass-pale);
+  color: var(--color-brass);
+  border: 1px solid rgba(197, 155, 39, 0.3);
 }
 
 .brown {
-  background-color: #F8F4EE;
-  color: var(--color-brown);
-  border: 1px solid rgba(139, 105, 20, 0.2);
+  background-color: #F4EFE6;
+  color: #7A5810;
+  border: 1px solid rgba(122, 88, 16, 0.2);
+}
+
+.dark {
+  background-color: var(--color-archive-dark);
+  color: var(--color-archive-paper);
+  border: 1px solid var(--color-border-dark);
 }

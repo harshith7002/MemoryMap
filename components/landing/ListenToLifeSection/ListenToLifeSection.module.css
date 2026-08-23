@@ -1,0 +1,286 @@
+.section {
+  padding: var(--space-20) 0;
+  background-color: var(--color-archive-charcoal);
+  color: var(--color-archive-paper);
+  border-bottom: 1px solid var(--color-border-dark);
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.sectionMeta {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-brass);
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--color-border-dark);
+  padding-bottom: var(--space-3);
+}
+
+.layoutGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--space-12);
+  align-items: flex-start;
+}
+
+.voiceColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.headingGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.25rem, 3.5vw, 3rem);
+  color: var(--color-archive-paper);
+}
+
+.subtitle {
+  font-size: var(--text-base);
+  color: var(--color-text-inverse-muted);
+}
+
+.audioExhibitBox {
+  background-color: var(--color-archive-black);
+  border: 1px solid var(--color-border-dark);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.playerBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.playToggleBtn {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--color-brass);
+  background-color: rgba(197, 155, 39, 0.15);
+  border: 1px solid var(--color-brass);
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.timestampMono {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-text-inverse-muted);
+}
+
+.waveformContainer {
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--color-border-dark);
+  border-bottom: 1px solid var(--color-border-dark);
+}
+
+.transcriptFlow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.flowLabel {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-brass);
+  letter-spacing: 0.05em;
+}
+
+.transcriptCard {
+  background-color: var(--color-archive-dark);
+  border: 1px solid var(--color-border-dark);
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.transcriptCard:hover {
+  border-color: var(--color-brass);
+}
+
+.activeSeg {
+  border-color: var(--color-brass);
+  background-color: #2D2D29;
+}
+
+.segTime {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-brass);
+}
+
+.normalText {
+  font-size: 0.875rem;
+  color: var(--color-text-inverse-muted);
+  line-height: 1.5;
+}
+
+.highlightText {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--color-archive-paper);
+  line-height: 1.5;
+}
+
+/* Extraction Pipeline */
+.extractionColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.extractionHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.aiTag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-brass);
+  letter-spacing: 0.05em;
+}
+
+.extractTitle {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  color: var(--color-archive-paper);
+}
+
+.pipelineFlow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.pipelineStep {
+  background-color: var(--color-archive-black);
+  border: 1px solid var(--color-border-dark);
+  padding: var(--space-4);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.highlightedStep {
+  border-color: var(--color-forest);
+  background-color: #1A281A;
+}
+
+.stepMarker {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-brass);
+}
+
+.stepContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.stepType {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-text-inverse-muted);
+  letter-spacing: 0.05em;
+}
+
+.stepTypeGreen {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: #6B8F68;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.stepTypeBrass {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-brass);
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.stepTitle {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--color-archive-paper);
+}
+
+.stepDesc {
+  font-size: 0.8125rem;
+  color: var(--color-text-inverse-muted);
+  line-height: 1.4;
+  margin-top: 2px;
+}
+
+.connectorArrow {
+  text-align: center;
+  color: var(--color-brass);
+  font-size: 0.875rem;
+  font-weight: bold;
+}
+
+.pipelineStepFinal {
+  background-color: var(--color-brass-pale);
+  color: var(--color-archive-black);
+  border: 1px solid var(--color-brass);
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.finalCatalogNum {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--color-brass);
+}
+
+.finalTitle {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--color-archive-black);
+}
+
+.exploreRecordBtn {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-archive-black);
+  margin-top: var(--space-2);
+}
+
+@media (max-width: 992px) {
+  .layoutGrid {
+    grid-template-columns: 1fr;
+  }
+}

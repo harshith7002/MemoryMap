@@ -13,74 +13,62 @@ export default function DashboardPage() {
 
   return (
     <div className={styles.container}>
-      {/* Header Banner */}
+      {/* Archival Banner */}
       <div className={styles.welcomeBanner}>
         <div className={styles.welcomeText}>
-          <h1 className={styles.greeting}>Welcome back, Ramesh</h1>
-          <p className={styles.tagline}>Your personal knowledge preservation archive</p>
+          <span className={styles.catalogTag}>ARCHIVAL DESK // REGISTRY CONTROL</span>
+          <h1 className={styles.greeting}>Ramesh Kumar Archive</h1>
+          <p className={styles.tagline}>Oral history preservation & diagnostic knowledge database</p>
         </div>
-        <Button href="/app/record" variant="amber" size="md">
-          🎙️ Preserve New Memory
+        <Button href="/app/record" variant="brass" size="md">
+          🎙️ Record Oral Account
         </Button>
       </div>
 
-      {/* Stats Cards Row */}
+      {/* Archival Stats Row */}
       <div className={styles.statsGrid}>
         <div className={styles.statCard}>
-          <div className={styles.statIcon}>📝</div>
-          <div className={styles.statInfo}>
-            <span className={styles.statNum}>{stats.memoriesPreserved}</span>
-            <span className={styles.statLabel}>Memories Preserved</span>
-          </div>
+          <span className={styles.statCode}>INDEX_MEM</span>
+          <span className={styles.statNum}>{stats.memoriesPreserved}</span>
+          <span className={styles.statLabel}>Memories Cataloged</span>
         </div>
 
         <div className={styles.statCard}>
-          <div className={styles.statIcon}>📋</div>
-          <div className={styles.statInfo}>
-            <span className={styles.statNum}>{stats.proceduresExtracted}</span>
-            <span className={styles.statLabel}>Procedures Extracted</span>
-          </div>
+          <span className={styles.statCode}>INDEX_PROC</span>
+          <span className={styles.statNum}>{stats.proceduresExtracted}</span>
+          <span className={styles.statLabel}>Procedures Extracted</span>
         </div>
 
         <div className={styles.statCard}>
-          <div className={styles.statIcon}>📖</div>
-          <div className={styles.statInfo}>
-            <span className={styles.statNum}>{stats.storiesRecorded}</span>
-            <span className={styles.statLabel}>Stories Recorded</span>
-          </div>
+          <span className={styles.statCode}>INDEX_STOR</span>
+          <span className={styles.statNum}>{stats.storiesRecorded}</span>
+          <span className={styles.statLabel}>Stories Documented</span>
         </div>
 
         <div className={styles.statCard}>
-          <div className={styles.statIcon}>🎙️</div>
-          <div className={styles.statInfo}>
-            <span className={styles.statNum}>{stats.minutesRecorded}m</span>
-            <span className={styles.statLabel}>Audio Recordings</span>
-          </div>
+          <span className={styles.statCode}>INDEX_AUD</span>
+          <span className={styles.statNum}>{stats.minutesRecorded}m</span>
+          <span className={styles.statLabel}>Audio Archives</span>
         </div>
       </div>
 
-      {/* Main Grid: Recent Memories + Sidebar Cards */}
+      {/* Main Grid: Catalog Entries + Sidebar */}
       <div className={styles.mainGrid}>
-        {/* Left Column: Recent Memories */}
+        {/* Left Column: Recent Catalog Entries */}
         <div className={styles.memoriesSection}>
           <div className={styles.sectionHeader}>
-            <h2 className={styles.sectionTitle}>Recent Preserved Memories</h2>
+            <h2 className={styles.sectionTitle}>Recent Catalog Entries</h2>
             <Link href="/app/knowledge" className={styles.viewAllLink}>
-              View All Archive →
+              View Complete Index →
             </Link>
           </div>
 
           <div className={styles.memoriesList}>
             {MEMORIES.map((m) => (
-              <Card key={m.id} variant="default" className={styles.memoryCard}>
+              <Card key={m.id} variant="default" catalogId={m.catalogId} className={styles.memoryCard}>
                 <div className={styles.cardHeader}>
-                  <div className={styles.cardMeta}>
-                    <span className={styles.categoryBadge}>{m.category}</span>
-                    <span className={styles.durationBadge}>⏱️ {m.duration}</span>
-                  </div>
-                  <Link href={`/app/knowledge/${m.id}`} className={styles.playIconBtn}>
-                    ▶
-                  </Link>
+                  <span className={styles.categoryTag}>{m.category}</span>
+                  <span className={styles.durationTag}>⏱️ {m.duration}</span>
                 </div>
 
                 <h3 className={styles.cardTitle}>
@@ -88,10 +76,10 @@ export default function DashboardPage() {
                 </h3>
 
                 <div className={styles.expertAuthor}>
-                  <span>{m.expertName}</span>
-                  <span className={styles.dot}>•</span>
+                  <span>Source: {m.expertName}</span>
+                  <span className={styles.dot}>·</span>
                   <span>{m.expertRole}</span>
-                  <span className={styles.dot}>•</span>
+                  <span className={styles.dot}>·</span>
                   <span>{m.expertExperience} yrs exp</span>
                 </div>
 
@@ -105,7 +93,7 @@ export default function DashboardPage() {
 
                 <div className={styles.cardActions}>
                   <Link href={`/app/knowledge/${m.id}`} className={styles.viewDetailsBtn}>
-                    View Extracted Knowledge & Audio →
+                    Inspect Extracted Knowledge & Audio Source →
                   </Link>
                 </div>
               </Card>
@@ -113,11 +101,11 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Right Sidebar: Featured Experts + Knowledge at Risk */}
+        {/* Right Sidebar */}
         <div className={styles.sideCol}>
-          {/* Featured Experts Box */}
+          {/* Featured Practitioners */}
           <div className={styles.sideCard}>
-            <h3 className={styles.sideTitle}>👥 Featured Experts</h3>
+            <h3 className={styles.sideTitle}>Practitioners Index</h3>
             <div className={styles.expertsList}>
               {EXPERTS.slice(0, 3).map((exp) => (
                 <Link key={exp.id} href={`/app/experts/${exp.id}`} className={styles.expertItem}>
@@ -126,34 +114,34 @@ export default function DashboardPage() {
                     <span className={styles.expName}>{exp.name}</span>
                     <span className={styles.expRole}>{exp.role}</span>
                   </div>
-                  <span className={styles.expCount}>{exp.memoriesCount} memories</span>
+                  <span className={styles.expCount}>{exp.memoriesCount} entries</span>
                 </Link>
               ))}
             </div>
             <Link href="/app/experts" className={styles.sideLink}>
-              Browse All Experts →
+              Browse All Practitioners →
             </Link>
           </div>
 
-          {/* Knowledge at Risk Alert Box */}
+          {/* Critical Knowledge Registry */}
           <div className={styles.sideCardUrgent}>
             <div className={styles.urgentHeader}>
               <span className={styles.redDot} />
-              <h3 className={styles.sideTitleUrgent}>Knowledge at Risk</h3>
+              <h3 className={styles.sideTitleUrgent}>Scarcity Registry</h3>
             </div>
-            <p className={styles.urgentSub}>Critical heritage needing immediate preservation:</p>
+            <p className={styles.urgentSub}>Techniques with critical practitioner count:</p>
 
             <div className={styles.urgentList}>
               {KNOWLEDGE_AT_RISK.slice(0, 2).map((item) => (
                 <div key={item.id} className={styles.urgentItem}>
                   <span className={styles.itemTitle}>{item.title}</span>
-                  <span className={styles.itemCount}>{item.practitionersLeft} practitioners left</span>
+                  <span className={styles.itemCount}>{item.practitionersLeft} practitioners remaining</span>
                 </div>
               ))}
             </div>
 
-            <Button href="/app/record" variant="amber" size="sm" className={styles.fullWidth}>
-              Preserve Someone's Story Now
+            <Button href="/app/record" variant="brass" size="sm" className={styles.fullWidth}>
+              Document Someone's Story
             </Button>
           </div>
         </div>

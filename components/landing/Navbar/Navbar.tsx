@@ -7,7 +7,6 @@ import styles from './Navbar.module.css';
 
 export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,87 +22,36 @@ export const Navbar: React.FC = () => {
       <div className={styles.container}>
         {/* Brand */}
         <Link href="/" className={styles.brand}>
-          <span className={styles.logoDot} />
-          <span className={styles.brandText}>MemoryMap</span>
+          <span className={styles.brandMark}>MemoryMap</span>
+          <span className={styles.subMark}>/ Oral Knowledge Archive</span>
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className={styles.desktopNav}>
-          <a href="#how-it-works" className={styles.navLink}>
-            How It Works
-          </a>
-          <a href="#stories" className={styles.navLink}>
+        {/* Minimal Editorial Nav Links */}
+        <nav className={styles.navLinks}>
+          <Link href="/app/knowledge" className={styles.link}>
+            Archive
+          </Link>
+          <Link href="/app/experts" className={styles.link}>
+            People
+          </Link>
+          <a href="#stories" className={styles.link}>
             Stories
           </a>
-          <a href="#impact" className={styles.navLink}>
-            Impact
+          <a href="#how-it-works" className={styles.link}>
+            How It Works
           </a>
-          <Link href="/app/knowledge" className={styles.navLink}>
-            Explorer
-          </Link>
         </nav>
 
         {/* Action Buttons */}
         <div className={styles.actions}>
-          <Button href="/demo" variant="ghost" size="sm">
-            Try Demo
+          <Button href="/demo" variant="secondary" size="sm">
+            Exhibition Demo
           </Button>
-          <Button href="/app/dashboard" variant="amber" size="sm">
-            Preserve Knowledge
+          <Button href="/app/record" variant="primary" size="sm">
+            Preserve Knowledge →
           </Button>
-
-          {/* Mobile menu toggle */}
-          <button
-            className={styles.mobileToggle}
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? '✕' : '☰'}
-          </button>
         </div>
       </div>
-
-      {/* Mobile dropdown nav */}
-      {mobileMenuOpen && (
-        <nav className={styles.mobileNav}>
-          <a
-            href="#how-it-works"
-            className={styles.mobileNavLink}
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            How It Works
-          </a>
-          <a
-            href="#stories"
-            className={styles.mobileNavLink}
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            Stories
-          </a>
-          <a
-            href="#impact"
-            className={styles.mobileNavLink}
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            Impact
-          </a>
-          <Link
-            href="/app/knowledge"
-            className={styles.mobileNavLink}
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            Explorer
-          </Link>
-          <div className={styles.mobileActions}>
-            <Button href="/demo" variant="secondary" size="md" className={styles.fullWidth}>
-              Try Demo
-            </Button>
-            <Button href="/app/dashboard" variant="amber" size="md" className={styles.fullWidth}>
-              Preserve Knowledge
-            </Button>
-          </div>
-        </nav>
-      )}
     </header>
   );
 };

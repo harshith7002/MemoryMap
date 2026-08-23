@@ -1,32 +1,40 @@
 .card {
-  background-color: var(--color-white);
-  border: 1px solid var(--color-border-light);
-  border-radius: var(--radius-xl);
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
   padding: var(--space-6);
   transition: all var(--transition-base);
-  box-shadow: 0 2px 8px var(--color-shadow);
   position: relative;
-  overflow: hidden;
 }
 
 .default {
-  background-color: var(--color-white);
+  background-color: #FFFFFF;
 }
 
-.featured {
-  background-color: var(--color-ivory);
+.archival {
+  background-color: var(--color-archive-paper-dark);
   border-color: var(--color-border);
-  box-shadow: 0 4px 16px var(--color-shadow-md);
 }
 
-.compact {
-  padding: var(--space-4);
-  border-radius: var(--radius-lg);
+.dark {
+  background-color: var(--color-archive-charcoal);
+  color: var(--color-archive-paper);
+  border-color: var(--color-border-dark);
 }
 
 .accent {
-  background-color: var(--color-amber-pale);
-  border-color: rgba(193, 127, 36, 0.3);
+  background-color: var(--color-brass-pale);
+  border-color: rgba(197, 155, 39, 0.4);
+}
+
+.catalogTag {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-4);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
 }
 
 .clickable {
@@ -34,7 +42,6 @@
 }
 
 .clickable:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 24px var(--color-shadow-md);
-  border-color: var(--color-amber);
+  border-color: var(--color-text-primary);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
 }

@@ -11,16 +11,16 @@ export default function ExpertsPage() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <span className={styles.badge}>EXPERT ARCHIVE</span>
+        <span className={styles.badge}>DOCUMENTARY PRACTITIONER DIRECTORY</span>
         <h1 className={styles.title}>The People Behind the Knowledge</h1>
         <p className={styles.subtitle}>
-          Meet the master artisans, mechanics, teachers, and farmers whose decades of practical experience are preserved in MemoryMap.
+          Master mechanics, artisans, teachers, and organic farmers whose oral accounts form the foundation of the MemoryMap archive.
         </p>
       </div>
 
       <div className={styles.grid}>
         {EXPERTS.map((expert) => (
-          <Card key={expert.id} variant="default" className={styles.card}>
+          <Card key={expert.id} variant="default" catalogId={expert.catalogId} className={styles.card}>
             <div className={styles.cardHeader}>
               <div className={styles.avatar}>{expert.avatar}</div>
               <div className={styles.headerMeta}>
@@ -28,14 +28,14 @@ export default function ExpertsPage() {
                   <Link href={`/app/experts/${expert.id}`}>{expert.name}</Link>
                 </h2>
                 <span className={styles.role}>{expert.role}</span>
-                <span className={styles.experience}>⏱️ {expert.yearsExperience} years experience</span>
+                <span className={styles.experience}>⏱️ {expert.yearsExperience} years in field · {expert.location}</span>
               </div>
             </div>
 
             <p className={styles.bio}>{expert.bio}</p>
 
             <div className={styles.skillsSection}>
-              <span className={styles.skillsTitle}>Key Mastered Skills:</span>
+              <span className={styles.skillsTitle}>MASTERED SKILLS & INSTINCTS:</span>
               <div className={styles.skillsRow}>
                 {expert.skills.map((skill) => (
                   <Tag key={skill} label={skill} variant="amber" />
@@ -45,10 +45,10 @@ export default function ExpertsPage() {
 
             <div className={styles.cardFooter}>
               <span className={styles.memoriesCount}>
-                📝 {expert.memoriesCount} memories archived
+                📝 {expert.memoriesCount} cataloged accounts
               </span>
               <Link href={`/app/experts/${expert.id}`} className={styles.viewProfileBtn}>
-                View Full Profile & Timeline →
+                Inspect Timeline & Archive →
               </Link>
             </div>
           </Card>

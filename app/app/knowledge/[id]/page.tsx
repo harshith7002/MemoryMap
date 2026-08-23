@@ -2,7 +2,7 @@
 
 import React, { useState, use } from 'react';
 import Link from 'next/link';
-import { getMemoryById, Memory } from '@/lib/data';
+import { getMemoryById } from '@/lib/data';
 import { Tag } from '@/components/ui/Tag/Tag';
 import { Waveform } from '@/components/ui/Waveform/Waveform';
 import styles from './page.module.css';
@@ -22,25 +22,25 @@ export default function MemoryDetailPage({ params }: { params: Promise<{ id: str
     <div className={styles.container}>
       {/* Back button */}
       <Link href="/app/knowledge" className={styles.backBtn}>
-        ← Back to Knowledge Archive
+        ← Back to Archive Index
       </Link>
 
-      {/* Top Header */}
-      <div className={styles.header}>
-        <div className={styles.categoryRow}>
+      {/* Archival Catalog Document Header */}
+      <div className={styles.documentHeader}>
+        <div className={styles.catalogMetaRow}>
+          <span className={styles.catalogIdTag}>{memory.catalogId}</span>
           <span className={styles.catBadge}>{memory.category}</span>
-          <span className={styles.aiBadge}>✨ AI Preserved Knowledge</span>
-          <span className={styles.dateStamp}>Recorded: {memory.createdAt}</span>
+          <span className={styles.dateStamp}>RECORDED: {memory.createdAt}</span>
         </div>
 
         <h1 className={styles.title}>{memory.title}</h1>
 
-        {/* Source Attribution Bar */}
+        {/* Source Attribution Unit */}
         <div className={styles.sourceBar}>
           <div className={styles.authorAvatar}>👨‍🔧</div>
           <div className={styles.authorMeta}>
             <span className={styles.authorName}>
-              Source: <Link href={`/app/experts/${memory.expertId}`}>{memory.expertName}</Link>
+              Source Practitioner: <Link href={`/app/experts/${memory.expertId}`}>{memory.expertName}</Link>
             </span>
             <span className={styles.authorRole}>
               {memory.expertRole} • {memory.expertExperience} years experience
@@ -50,33 +50,36 @@ export default function MemoryDetailPage({ params }: { params: Promise<{ id: str
         </div>
       </div>
 
-      {/* Section 1: What I Learned / Summary */}
+      {/* Section 1: Summary / Verbatim Insight */}
       <div className={styles.sectionCard}>
-        <h2 className={styles.sectionHeader}>💡 What I Learned (Summary)</h2>
-        <p className={styles.summaryBox}>{memory.summary}</p>
+        <h2 className={styles.sectionHeader}>SUMMARY // PRACTITIONER INSIGHT</h2>
+        <p className={styles.summaryText}>“{memory.summary}”</p>
       </div>
 
       {/* Section 2: Procedure Steps */}
       {memory.procedure && (
         <div className={styles.sectionCard}>
-          <h2 className={styles.sectionHeader}>📋 Procedure (Extracted Steps)</h2>
+          <h2 className={styles.sectionHeader}>EXTRACTED PROCEDURE SEQUENCE</h2>
           <div className={styles.stepsList}>
             {memory.procedure.map((p) => (
               <div key={p.step} className={styles.stepItem}>
-                <span className={styles.stepCircle}>{p.step}</span>
-                <span className={styles.stepInstruction}>{p.instruction}</span>
+                <span className={styles.stepSquare}>{p.step}</span>
+                <div className={styles.stepContent}>
+                  <span className={styles.stepInstruction}>{p.instruction}</span>
+                  {p.note && <span className={styles.stepNote}>Note: {p.note}</span>}
+                </div>
               </div>
             ))}
           </div>
         </div>
       )}
 
-      {/* Two column layout: Expert Tips + Common Mistakes */}
+      {/* Two Column Layout: Expert Tips + Common Mistakes */}
       <div className={styles.twoCol}>
         {/* Expert Tips */}
         {memory.expertTips && (
           <div className={styles.sectionCard}>
-            <h2 className={styles.sectionHeader}>✦ Expert Tips & Insights</h2>
+            <h2 className={styles.sectionHeader}>✦ MASTER PRACTITIONER TIPS</h2>
             <ul className={styles.tipsList}>
               {memory.expertTips.map((tip, idx) => (
                 <li key={idx} className={styles.tipItem}>
@@ -91,7 +94,7 @@ export default function MemoryDetailPage({ params }: { params: Promise<{ id: str
         {/* Common Mistakes */}
         {memory.commonMistakes && (
           <div className={styles.sectionCard}>
-            <h2 className={styles.sectionHeader}>⚠️ Common Mistakes to Avoid</h2>
+            <h2 className={styles.sectionHeader}>⚠️ COMMON MISTAKES TO AVOID</h2>
             <ul className={styles.mistakesList}>
               {memory.commonMistakes.map((m, idx) => (
                 <li key={idx} className={styles.mistakeItem}>
@@ -107,7 +110,7 @@ export default function MemoryDetailPage({ params }: { params: Promise<{ id: str
       {/* Section: Tools & Materials */}
       {memory.tools && (
         <div className={styles.sectionCard}>
-          <h2 className={styles.sectionHeader}>🛠️ Tools & Materials Extracted</h2>
+          <h2 className={styles.sectionHeader}>🛠️ REQUIRED TOOLS & MATERIALS</h2>
           <div className={styles.toolsRow}>
             {memory.tools.map((tool) => (
               <Tag key={tool} label={tool} variant="brown" size="md" />
@@ -116,23 +119,23 @@ export default function MemoryDetailPage({ params }: { params: Promise<{ id: str
         </div>
       )}
 
-      {/* Section: The Story Behind It */}
+      {/* Section: Personal Backstory */}
       {memory.story && (
         <div className={styles.sectionCardStory}>
-          <h2 className={styles.sectionHeaderStory}>📖 The Personal Story Behind It</h2>
+          <h2 className={styles.sectionHeaderStory}>📖 PERSONAL NARRATIVE & BACKSTORY</h2>
           <blockquote className={styles.storyQuote}>“{memory.story}”</blockquote>
         </div>
       )}
 
-      {/* Section: Audio Player UI with Source Timestamps */}
+      {/* Archival Audio Source Player */}
       <div className={styles.audioPlayerCard}>
         <div className={styles.playerHeader}>
           <div className={styles.playerTitleRow}>
             <span className={styles.playerIcon}>🎙️</span>
             <div>
-              <h3 className={styles.playerTitle}>Original Spoken Recording</h3>
+              <h3 className={styles.playerTitle}>Original Spoken Account Audio</h3>
               <span className={styles.playerSubtitle}>
-                Verify source audio timestamp — {memory.expertName}
+                Source: {memory.expertName} • Verified Field Recording
               </span>
             </div>
           </div>
@@ -140,40 +143,40 @@ export default function MemoryDetailPage({ params }: { params: Promise<{ id: str
             className={styles.playButtonBig}
             onClick={() => setIsPlaying(!isPlaying)}
           >
-            {isPlaying ? '⏸️ Pause' : '▶ Play Audio'}
+            {isPlaying ? '⏸ Pause Audio' : '▶ Play Spoken Account'}
           </button>
         </div>
 
         {/* Waveform */}
         <div className={styles.waveformBox}>
-          <Waveform isAnimating={isPlaying} barCount={42} height={44} color="var(--color-amber)" />
+          <Waveform isAnimating={isPlaying} barCount={44} height={40} color="var(--color-brass)" />
           <div className={styles.timeMeta}>
-            <span>{currentTime}</span>
-            <span>{memory.duration}</span>
+            <span>TIMESTAMP: {currentTime}</span>
+            <span>TOTAL: {memory.duration}</span>
           </div>
         </div>
 
-        {/* Timestamps Jump Links */}
+        {/* Source Timestamps Link Bar */}
         <div className={styles.timestampSection}>
-          <span className={styles.timestampLabel}>Jump to source timestamp:</span>
+          <span className={styles.timestampLabel}>TIMESTAMP VERIFICATION SOURCES (CLICK TO PLAY):</span>
           <div className={styles.timestampButtons}>
             <button
               className={styles.timeBtn}
               onClick={() => handleJumpToTimestamp('02:17')}
             >
-              🔊 02:17 — Diagnostic procedure
+              🔊 02:17 — Water pump cavitation diagnostic
             </button>
             <button
               className={styles.timeBtn}
               onClick={() => handleJumpToTimestamp('03:45')}
             >
-              🔊 03:45 — Expert tip on radiator cap
+              🔊 03:45 — Radiator cap aroma test
             </button>
             <button
               className={styles.timeBtn}
               onClick={() => handleJumpToTimestamp('04:10')}
             >
-              🔊 04:10 — Story of the apprentice
+              🔊 04:10 — Apprenticeship narrative
             </button>
           </div>
         </div>

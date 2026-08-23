@@ -11,13 +11,13 @@ export default function TimelinePage() {
   return (
     <div className={styles.container}>
       <div className={styles.header}>
-        <span className={styles.badge}>KNOWLEDGE EVOLUTION</span>
-        <h1 className={styles.title}>Interactive Knowledge Timeline</h1>
+        <span className={styles.badge}>MUSEUM EXHIBITION TIMELINE // EVOLUTION TRACK</span>
+        <h1 className={styles.title}>Knowledge Evolution Archive</h1>
         <p className={styles.subtitle}>
-          Track how an expert's practical knowledge, diagnostic instincts, and mastery evolved over decades of hands-on experience.
+          Visualizing how an expert's diagnostic instincts, field mastery, and oral testimony evolved across 30+ years.
         </p>
 
-        {/* Expert Selector Tabs */}
+        {/* Practitioner Selector Tabs */}
         <div className={styles.tabsRow}>
           {EXPERTS.map((exp) => (
             <button
@@ -35,20 +35,21 @@ export default function TimelinePage() {
         </div>
       </div>
 
-      {/* Main Timeline Card */}
+      {/* Main Exhibition Timeline Board */}
       <div className={styles.timelineCard}>
         <div className={styles.expertBanner}>
           <div className={styles.bannerAvatar}>{selectedExpert.avatar}</div>
           <div className={styles.bannerMeta}>
+            <span className={styles.catId}>{selectedExpert.catalogId}</span>
             <h2 className={styles.bannerName}>{selectedExpert.name}</h2>
             <span className={styles.bannerSub}>
               {selectedExpert.role} • {selectedExpert.yearsExperience} Years in Field • {selectedExpert.location}
             </span>
           </div>
-          <span className={styles.memoryBadge}>{selectedExpert.memoriesCount} Memories Archival Profile</span>
+          <span className={styles.memoryBadge}>📝 {selectedExpert.memoriesCount} Archived Accounts</span>
         </div>
 
-        {/* Vertical Timeline Track */}
+        {/* Museum Exhibition Vertical Timeline Track */}
         <div className={styles.timelineTrack}>
           {selectedExpert.timeline.map((event, idx) => (
             <div key={idx} className={styles.timelineNode}>
@@ -57,12 +58,15 @@ export default function TimelinePage() {
               </div>
 
               <div className={styles.nodeCenter}>
-                <span className={styles.circleMarker} />
+                <span className={styles.squareMarker} />
               </div>
 
               <div className={styles.nodeRight}>
                 <div className={styles.eventBox}>
-                  <h3 className={styles.eventTitle}>{event.event}</h3>
+                  <div className={styles.eventTop}>
+                    <h3 className={styles.eventTitle}>{event.event}</h3>
+                    {event.archiveRef && <span className={styles.refTag}>{event.archiveRef}</span>}
+                  </div>
                   {event.detail && <p className={styles.eventDetail}>{event.detail}</p>}
                 </div>
               </div>

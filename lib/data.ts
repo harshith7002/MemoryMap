@@ -1,5 +1,6 @@
 export interface Expert {
   id: string;
+  catalogId: string;
   name: string;
   role: string;
   yearsExperience: number;
@@ -9,21 +10,27 @@ export interface Expert {
   bio: string;
   timeline: TimelineEvent[];
   location: string;
+  coordinates: string;
+  recordedDate: string;
+  photoUrl?: string;
 }
 
 export interface TimelineEvent {
   year: number;
   event: string;
   detail?: string;
+  archiveRef?: string;
 }
 
 export interface ProcedureStep {
   step: number;
   instruction: string;
+  note?: string;
 }
 
 export interface Memory {
   id: string;
+  catalogId: string;
   title: string;
   expertId: string;
   expertName: string;
@@ -46,9 +53,11 @@ export interface Memory {
 
 export interface KnowledgeAtRisk {
   id: string;
+  catalogId: string;
   title: string;
   practitionersLeft: number;
   category: string;
+  region: string;
   urgency: 'critical' | 'high' | 'medium';
   description: string;
 }
@@ -63,47 +72,55 @@ export interface QAEntry {
   recordingTimestamp: string;
   memoryId: string;
   memoryTitle: string;
+  catalogId: string;
 }
 
 export const EXPERTS: Expert[] = [
   {
     id: 'ramesh-kumar',
+    catalogId: 'EXPRT-1989-0047',
     name: 'Ramesh Kumar',
     role: 'Master Mechanic',
     yearsExperience: 35,
     avatar: '👨‍🔧',
     skills: ['Engine Diagnostics', 'Diesel Systems', 'Cooling Systems', 'Preventive Maintenance', 'Brake Systems'],
     memoriesCount: 47,
-    bio: 'Over 35 years diagnosing heavy industrial machinery and diesel engines. Known for detecting internal wear purely by listening to acoustic signatures.',
-    location: 'Mumbai, India',
+    bio: 'Over 35 years diagnosing heavy industrial machinery and diesel engines. Known across Mumbai workshops for detecting internal engine wear purely by listening to acoustic signatures.',
+    location: 'Mumbai, Maharashtra',
+    coordinates: '18.9220° N, 72.8347° E',
+    recordedDate: '18 August 2026',
     timeline: [
-      { year: 1989, event: 'Started apprenticeship at Central Auto Workshop', detail: 'Learned manual lathe operations and engine overhauls under Master Joshi.' },
-      { year: 1995, event: 'Promoted to Senior Mechanic', detail: 'Handled complex diesel generator maintenance across regional plants.' },
-      { year: 2000, event: 'Opened Kumar Precision Motors', detail: 'Established independent repair facility specializing in commercial transport.' },
-      { year: 2008, event: 'Specialized in rare electronic-diesel hybrid systems', detail: 'Authored internal diagnostic checklists adopted by local garages.' },
-      { year: 2018, event: 'Began Master Training Program', detail: 'Mentored 14 young technicians in mechanical diagnostics.' },
-      { year: 2026, event: 'Knowledge Preserved with MemoryMap', detail: 'Archived 47 core diagnostic procedures and acoustic troubleshooting guides.' }
+      { year: 1989, event: 'Apprenticeship at Central Auto Workshop', detail: 'Learned manual lathe operations and engine overhauls under Master Joshi.', archiveRef: 'FIELD-NOTE #01' },
+      { year: 1995, event: 'Senior Mechanic at Regional Transport Fleet', detail: 'Handled complex diesel generator maintenance across regional industrial plants.', archiveRef: 'FLEET-LOG #14' },
+      { year: 2000, event: 'Opened Kumar Precision Motors', detail: 'Established independent repair facility specializing in commercial heavy transport.', archiveRef: 'REGISTRY #88' },
+      { year: 2008, event: 'Specialization in Electronic-Diesel Hybrid Systems', detail: 'Authored internal diagnostic checklists adopted by 12 regional workshops.', archiveRef: 'MANUAL #04' },
+      { year: 2018, event: 'Master Training Program', detail: 'Mentored 14 young technicians in mechanical acoustics and troubleshooting.', archiveRef: 'MENTOR-LOG #09' },
+      { year: 2026, event: 'Knowledge Preserved with MemoryMap Archive', detail: 'Archived 47 core diagnostic procedures and acoustic troubleshooting accounts.', archiveRef: 'CATALOG #0047' }
     ]
   },
   {
     id: 'meera-pillai',
+    catalogId: 'EXPRT-1984-0023',
     name: 'Meera Pillai',
     role: 'Master Artisan Weaver',
     yearsExperience: 40,
     avatar: '👩‍🌾',
     skills: ['Handloom Weaving', 'Natural Dyeing', 'Pattern Design', 'Thread Tension Tuning', 'Jacquard Looming'],
     memoriesCount: 23,
-    bio: 'Preserving four decades of traditional silk and cotton handloom weaving techniques passed down through generations in Kerala.',
+    bio: 'Preserving four decades of traditional silk and cotton handloom weaving techniques passed down through oral tradition in Kerala.',
     location: 'Balaramapuram, Kerala',
+    coordinates: '8.4312° N, 77.0398° E',
+    recordedDate: '12 August 2026',
     timeline: [
-      { year: 1984, event: 'Learned handloom weaving from family elders', detail: 'Began with basic cotton warp preparation.' },
+      { year: 1984, event: 'Learned handloom weaving from family elders', detail: 'Began with basic cotton warp preparation and wooden ratchet setting.' },
       { year: 1996, event: 'Revived natural indigo and madder root dyeing', detail: 'Created eco-friendly color formulation processes.' },
-      { year: 2012, event: 'National Artisan Recognition', detail: 'Honored for preserving intricate Kasavu border weaves.' },
-      { year: 2026, event: 'Preserved loom calibration methods on MemoryMap', detail: 'Recorded tactile thread tension and warp alignment procedures.' }
+      { year: 2012, event: 'National Artisan Heritage Recognition', detail: 'Honored for preserving intricate Kasavu gold-border weaves.' },
+      { year: 2026, event: 'Preserved loom calibration on MemoryMap', detail: 'Recorded tactile thread tension and warp alignment procedures.' }
     ]
   },
   {
     id: 'david-chen',
+    catalogId: 'EXPRT-1992-0031',
     name: 'David Chen',
     role: 'Veteran Physics Teacher',
     yearsExperience: 32,
@@ -111,27 +128,32 @@ export const EXPERTS: Expert[] = [
     skills: ['Learning Assessment', 'Classroom Management', 'Intuitive Physics Experiments', 'Student Engagement'],
     memoriesCount: 31,
     bio: 'Spent 32 years helping high school students fall in love with physics through hands-on intuition rather than abstract formula memorization.',
-    location: 'Toronto, Canada',
+    location: 'Toronto, Ontario',
+    coordinates: '43.6532° N, 79.3832° W',
+    recordedDate: '04 August 2026',
     timeline: [
-      { year: 1992, event: 'Began teaching high school science', detail: 'Introduced project-based mechanics labs.' },
-      { year: 2005, event: 'Department Chair of Physical Sciences', detail: 'Redesigned curriculum around practical intuition.' },
-      { year: 2020, event: 'Excellence in Pedagogy Award', detail: 'Recognized for adaptive teaching strategies.' },
-      { year: 2026, event: 'Recorded classroom instincts on MemoryMap', detail: 'Captured subtle non-verbal cues indicating student confusion.' }
+      { year: 1992, event: 'Began teaching high school physical science', detail: 'Introduced practical mechanics labs using everyday objects.' },
+      { year: 2005, event: 'Department Chair of Physical Sciences', detail: 'Redesigned district curriculum around practical intuition.' },
+      { year: 2020, event: 'Excellence in Pedagogy Award', detail: 'Recognized for adaptive non-verbal student engagement strategies.' },
+      { year: 2026, event: 'Captured classroom instincts on MemoryMap', detail: 'Recorded subtle body-language cues indicating student confusion.' }
     ]
   },
   {
     id: 'sunita-devi',
+    catalogId: 'EXPRT-1994-0018',
     name: 'Sunita Devi',
-    role: 'Traditional Farmer',
+    role: 'Traditional Organic Farmer',
     yearsExperience: 30,
     avatar: '🌾',
     skills: ['Soil Humidity Reading', 'Natural Pest Control', 'Micro-climate Irrigation', 'Seed Selection'],
     memoriesCount: 18,
-    bio: '30 years managing organic farmland. Reads soil health through texture, smell, and local bio-indicators without digital sensors.',
+    bio: '30 years managing organic terraced farmland. Reads soil health through texture, aroma, and local bio-indicators without digital sensors.',
     location: 'Himachal Pradesh, India',
+    coordinates: '31.1048° N, 77.1734° E',
+    recordedDate: '29 July 2026',
     timeline: [
-      { year: 1994, event: 'Inherited family terraced farm', detail: 'Switched exclusively to organic soil enrichment.' },
-      { year: 2007, event: 'Developed micro-basin rainwater catchment', detail: 'Protected crops during severe drought seasons.' },
+      { year: 1994, event: 'Inherited family terraced farmland', detail: 'Switched exclusively to organic compost soil enrichment.' },
+      { year: 2007, event: 'Developed micro-basin rainwater catchment', detail: 'Protected local crops during severe drought seasons.' },
       { year: 2026, event: 'Preserved crop timing knowledge on MemoryMap', detail: 'Recorded weather pattern indicators based on local mountain flora.' }
     ]
   }
@@ -140,21 +162,22 @@ export const EXPERTS: Expert[] = [
 export const MEMORIES: Memory[] = [
   {
     id: 'demo-memory-1',
+    catalogId: 'ARCH-2026-0047',
     title: 'Diagnosing an Overheating Engine',
     expertId: 'ramesh-kumar',
     expertName: 'Ramesh Kumar',
     expertRole: 'Master Mechanic',
     expertExperience: 35,
-    category: 'Automotive',
+    category: 'Automotive Repair',
     duration: '04:32',
     tags: ['diagnostics', 'engine', 'cooling', 'water-pump', 'thermostat'],
-    summary: "After 35 years of fixing engines, I've learned that overheating is almost never about what beginners suspect first. The manual points to the thermostat, but 80% of the time, the real culprit is water pump cavitation or subtle head gasket leaks.",
+    summary: "After 35 years of fixing engines, I've learned that overheating is almost never about what beginners suspect first. The manual points to the thermostat, but 80% of the time, the real culprit is water pump impeller cavitation or subtle head gasket leaks.",
     procedure: [
-      { step: 1, instruction: 'Let the engine cool completely before touching any cooling component.' },
-      { step: 2, instruction: 'Check coolant level and smell. A sweet, burnt scent indicates head gasket seepage into combustion.' },
-      { step: 3, instruction: 'Start the engine from cold with cap off; watch for continuous air bubbles indicating cylinder pressure loss.' },
-      { step: 4, instruction: 'Feel the upper and lower radiator hoses after 5 minutes of idling — both should feel warm and firm.' },
-      { step: 5, instruction: 'If lower hose remains cold while upper is scalding, test water pump impeller wear before replacing thermostat.' }
+      { step: 1, instruction: 'Let the engine cool completely before touching any cooling component.', note: 'Safety verification' },
+      { step: 2, instruction: 'Check coolant level and smell. A sweet, burnt scent indicates head gasket seepage into combustion.', note: 'Acoustic & aroma check' },
+      { step: 3, instruction: 'Start the engine from cold with cap off; watch for continuous air bubbles indicating cylinder pressure loss.', note: 'Visual inspection' },
+      { step: 4, instruction: 'Feel upper and lower radiator hoses after 5 minutes of idling — both should feel warm and firm.', note: 'Tactile temperature reading' },
+      { step: 5, instruction: 'If lower hose remains cold while upper is scalding, test water pump impeller wear before replacing thermostat.', note: 'Key expert insight' }
     ],
     expertTips: [
       'Always smell the coolant reservoir cap — burnt sweet smell is an early indicator of head gasket seepage.',
@@ -171,17 +194,18 @@ export const MEMORIES: Memory[] = [
     story: "My first year as an apprentice, a customer brought in a sedan that had overheated 3 times. Two previous shops replaced the thermostat twice. My master walked over, placed his palm on the lower hose, smelled the radiator cap, and said 'Water pump impeller blades are eroded.' We pulled it off, and sure enough, the plastic vanes had melted away. That single day taught me to diagnose through physical signals, not just quick component swaps.",
     transcript: "When this engine starts making that high-pitched metallic ticking, most guys grab the scanner. But if you put your hand right on the thermostat housing... you feel the pulse. The manual won't tell you what that sound means.",
     recordingTimestamp: '02:17',
-    createdAt: '2026-08-15',
+    createdAt: '18 August 2026',
     featured: true
   },
   {
     id: 'teaching-intuition',
+    catalogId: 'ARCH-2026-0031',
     title: 'Recognizing Unspoken Student Confusion',
     expertId: 'david-chen',
     expertName: 'David Chen',
     expertRole: 'Veteran Teacher',
     expertExperience: 32,
-    category: 'Education',
+    category: 'Pedagogy & Teaching',
     duration: '07:14',
     tags: ['teaching', 'classroom', 'pedagogy', 'assessment'],
     summary: 'Students almost always say "Yes, I understand" when put on the spot. Real comprehension is revealed in micro-gestures: pencil positioning, eye movement when looking at a diagram, and hesitation before writing step one.',
@@ -201,24 +225,25 @@ export const MEMORIES: Memory[] = [
     tools: ['Whiteboard prompts', 'Peer explanation cards', 'Concept diagnostic sheets'],
     story: 'In 1998 I had a student named Sarah who scored 100% on homework but choked on exams. I noticed she held her pencil differently when she was guessing versus when she felt certain. By spotting that body language, I realized she was relying on pattern recognition rather than understanding the underlying physics.',
     recordingTimestamp: '04:10',
-    createdAt: '2026-08-18',
+    createdAt: '04 August 2026',
     featured: true
   },
   {
     id: 'handloom-tension',
+    catalogId: 'ARCH-2026-0023',
     title: 'Calibrating Handloom Warp Tension by Touch',
     expertId: 'meera-pillai',
     expertName: 'Meera Pillai',
     expertRole: 'Master Artisan Weaver',
     expertExperience: 40,
-    category: 'Craft',
+    category: 'Handloom Craft',
     duration: '03:52',
     tags: ['textile', 'handloom', 'weaving', 'craftsmanship'],
     summary: 'Proper thread tension on a traditional wooden loom cannot be measured with digital tension meters. It is felt by plucking the warp threads like guitar strings and listening to the acoustic resonance across the beam.',
     procedure: [
       { step: 1, instruction: 'Sweep your open palm lightly across the center 50 warp threads.' },
       { step: 2, instruction: 'Pluck individual outer selvage threads; they should pitch slightly higher than inner threads.' },
-      { step: 3, instruction: 'Adjust the wooden ratchets by half-notch increments until pitch uniformity is achieved.' }
+      { step: 3, instruction: 'Adjust wooden ratchets by half-notch increments until pitch uniformity is achieved.' }
     ],
     expertTips: [
       'Humidity changes wood tension; adjust ratchets at dawn and mid-afternoon.',
@@ -230,11 +255,12 @@ export const MEMORIES: Memory[] = [
     tools: ['Wooden ratchet beam key', 'Beater reed hook', 'Tension gauge cord'],
     story: 'My teacher taught me this when I was 17. I had snapped 30 silk warp threads in one morning because the monsoon rain had swollen the wooden frame. She made me close my eyes and just pluck the threads until I could hear the pitch of perfect tension.',
     recordingTimestamp: '01:45',
-    createdAt: '2026-08-20',
+    createdAt: '12 August 2026',
     featured: true
   },
   {
     id: 'soil-reading',
+    catalogId: 'ARCH-2026-0018',
     title: 'Reading Soil Readiness Before Planting',
     expertId: 'sunita-devi',
     expertName: 'Sunita Devi',
@@ -260,7 +286,7 @@ export const MEMORIES: Memory[] = [
     tools: ['Traditional hand spade', 'Soil moisture squeeze test', 'Compost aerator'],
     story: 'In 2007, all the big farms followed the government weather bulletin and sowed early. I checked the soil texture and waited 11 days. A late freeze wiped out their seedlings, but our crops thrived because we waited for the earth to warm up.',
     recordingTimestamp: '03:12',
-    createdAt: '2026-08-21',
+    createdAt: '29 July 2026',
     featured: true
   }
 ];
@@ -268,25 +294,31 @@ export const MEMORIES: Memory[] = [
 export const KNOWLEDGE_AT_RISK: KnowledgeAtRisk[] = [
   {
     id: 'risk-1',
+    catalogId: 'RISK-REG-01',
     title: 'Traditional Kasavu Handloom Weaving',
     practitionersLeft: 2,
     category: 'Textile Craft',
+    region: 'Kerala, South India',
     urgency: 'critical',
-    description: 'Specialized gold-thread selvedge alignment technique known only by two elder weavers in Kerala.'
+    description: 'Specialized gold-thread selvedge alignment technique known only by two elder weavers in Balaramapuram.'
   },
   {
     id: 'risk-2',
-    title: 'High-Altitude Terraced Canal Calibration',
+    catalogId: 'RISK-REG-02',
+    title: 'High-Altitude Terraced Canal Alignment',
     practitionersLeft: 3,
     category: 'Traditional Irrigation',
+    region: 'Himachal Pradesh, Himalayas',
     urgency: 'high',
-    description: 'Gravity-fed water channel gradient alignment technique without surveying tools.'
+    description: 'Gravity-fed water channel gradient alignment technique conducted entirely without surveying tools.'
   },
   {
     id: 'risk-3',
-    title: 'Vintage Engine Mechanical Acoustic Tuning',
+    catalogId: 'RISK-REG-03',
+    title: 'Vintage Diesel Mechanical Acoustic Tuning',
     practitionersLeft: 1,
     category: 'Automotive Heritage',
+    region: 'Mumbai Industrial Belt',
     urgency: 'critical',
     description: 'Acoustic diagnostic procedures for obsolete 2-stroke industrial generator engines.'
   }
@@ -295,6 +327,7 @@ export const KNOWLEDGE_AT_RISK: KnowledgeAtRisk[] = [
 export const QA_ENTRIES: QAEntry[] = [
   {
     id: 'qa-1',
+    catalogId: 'QA-SRC-0047',
     question: 'My engine overheats after 30 minutes of highway driving. What should I check first?',
     answer: 'According to Ramesh Kumar (35 years experience as a Master Mechanic), do not replace the thermostat first. Check the lower radiator hose while idling: if the upper hose is hot but lower remains cold, or if you smell a sweet burnt scent at the reservoir cap, your issue is coolant flow cavitation or early head gasket pressure leakage.',
     sourceExpert: 'Ramesh Kumar',
@@ -306,6 +339,7 @@ export const QA_ENTRIES: QAEntry[] = [
   },
   {
     id: 'qa-2',
+    catalogId: 'QA-SRC-0018',
     question: 'How do I know if soil is ready for planting without digital sensors?',
     answer: 'According to Sunita Devi (30 years farming experience), dig 4 inches deep and squeeze a fistful of soil. If water drips out, it is too wet. If it holds shape but crumbles smoothly under light thumb pressure, the micro-soil temperature and moisture are optimal for seed germination.',
     sourceExpert: 'Sunita Devi',
@@ -348,7 +382,7 @@ export function searchMemories(query: string, category?: string): Memory[] {
       m.expertName.toLowerCase().includes(q) ||
       m.tags.some((t) => t.toLowerCase().includes(q));
 
-    const matchesCategory = !category || category === 'All' || m.category === category;
+    const matchesCategory = !category || category === 'All' || m.category.includes(category);
 
     return matchesQuery && matchesCategory;
   });

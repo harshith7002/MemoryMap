@@ -5,25 +5,30 @@
 }
 
 .welcomeBanner {
-  background-color: var(--color-white);
+  background-color: #FFFFFF;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
   padding: var(--space-6) var(--space-8);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 4px 16px var(--color-shadow);
+}
+
+.catalogTag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-brass);
+  letter-spacing: 0.08em;
 }
 
 .greeting {
   font-family: var(--font-serif);
-  font-size: var(--text-3xl);
-  color: var(--color-charcoal);
+  font-size: 2.25rem;
+  color: var(--color-text-primary);
 }
 
 .tagline {
-  font-size: var(--text-sm);
-  color: var(--color-charcoal-muted);
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
 }
 
 .statsGrid {
@@ -33,44 +38,30 @@
 }
 
 .statCard {
-  background-color: var(--color-white);
-  border: 1px solid var(--color-border-light);
-  border-radius: var(--radius-lg);
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
   padding: var(--space-4) var(--space-5);
   display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  box-shadow: 0 2px 8px var(--color-shadow);
-}
-
-.statIcon {
-  width: 44px;
-  height: 44px;
-  border-radius: var(--radius-md);
-  background-color: var(--color-amber-pale);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--text-xl);
-}
-
-.statInfo {
-  display: flex;
   flex-direction: column;
+  gap: 2px;
+}
+
+.statCode {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
 }
 
 .statNum {
   font-family: var(--font-serif);
-  font-size: var(--text-2xl);
-  font-weight: 700;
-  color: var(--color-charcoal);
-  line-height: 1;
+  font-size: 2rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
 }
 
 .statLabel {
-  font-size: var(--text-xs);
-  color: var(--color-charcoal-muted);
-  margin-top: 2px;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
 }
 
 .mainGrid {
@@ -89,18 +80,21 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding-bottom: var(--space-3);
 }
 
 .sectionTitle {
   font-family: var(--font-serif);
-  font-size: var(--text-xl);
-  color: var(--color-charcoal);
+  font-size: 1.35rem;
+  color: var(--color-text-primary);
 }
 
 .viewAllLink {
-  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-brass);
   font-weight: 600;
-  color: var(--color-amber);
 }
 
 .memoriesList {
@@ -118,60 +112,36 @@
 .cardHeader {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: var(--space-3);
 }
 
-.cardMeta {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.categoryBadge {
-  font-size: var(--text-xs);
-  font-weight: 600;
+.categoryTag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-brass);
+  background-color: var(--color-brass-pale);
   padding: 0.15rem 0.5rem;
-  background-color: var(--color-amber-pale);
-  color: var(--color-amber);
-  border-radius: var(--radius-sm);
 }
 
-.durationBadge {
-  font-size: var(--text-xs);
-  color: var(--color-charcoal-muted);
-  font-family: monospace;
-}
-
-.playIconBtn {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background-color: var(--color-amber);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
-  transition: transform 0.2s;
-}
-
-.playIconBtn:hover {
-  transform: scale(1.1);
+.durationTag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
 }
 
 .cardTitle {
   font-family: var(--font-serif);
-  font-size: var(--text-lg);
-  color: var(--color-charcoal);
+  font-size: 1.25rem;
+  color: var(--color-text-primary);
 }
 
 .cardTitle a:hover {
-  color: var(--color-amber);
+  color: var(--color-brass);
 }
 
 .expertAuthor {
-  font-size: var(--text-xs);
-  color: var(--color-charcoal-muted);
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
   display: flex;
   align-items: center;
   gap: var(--space-2);
@@ -182,8 +152,8 @@
 }
 
 .summaryText {
-  font-size: var(--text-sm);
-  color: var(--color-charcoal-light);
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
   line-height: 1.5;
 }
 
@@ -194,13 +164,13 @@
 
 .cardActions {
   padding-top: var(--space-2);
-  border-top: 1px solid var(--color-border-light);
+  border-top: 1px solid var(--color-border-subtle);
 }
 
 .viewDetailsBtn {
-  font-size: var(--text-xs);
+  font-size: 0.8125rem;
   font-weight: 600;
-  color: var(--color-amber);
+  color: var(--color-text-primary);
 }
 
 .sideCol {
@@ -210,20 +180,20 @@
 }
 
 .sideCard {
-  background-color: var(--color-white);
-  border: 1px solid var(--color-border-light);
-  border-radius: var(--radius-xl);
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
   padding: var(--space-6);
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  box-shadow: 0 2px 8px var(--color-shadow);
 }
 
 .sideTitle {
   font-family: var(--font-serif);
-  font-size: var(--text-lg);
-  color: var(--color-charcoal);
+  font-size: 1.15rem;
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding-bottom: var(--space-2);
 }
 
 .expertsList {
@@ -236,24 +206,23 @@
   display: flex;
   align-items: center;
   gap: var(--space-3);
-  padding: var(--space-2);
-  border-radius: var(--radius-md);
-  transition: background-color var(--transition-fast);
+  padding: var(--space-2) 0;
+  border-bottom: 1px dashed var(--color-border-subtle);
 }
 
-.expertItem:hover {
-  background-color: var(--color-ivory);
+.expertItem:last-child {
+  border-bottom: none;
 }
 
 .expAvatar {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
-  background-color: var(--color-cream);
+  background-color: var(--color-archive-paper);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--text-base);
+  font-size: 1rem;
 }
 
 .expInfo {
@@ -263,34 +232,34 @@
 }
 
 .expName {
-  font-size: var(--text-sm);
+  font-size: 0.8125rem;
   font-weight: 600;
-  color: var(--color-charcoal);
+  color: var(--color-text-primary);
 }
 
 .expRole {
-  font-size: var(--text-xs);
-  color: var(--color-charcoal-muted);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
 }
 
 .expCount {
+  font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: var(--color-amber);
-  font-weight: 600;
+  color: var(--color-brass);
 }
 
 .sideLink {
-  font-size: var(--text-xs);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-brass);
   font-weight: 600;
-  color: var(--color-amber);
-  text-align: center;
   margin-top: var(--space-2);
 }
 
 .sideCardUrgent {
-  background-color: var(--color-amber-pale);
-  border: 1px solid rgba(193, 127, 36, 0.3);
-  border-radius: var(--radius-xl);
+  background-color: var(--color-archive-charcoal);
+  color: var(--color-archive-paper);
+  border: 1px solid var(--color-border-dark);
   padding: var(--space-6);
   display: flex;
   flex-direction: column;
@@ -304,22 +273,22 @@
 }
 
 .redDot {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
-  background-color: var(--color-red);
-  animation: blink 1.2s infinite;
+  background-color: #E74C3C;
+  animation: blinkDot 1s infinite;
 }
 
 .sideTitleUrgent {
   font-family: var(--font-serif);
-  font-size: var(--text-lg);
-  color: var(--color-charcoal);
+  font-size: 1.15rem;
+  color: var(--color-archive-paper);
 }
 
 .urgentSub {
-  font-size: var(--text-xs);
-  color: var(--color-charcoal-muted);
+  font-size: 0.75rem;
+  color: var(--color-text-inverse-muted);
 }
 
 .urgentList {
@@ -332,22 +301,21 @@
 .urgentItem {
   display: flex;
   flex-direction: column;
-  background-color: var(--color-white);
+  background-color: var(--color-archive-dark);
   padding: var(--space-3);
-  border-radius: var(--radius-md);
-  border: 1px solid rgba(193, 127, 36, 0.2);
+  border: 1px solid var(--color-border-dark);
 }
 
 .itemTitle {
-  font-size: var(--text-xs);
+  font-size: 0.8125rem;
   font-weight: 600;
-  color: var(--color-charcoal);
+  color: var(--color-archive-paper);
 }
 
 .itemCount {
+  font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: var(--color-red);
-  font-weight: 600;
+  color: #E74C3C;
 }
 
 .fullWidth {
@@ -358,7 +326,6 @@
   .statsGrid {
     grid-template-columns: repeat(2, 1fr);
   }
-
   .mainGrid {
     grid-template-columns: 1fr;
   }

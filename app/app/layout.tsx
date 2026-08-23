@@ -9,30 +9,31 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   const navItems = [
-    { label: 'Dashboard', icon: '📊', href: '/app/dashboard' },
-    { label: 'Record Voice', icon: '🎙️', href: '/app/record' },
-    { label: 'Knowledge Archive', icon: '📚', href: '/app/knowledge' },
-    { label: 'Ask MemoryMap', icon: '💬', href: '/app/ask' },
-    { label: 'Experts', icon: '👥', href: '/app/experts' },
-    { label: 'Timeline', icon: '📅', href: '/app/timeline' },
-    { label: 'Settings', icon: '⚙️', href: '/app/settings' },
+    { label: 'Control Center', code: 'ARCH-01', href: '/app/dashboard' },
+    { label: 'Field Recording', code: 'STUDIO', href: '/app/record' },
+    { label: 'Archive Catalog', code: 'INDEX', href: '/app/knowledge' },
+    { label: 'Oral Search', code: 'QUERY', href: '/app/ask' },
+    { label: 'Practitioners', code: 'PEOPLE', href: '/app/experts' },
+    { label: 'Evolution Track', code: 'TIMELINE', href: '/app/timeline' },
+    { label: 'Settings', code: 'SYS-CFG', href: '/app/settings' },
   ];
 
   return (
     <div className={styles.appContainer}>
-      {/* Sidebar */}
+      {/* Archival Sidebar */}
       <aside className={styles.sidebar}>
         <div className={styles.sidebarHeader}>
           <Link href="/" className={styles.brand}>
-            <span className={styles.logoDot} />
-            <span className={styles.brandText}>MemoryMap</span>
+            <span className={styles.brandTitle}>MemoryMap</span>
+            <span className={styles.brandSub}>ORAL ARCHIVE PLATFORM</span>
           </Link>
-          <span className={styles.appBadge}>APP</span>
         </div>
 
         <nav className={styles.navMenu}>
           {navItems.map((item) => {
-            const isActive = pathname === item.href || (item.href !== '/app/dashboard' && pathname?.startsWith(item.href));
+            const isActive =
+              pathname === item.href ||
+              (item.href !== '/app/dashboard' && pathname?.startsWith(item.href));
 
             return (
               <Link
@@ -40,24 +41,22 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                 href={item.href}
                 className={`${styles.navItem} ${isActive ? styles.active : ''}`}
               >
-                <span className={styles.navIcon}>{item.icon}</span>
+                <span className={styles.navCode}>{item.code}</span>
                 <span className={styles.navLabel}>{item.label}</span>
-                {item.href === '/app/record' && <span className={styles.liveDot} />}
+                {item.href === '/app/record' && <span className={styles.livePulse} />}
               </Link>
             );
           })}
         </nav>
 
         <div className={styles.sidebarFooter}>
-          <div className={styles.demoModeBox}>
-            <span className={styles.demoIcon}>✦</span>
-            <div className={styles.demoMeta}>
-              <span className={styles.demoTitle}>Demo Profile</span>
-              <span className={styles.demoSub}>Ramesh Kumar Archive</span>
-            </div>
+          <div className={styles.archiveMetaBox}>
+            <span className={styles.metaTitle}>DEMO ARCHIVAL PROFILE</span>
+            <span className={styles.metaName}>Ramesh Kumar Archive</span>
+            <span className={styles.metaCode}>CATALOG #EXPRT-1989-0047</span>
           </div>
-          <Link href="/demo" className={styles.demoLink}>
-            Switch Demo Mode ➔
+          <Link href="/demo" className={styles.exhibitionLink}>
+            Interactive Exhibition Demo ➔
           </Link>
         </div>
       </aside>
@@ -65,14 +64,14 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       {/* Main Content Area */}
       <div className={styles.mainWrapper}>
         <header className={styles.topHeader}>
-          <div className={styles.headerTitle}>
-            <span>MemoryMap Archive Platform</span>
+          <div className={styles.headerInfo}>
+            <span className={styles.sysTag}>MEMORYMAP DIGITAL MUSEUM & ARCHIVE</span>
           </div>
           <div className={styles.headerRight}>
-            <Link href="/app/record" className={styles.quickRecordBtn}>
-              🎙️ Quick Record
+            <Link href="/app/record" className={styles.recordActionBtn}>
+              🎙️ Record Oral Account
             </Link>
-            <div className={styles.userAvatar}>👨‍🔧</div>
+            <div className={styles.expertAvatar}>👨‍🔧</div>
           </div>
         </header>
 

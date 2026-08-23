@@ -1,5 +1,6 @@
 import { Navbar } from '@/components/landing/Navbar/Navbar';
 import { HeroSection } from '@/components/landing/HeroSection/HeroSection';
+import { ListenToLifeSection } from '@/components/landing/ListenToLifeSection/ListenToLifeSection';
 import { StorySection } from '@/components/landing/StorySection/StorySection';
 import { HowItWorksSection } from '@/components/landing/HowItWorksSection/HowItWorksSection';
 import { BeforeAfterSection } from '@/components/landing/BeforeAfterSection/BeforeAfterSection';
@@ -12,6 +13,7 @@ export default function Home() {
     <main>
       <Navbar />
       <HeroSection />
+      <ListenToLifeSection />
       <StorySection />
       <HowItWorksSection />
       <BeforeAfterSection />

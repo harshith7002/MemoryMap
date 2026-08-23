@@ -1,142 +1,144 @@
 .section {
   padding: var(--space-20) 0;
-  background-color: var(--color-cream);
-  border-top: 1px solid var(--color-border);
+  background-color: var(--color-archive-paper-dark);
   border-bottom: 1px solid var(--color-border);
 }
 
 .container {
-  max-width: 1240px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 var(--space-6);
+  padding: 0 var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
 }
 
 .header {
-  text-align: center;
-  max-width: 680px;
-  margin: 0 auto var(--space-16);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-6);
 }
 
-.sectionBadge {
-  font-size: var(--text-xs);
-  font-weight: 700;
-  color: var(--color-amber);
+.metaLabel {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-brass);
   letter-spacing: 0.08em;
 }
 
 .title {
+  font-family: var(--font-serif);
   font-size: clamp(2rem, 3.5vw, 2.75rem);
-  color: var(--color-charcoal);
+  color: var(--color-text-primary);
 }
 
 .subtitle {
   font-size: var(--text-base);
-  color: var(--color-charcoal-muted);
+  color: var(--color-text-secondary);
+  max-width: 620px;
 }
 
-.comparisonGrid {
+.transformationGrid {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   gap: var(--space-6);
   align-items: center;
 }
 
-.columnBefore, .columnAfter {
+.paneBefore, .paneAfter {
   display: flex;
   flex-direction: column;
-  gap: var(--space-4);
+  gap: var(--space-3);
 }
 
-.colHeader {
+.paneMetaHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.colBadgeRed {
-  font-size: var(--text-xs);
-  font-weight: 700;
-  color: var(--color-red);
+.tagBefore {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-rust);
   letter-spacing: 0.05em;
-}
-
-.colBadgeGreen {
-  font-size: var(--text-xs);
-  font-weight: 700;
-  color: var(--color-green);
-  letter-spacing: 0.05em;
-}
-
-.colMeta {
-  font-size: var(--text-xs);
-  color: var(--color-charcoal-muted);
-}
-
-.rawTranscriptCard {
-  background-color: var(--color-white);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
-  padding: var(--space-6);
-  box-shadow: 0 4px 16px var(--color-shadow);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-}
-
-.audioWaveHeader {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: var(--text-sm);
   font-weight: 600;
-  color: var(--color-charcoal);
-  padding-bottom: var(--space-3);
-  border-bottom: 1px solid var(--color-border-light);
+}
+
+.tagAfter {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-forest);
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+.timeTag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+}
+
+.timeTagGreen {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-forest);
+  font-weight: 700;
+}
+
+.audioExhibitCard {
+  background-color: var(--color-archive-charcoal);
+  color: var(--color-archive-paper);
+  border: 1px solid var(--color-border-dark);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.audioWaveMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8125rem;
+  border-bottom: 1px solid var(--color-border-dark);
+  padding-bottom: var(--space-2);
 }
 
 .monoTime {
-  font-family: monospace;
-  font-size: var(--text-xs);
-  color: var(--color-charcoal-muted);
+  font-family: var(--font-mono);
+  color: var(--color-brass);
 }
 
-.transcriptBox {
-  background-color: var(--color-ivory);
-  border: 1px solid var(--color-border-light);
-  border-radius: var(--radius-lg);
+.transcriptQuoteBox {
+  background-color: var(--color-archive-black);
+  border: 1px solid var(--color-border-dark);
   padding: var(--space-4);
-  max-height: 180px;
+  max-height: 160px;
   overflow-y: auto;
 }
 
-.transcriptText {
-  font-size: var(--text-xs);
-  color: var(--color-charcoal-light);
-  line-height: 1.6;
+.quoteText {
+  font-family: var(--font-serif);
   font-style: italic;
+  font-size: 0.875rem;
+  color: var(--color-text-inverse-muted);
+  line-height: 1.6;
 }
 
-.transcriptFooter {
+.statusBoxRed {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: #E74C3C;
+  background-color: rgba(192, 57, 43, 0.15);
+  padding: 0.35rem 0.65rem;
+  border: 1px solid rgba(192, 57, 43, 0.3);
+}
+
+.centerArrowCol {
   display: flex;
-  align-items: center;
-}
-
-.warningTag {
-  font-size: var(--text-xs);
-  color: var(--color-red);
-  background-color: var(--color-red-pale);
-  padding: 0.25rem 0.75rem;
-  border-radius: var(--radius-full);
-  font-weight: 500;
-}
-
-.transformCenter {
-  display: flex;
-  align-items: center;
   justify-content: center;
 }
 
@@ -145,110 +147,105 @@
   flex-direction: column;
   align-items: center;
   gap: var(--space-1);
+  background-color: var(--color-brass);
+  color: var(--color-archive-black);
   padding: var(--space-4) var(--space-3);
-  background-color: var(--color-charcoal);
-  color: var(--color-ivory);
-  border-radius: var(--radius-full);
-  font-size: var(--text-xs);
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  box-shadow: 0 4px 14px var(--color-shadow-md);
-}
-
-.sparkle {
-  font-size: var(--text-lg);
+  border-radius: var(--radius-sm);
 }
 
 .arrowIcon {
-  font-size: var(--text-base);
-  color: var(--color-amber);
+  font-size: 1.25rem;
+  font-weight: bold;
 }
 
-.extractedKnowledgeCard {
-  background-color: var(--color-white);
+.pillText {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  writing-mode: vertical-lr;
+  transform: rotate(180deg);
+}
+
+.catalogRecordCard {
+  background-color: #FFFFFF;
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-xl);
   padding: var(--space-6);
-  box-shadow: 0 4px 16px var(--color-shadow);
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
 }
 
-.extractionSummaryHeader {
+.recordHeader {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid var(--color-border-subtle);
+  padding-bottom: var(--space-3);
 }
 
-.memoryTitle {
+.recordTitle {
   font-family: var(--font-serif);
-  font-size: var(--text-lg);
-  color: var(--color-charcoal);
+  font-size: 1.25rem;
+  color: var(--color-text-primary);
 }
 
-.catTag {
-  font-size: var(--text-xs);
+.catBadge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-forest);
+  background-color: var(--color-forest-pale);
   padding: 0.15rem 0.5rem;
-  background-color: var(--color-green-pale);
-  color: var(--color-green);
-  border-radius: var(--radius-sm);
-  font-weight: 600;
 }
 
-.statsRow {
+.extractedCountsRow {
   display: flex;
   gap: var(--space-2);
+  flex-wrap: wrap;
 }
 
-.statBox {
-  flex: 1;
-  background-color: var(--color-ivory);
-  border: 1px solid var(--color-border-light);
-  border-radius: var(--radius-md);
-  padding: var(--space-2);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.statNum {
-  font-family: var(--font-serif);
-  font-size: var(--text-lg);
-  font-weight: 700;
-  color: var(--color-amber);
-}
-
-.statLabel {
+.countBadge {
+  font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: var(--color-charcoal-muted);
+  background-color: var(--color-archive-paper);
+  border: 1px solid var(--color-border);
+  padding: 0.15rem 0.5rem;
+  color: var(--color-text-secondary);
 }
 
-.previewStep, .previewTip {
+.previewStepBox, .previewTipBox {
   display: flex;
   align-items: flex-start;
-  gap: var(--space-2);
-  background-color: var(--color-ivory);
+  gap: var(--space-3);
+  background-color: var(--color-archive-paper);
   padding: var(--space-3);
-  border-radius: var(--radius-md);
-  font-size: var(--text-xs);
+  border-left: 3px solid var(--color-brass);
 }
 
-.stepBadge {
+.previewTipBox {
+  border-left-color: var(--color-forest);
+}
+
+.stepNum {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
   font-weight: 700;
-  color: var(--color-amber);
+  color: var(--color-brass);
   white-space: nowrap;
 }
 
-.tipBadge {
+.tipLabel {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
   font-weight: 700;
-  color: var(--color-green);
+  color: var(--color-forest);
   white-space: nowrap;
 }
 
 .stepText, .tipText {
-  color: var(--color-charcoal-light);
+  font-size: 0.8125rem;
+  color: var(--color-text-primary);
   line-height: 1.4;
 }
 
@@ -256,30 +253,25 @@
   display: flex;
   align-items: center;
   gap: var(--space-2);
-  font-size: var(--text-xs);
-  color: var(--color-green);
-  font-weight: 500;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-forest);
+  font-weight: 600;
   padding-top: var(--space-2);
+  border-top: 1px solid var(--color-border-subtle);
 }
 
-.checkIcon {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background-color: var(--color-green);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 10px;
+.checkMark {
+  color: var(--color-forest);
+  font-weight: bold;
 }
 
 @media (max-width: 992px) {
-  .comparisonGrid {
+  .transformationGrid {
     grid-template-columns: 1fr;
   }
-  .transformCenter {
-    transform: rotate(90deg);
-    padding: var(--space-4) 0;
+  .pillText {
+    writing-mode: horizontal-tb;
+    transform: none;
   }
 }
