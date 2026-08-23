@@ -1,0 +1,223 @@
+.appContainer {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--color-ivory);
+}
+
+.sidebar {
+  width: 260px;
+  background-color: var(--color-white);
+  border-right: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 50;
+  padding: var(--space-6) var(--space-4);
+}
+
+.sidebarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.logoDot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-amber);
+}
+
+.brandText {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--color-charcoal);
+}
+
+.appBadge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  background-color: var(--color-amber-pale);
+  color: var(--color-amber);
+  padding: 0.15rem 0.4rem;
+  border-radius: var(--radius-sm);
+}
+
+.navMenu {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-6);
+  flex: 1;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-charcoal-light);
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.navItem:hover {
+  background-color: var(--color-ivory);
+  color: var(--color-charcoal);
+}
+
+.active {
+  background-color: var(--color-amber-pale);
+  color: var(--color-amber);
+  font-weight: 600;
+  border-left: 3px solid var(--color-amber);
+}
+
+.navIcon {
+  font-size: var(--text-base);
+}
+
+.liveDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-red);
+  margin-left: auto;
+  animation: blink 1.2s infinite;
+}
+
+.sidebarFooter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border-light);
+}
+
+.demoModeBox {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background-color: var(--color-cream);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+}
+
+.demoIcon {
+  color: var(--color-amber);
+}
+
+.demoMeta {
+  display: flex;
+  flex-direction: column;
+}
+
+.demoTitle {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-charcoal);
+}
+
+.demoSub {
+  font-size: 0.65rem;
+  color: var(--color-charcoal-muted);
+}
+
+.demoLink {
+  font-size: var(--text-xs);
+  color: var(--color-amber);
+  font-weight: 600;
+  text-align: center;
+}
+
+.mainWrapper {
+  margin-left: 260px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.topHeader {
+  height: 60px;
+  background-color: var(--color-white);
+  border-bottom: 1px solid var(--color-border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--space-8);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.headerTitle {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-charcoal-muted);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.quickRecordBtn {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  background-color: var(--color-amber);
+  color: white;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+}
+
+.userAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--color-amber-pale);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-sm);
+  border: 1px solid rgba(193, 127, 36, 0.3);
+}
+
+.content {
+  padding: var(--space-8);
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 60px;
+    padding: var(--space-4) var(--space-2);
+  }
+
+  .brandText, .appBadge, .navLabel, .sidebarFooter {
+    display: none;
+  }
+
+  .mainWrapper {
+    margin-left: 60px;
+  }
+}

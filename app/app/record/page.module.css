@@ -1,0 +1,302 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+  padding: var(--space-6) 0;
+}
+
+.header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.badge {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-amber);
+  letter-spacing: 0.08em;
+}
+
+.title {
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  color: var(--color-charcoal);
+}
+
+.subtitle {
+  font-size: var(--text-base);
+  color: var(--color-charcoal-muted);
+  max-width: 520px;
+}
+
+/* Idle State */
+.idleState {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-10);
+}
+
+.promptCard {
+  width: 100%;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  box-shadow: 0 4px 16px var(--color-shadow);
+}
+
+.promptHeader {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-amber);
+  letter-spacing: 0.05em;
+}
+
+.promptMain {
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  color: var(--color-charcoal);
+  font-style: italic;
+}
+
+.chipsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.chip {
+  font-size: var(--text-xs);
+  padding: 0.35rem 0.75rem;
+  background-color: var(--color-ivory);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  color: var(--color-charcoal-light);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.chip:hover {
+  background-color: var(--color-cream);
+  border-color: var(--color-amber);
+  color: var(--color-charcoal);
+}
+
+.chipActive {
+  background-color: var(--color-amber-pale);
+  border-color: var(--color-amber);
+  color: var(--color-amber);
+  font-weight: 600;
+}
+
+.micContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  position: relative;
+}
+
+.pulseRing {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 124px;
+  height: 124px;
+  border-radius: 50%;
+  background-color: rgba(193, 127, 36, 0.15);
+  animation: pulse-ring 2s infinite ease-out;
+  pointer-events: none;
+}
+
+.bigMicButton {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: var(--color-amber);
+  color: white;
+  font-size: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 28px rgba(193, 127, 36, 0.4);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  z-index: 10;
+  border: none;
+  cursor: pointer;
+}
+
+.bigMicButton:hover {
+  transform: scale(1.06);
+  background-color: var(--color-amber-light);
+}
+
+.micActionText {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-charcoal);
+}
+
+.privacyNote {
+  font-size: var(--text-xs);
+  color: var(--color-charcoal-muted);
+  text-align: center;
+}
+
+/* Active Recording / Paused State */
+.activeState {
+  width: 100%;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  box-shadow: 0 8px 32px var(--color-shadow-md);
+}
+
+.liveIndicatorRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.redBlinkDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--color-red);
+  animation: blink 1s infinite;
+}
+
+.liveText {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-red);
+  letter-spacing: 0.05em;
+}
+
+.pauseBadge {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-charcoal-muted);
+  background-color: var(--color-cream);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-sm);
+}
+
+.timerDisplay {
+  font-family: monospace;
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--color-charcoal);
+}
+
+.waveformContainer {
+  width: 100%;
+  padding: var(--space-4) var(--space-6);
+  background-color: var(--color-ivory);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border-light);
+  display: flex;
+  justify-content: center;
+}
+
+.recordingAdvice {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--text-sm);
+  color: var(--color-charcoal-muted);
+  text-align: center;
+  max-width: 480px;
+}
+
+.controlsRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+/* Processing State */
+.processingState {
+  width: 100%;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-12) var(--space-8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  box-shadow: 0 8px 32px var(--color-shadow-md);
+  text-align: center;
+}
+
+.spinnerRing {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  border: 4px solid var(--color-amber-pale);
+  border-top-color: var(--color-amber);
+  animation: spin 1s linear infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.sparkleIcon {
+  font-size: var(--text-xl);
+  animation: pulse 1s infinite alternate;
+}
+
+.processingTitle {
+  font-family: var(--font-serif);
+  font-size: var(--text-2xl);
+  color: var(--color-charcoal);
+}
+
+.processingStepText {
+  font-size: var(--text-base);
+  color: var(--color-amber);
+  font-weight: 500;
+  min-height: 24px;
+}
+
+.progressBar {
+  width: 100%;
+  max-width: 400px;
+  height: 8px;
+  background-color: var(--color-cream);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background-color: var(--color-amber);
+  transition: width 0.8s ease;
+  border-radius: var(--radius-full);
+}
+
+.aiFeaturesPreview {
+  display: flex;
+  gap: var(--space-4);
+  font-size: var(--text-xs);
+  color: var(--color-charcoal-muted);
+  font-weight: 500;
+}

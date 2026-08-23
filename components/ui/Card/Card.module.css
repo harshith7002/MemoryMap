@@ -1,0 +1,40 @@
+.card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  transition: all var(--transition-base);
+  box-shadow: 0 2px 8px var(--color-shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.default {
+  background-color: var(--color-white);
+}
+
+.featured {
+  background-color: var(--color-ivory);
+  border-color: var(--color-border);
+  box-shadow: 0 4px 16px var(--color-shadow-md);
+}
+
+.compact {
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+}
+
+.accent {
+  background-color: var(--color-amber-pale);
+  border-color: rgba(193, 127, 36, 0.3);
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px var(--color-shadow-md);
+  border-color: var(--color-amber);
+}

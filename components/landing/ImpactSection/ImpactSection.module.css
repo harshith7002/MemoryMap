@@ -1,0 +1,186 @@
+.section {
+  padding: var(--space-20) 0;
+  background-color: var(--color-ivory);
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 var(--space-6);
+}
+
+.header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto var(--space-16);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.sectionBadge {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-amber);
+  letter-spacing: 0.08em;
+}
+
+.title {
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  color: var(--color-charcoal);
+}
+
+.subtitle {
+  font-size: var(--text-lg);
+  color: var(--color-charcoal-muted);
+}
+
+.comparisonRow {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: var(--space-6);
+  align-items: center;
+  margin-bottom: var(--space-16);
+}
+
+.compBoxBefore {
+  background-color: var(--color-cream);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.compBoxAfter {
+  background-color: var(--color-green-pale);
+  border: 1px solid rgba(74, 103, 65, 0.3);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.boxTag {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-charcoal-muted);
+}
+
+.boxTagGreen {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-green);
+}
+
+.boxTitle {
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  color: var(--color-charcoal);
+}
+
+.boxDesc {
+  font-size: var(--text-sm);
+  color: var(--color-charcoal-light);
+  line-height: 1.6;
+}
+
+.arrowDivider {
+  font-size: var(--text-2xl);
+  color: var(--color-amber);
+  font-weight: bold;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin-bottom: var(--space-16);
+}
+
+.impactCard {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  box-shadow: 0 4px 16px var(--color-shadow);
+  transition: all var(--transition-base);
+}
+
+.impactCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px var(--color-shadow-md);
+  border-color: var(--color-amber);
+}
+
+.iconCircle {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-lg);
+  background-color: var(--color-amber-pale);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-xl);
+}
+
+.cardTitle {
+  font-family: var(--font-serif);
+  font-size: var(--text-lg);
+  color: var(--color-charcoal);
+}
+
+.cardDesc {
+  font-size: var(--text-sm);
+  color: var(--color-charcoal-muted);
+  line-height: 1.5;
+}
+
+.finalBanner {
+  background-color: var(--color-cream);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-12) var(--space-6);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  box-shadow: 0 8px 32px var(--color-shadow);
+}
+
+.bannerTitle {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  color: var(--color-charcoal);
+}
+
+.bannerSubtitle {
+  font-size: var(--text-base);
+  color: var(--color-charcoal-muted);
+  max-width: 500px;
+}
+
+.bannerActions {
+  display: flex;
+  gap: var(--space-4);
+  margin-top: var(--space-2);
+}
+
+@media (max-width: 992px) {
+  .comparisonRow {
+    grid-template-columns: 1fr;
+  }
+  .arrowDivider {
+    transform: rotate(90deg);
+    text-align: center;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

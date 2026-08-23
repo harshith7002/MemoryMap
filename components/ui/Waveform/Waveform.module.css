@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 100%;
+}
+
+.bar {
+  width: 3px;
+  border-radius: var(--radius-full);
+  transition: height 0.3s ease;
+  transform-origin: center;
+  display: inline-block;
+}
+
+.animating {
+  animation: wavePulse infinite ease-in-out alternate;
+}
+
+@keyframes wavePulse {
+  0% {
+    transform: scaleY(0.25);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scaleY(1.1);
+    opacity: 1;
+  }
+}

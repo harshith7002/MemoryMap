@@ -1,0 +1,122 @@
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-navbar);
+  background-color: rgba(250, 248, 244, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: all var(--transition-base);
+}
+
+.scrolled {
+  background-color: rgba(250, 248, 244, 0.95);
+  border-bottom-color: var(--color-border-light);
+  box-shadow: 0 4px 16px var(--color-shadow);
+}
+
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.logoDot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-amber);
+  display: inline-block;
+  box-shadow: 0 0 8px var(--color-amber);
+}
+
+.brandText {
+  font-family: var(--font-serif);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--color-charcoal);
+  letter-spacing: -0.02em;
+}
+
+.desktopNav {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.navLink {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-charcoal-light);
+  transition: color var(--transition-fast);
+}
+
+.navLink:hover {
+  color: var(--color-amber);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.mobileToggle {
+  display: none;
+  font-size: var(--text-xl);
+  color: var(--color-charcoal);
+  padding: var(--space-2);
+}
+
+.mobileNav {
+  display: none;
+  flex-direction: column;
+  padding: var(--space-6);
+  background-color: var(--color-ivory);
+  border-bottom: 1px solid var(--color-border);
+  gap: var(--space-4);
+  animation: fadeIn 0.2s ease forwards;
+}
+
+.mobileNavLink {
+  font-size: var(--text-lg);
+  font-weight: 500;
+  color: var(--color-charcoal);
+  padding: var(--space-2) 0;
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.mobileActions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-4);
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .desktopNav {
+    display: none;
+  }
+
+  .mobileToggle {
+    display: block;
+  }
+
+  .mobileNav {
+    display: flex;
+  }
+}
