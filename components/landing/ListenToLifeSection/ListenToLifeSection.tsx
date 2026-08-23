@@ -7,119 +7,125 @@ import styles from './ListenToLifeSection.module.css';
 
 export const ListenToLifeSection: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(true);
-  const [activeSegment, setActiveSegment] = useState(1);
-
-  const transcriptSegments = [
-    { id: 1, text: "“When this engine starts making that high-pitched metallic ticking, most guys grab the scanner...”", time: "00:14" },
-    { id: 2, text: "“...but back in 1994, my master showed me you place your palm right here on the lower housing.”", time: "01:05" },
-    { id: 3, text: "“If the lower hose is cold while the top is burning hot, that's not your thermostat sticking...”", time: "02:17" },
-    { id: 4, text: "“...that's water pump impeller erosion. And smell the cap — burnt sweet scent means head gasket pressure loss.”", time: "03:45" }
-  ];
+  const [activeStage, setActiveStage] = useState<number>(3); // 1: Voice, 2: Transcript, 3: Extraction
 
   return (
-    <section className={styles.section}>
+    <section className={styles.fullBleedSection}>
       <div className={styles.container}>
-        <div className={styles.sectionMeta}>
-          <span className={styles.sectionNum}>01 // SIGNATURE EXHIBIT</span>
-          <span className={styles.sectionLabel}>ORAL HISTORY RECORDING</span>
+        {/* Section Metadata */}
+        <div className={styles.sectionHeader}>
+          <span className={styles.monoTag}>[ EXHIBIT 02 // ARCHIVAL TRANSFORMATION ]</span>
+          <h2 className={styles.title}>Knowledge Is Alive</h2>
+          <p className={styles.subtitle}>
+            Watch spontaneous oral accounts evolve into verified, structured institutional memory.
+          </p>
         </div>
 
-        <div className={styles.layoutGrid}>
-          {/* Left Column: Voice Recording Unit */}
-          <div className={styles.voiceColumn}>
-            <div className={styles.headingGroup}>
-              <h2 className={styles.title}>Listen to Ramesh</h2>
-              <span className={styles.subtitle}>35 years diagnosing heavy diesel machinery by ear.</span>
-            </div>
+        {/* Transformation Pipeline Stage Selector */}
+        <div className={styles.stageBar}>
+          <button
+            className={`${styles.stageTab} ${activeStage === 1 ? styles.stageActive : ''}`}
+            onClick={() => setActiveStage(1)}
+          >
+            <span className={styles.stageNum}>01</span>
+            <span className={styles.stageName}>RAW VOICE RECORDING</span>
+          </button>
+          <span className={styles.stageArrow}>➔</span>
 
-            <div className={styles.audioExhibitBox}>
-              <div className={styles.playerBar}>
-                <button
-                  className={styles.playToggleBtn}
-                  onClick={() => setIsPlaying(!isPlaying)}
-                >
-                  {isPlaying ? '⏸ PAUSE ARCHIVE AUDIO' : '▶ PLAY SPOKEN ACCOUNT'}
-                </button>
-                <span className={styles.timestampMono}>TIMESTAMP: 02:17 / 04:32</span>
-              </div>
+          <button
+            className={`${styles.stageTab} ${activeStage === 2 ? styles.stageActive : ''}`}
+            onClick={() => setActiveStage(2)}
+          >
+            <span className={styles.stageNum}>02</span>
+            <span className={styles.stageName}>SPOKEN TRANSCRIPT</span>
+          </button>
+          <span className={styles.stageArrow}>➔</span>
 
-              <div className={styles.waveformContainer}>
-                <Waveform isAnimating={isPlaying} barCount={44} height={40} color="var(--color-brass)" />
-              </div>
+          <button
+            className={`${styles.stageTab} ${activeStage === 3 ? styles.stageActive : ''}`}
+            onClick={() => setActiveStage(3)}
+          >
+            <span className={styles.stageNum}>03</span>
+            <span className={styles.stageName}>AI EXTRACTION & CATALOGING</span>
+          </button>
+        </div>
 
-              {/* Live Transcript Segment Navigation */}
-              <div className={styles.transcriptFlow}>
-                <span className={styles.flowLabel}>VERBATIM SPOKEN TRANSCRIPT (CLICK SEGMENT):</span>
-                {transcriptSegments.map((seg) => (
-                  <div
-                    key={seg.id}
-                    className={`${styles.transcriptCard} ${activeSegment === seg.id ? styles.activeSeg : ''}`}
-                    onClick={() => setActiveSegment(seg.id)}
+        {/* Live Transformation Board */}
+        <div className={styles.transformationBoard}>
+          {/* STAGE 1: RAW VOICE */}
+          {activeStage === 1 && (
+            <div className={styles.stagePane}>
+              <div className={styles.paneMeta}>STAGE 01 // ACOUSTIC VOICE CAPTURE</div>
+              <div className={styles.audioPlayerBox}>
+                <div className={styles.playerControls}>
+                  <button
+                    className={styles.playBtn}
+                    onClick={() => setIsPlaying(!isPlaying)}
                   >
-                    <span className={styles.segTime}>{seg.time}</span>
-                    <p className={seg.id === 3 ? styles.highlightText : styles.normalText}>
-                      {seg.text}
-                    </p>
-                  </div>
-                ))}
+                    {isPlaying ? '⏸ PAUSE ARCHIVE AUDIO' : '▶ PLAY SPOKEN ACCOUNT'}
+                  </button>
+                  <span className={styles.timeMono}>TIMESTAMP: 02:17 / 04:32</span>
+                </div>
+
+                <div className={styles.waveformContainer}>
+                  <Waveform isAnimating={isPlaying} barCount={48} height={40} color="var(--color-brass)" />
+                </div>
+                <p className={styles.paneDesc}>
+                  Unfiltered 8-minute audio captured in a workshop setting. Trapped in audio file format without indexing.
+                </p>
               </div>
             </div>
-          </div>
+          )}
 
-          {/* Right Column: Gradual Knowledge Extraction Sequence */}
-          <div className={styles.extractionColumn}>
-            <div className={styles.extractionHeader}>
-              <span className={styles.aiTag}>MEMORYMAP AI STRUCTURING ENGINE</span>
-              <h3 className={styles.extractTitle}>Live Extraction Pipeline</h3>
+          {/* STAGE 2: TRANSCRIPT */}
+          {activeStage === 2 && (
+            <div className={styles.stagePane}>
+              <div className={styles.paneMeta}>STAGE 02 // SPOKEN VERBATIM TRANSCRIPT</div>
+              <blockquote className={styles.rawTranscriptQuote}>
+                “When this engine starts making that high-pitched metallic ticking, most guys grab the scanner. But if you put your hand right on the thermostat housing... you feel the pulse. If the lower hose is cold while the top is scalding hot, that's water pump impeller erosion...”
+              </blockquote>
             </div>
+          )}
 
-            <div className={styles.pipelineFlow}>
-              {/* Step 1: Raw Voice Experience */}
-              <div className={styles.pipelineStep}>
-                <div className={styles.stepMarker}>01</div>
-                <div className={styles.stepContent}>
-                  <span className={styles.stepType}>EXPERIENCE</span>
-                  <h4 className={styles.stepTitle}>Spontaneous Oral Account</h4>
-                  <p className={styles.stepDesc}>35 years of unwritten diagnostic instincts captured via microphone.</p>
+          {/* STAGE 3: AI EXTRACTION (SIGNATURE DEMO) */}
+          {activeStage === 3 && (
+            <div className={styles.stagePane}>
+              <div className={styles.paneMeta}>STAGE 03 // EXTRACTED & CATALOGED KNOWLEDGE RECORD</div>
+
+              <div className={styles.extractionCardsGrid}>
+                {/* Extracted Procedure */}
+                <div className={styles.extractedCard}>
+                  <span className={styles.cardTypeGreen}>[ PROCEDURE ]</span>
+                  <h3 className={styles.cardTitle}>Cooling System Circulation Test</h3>
+                  <p className={styles.cardDesc}>Check coolant flow and hose temperature differential before replacing thermostat housing.</p>
+                  <span className={styles.sourceTag}>Verbatim Audio Ref: 02:17</span>
                 </div>
-              </div>
 
-              <div className={styles.connectorArrow}>↓</div>
-
-              {/* Step 2: Extracted Procedure */}
-              <div className={`${styles.pipelineStep} ${styles.highlightedStep}`}>
-                <div className={styles.stepMarker}>02</div>
-                <div className={styles.stepContent}>
-                  <span className={styles.stepTypeGreen}>PROCEDURE</span>
-                  <h4 className={styles.stepTitle}>Cooling Circulation Sequence</h4>
-                  <p className={styles.stepDesc}>Touch lower hose prior to removing thermostat housing.</p>
+                {/* Extracted Expert Tip */}
+                <div className={styles.extractedCard}>
+                  <span className={styles.cardTypeBrass}>[ MASTER PRACTITIONER TIP ]</span>
+                  <h3 className={styles.cardTitle}>Tactile & Aroma Diagnostics</h3>
+                  <p className={styles.cardDesc}>Burnt sweet scent at reservoir cap indicates early cylinder head gasket pressure seepage.</p>
+                  <span className={styles.sourceTag}>Verbatim Audio Ref: 03:45</span>
                 </div>
-              </div>
 
-              <div className={styles.connectorArrow}>↓</div>
-
-              {/* Step 3: Master Tip */}
-              <div className={styles.pipelineStep}>
-                <div className={styles.stepMarker}>03</div>
-                <div className={styles.stepContent}>
-                  <span className={styles.stepTypeBrass}>EXPERT TIP</span>
-                  <h4 className={styles.stepTitle}>Aroma & Tactile Signatures</h4>
-                  <p className={styles.stepDesc}>Burnt sweet scent at reservoir cap = head gasket pressure seepage.</p>
+                {/* Extracted Common Mistake */}
+                <div className={styles.extractedCard}>
+                  <span className={styles.cardTypeRust}>[ COMMON MISTAKE TO AVOID ]</span>
+                  <h3 className={styles.cardTitle}>Premature Thermostat Swap</h3>
+                  <p className={styles.cardDesc}>Replacing the thermostat immediately without verifying actual impeller cavitation.</p>
+                  <span className={styles.sourceTag}>Verbatim Audio Ref: 04:10</span>
                 </div>
-              </div>
-
-              <div className={styles.connectorArrow}>↓</div>
-
-              {/* Step 4: Permanent Archive Catalog Record */}
-              <div className={styles.pipelineStepFinal}>
-                <span className={styles.finalCatalogNum}>CATALOG RECORD #ARCH-2026-0047</span>
-                <h4 className={styles.finalTitle}>Permanent Preserved Knowledge</h4>
-                <Link href="/app/knowledge/demo-memory-1" className={styles.exploreRecordBtn}>
-                  Inspect Complete Catalog Entry →
-                </Link>
               </div>
             </div>
-          </div>
+          )}
+        </div>
+
+        {/* Action Link */}
+        <div className={styles.bottomLinkRow}>
+          <Link href="/app/knowledge/demo-memory-1" className={styles.inspectCatalogBtn}>
+            Inspect Full Digitized Field Recording Catalog Entry #ARCH-0047 →
+          </Link>
         </div>
       </div>
     </section>

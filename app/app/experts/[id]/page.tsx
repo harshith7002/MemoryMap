@@ -16,12 +16,16 @@ export default function ExpertProfilePage({ params }: { params: Promise<{ id: st
     <div className={styles.container}>
       {/* Back Button */}
       <Link href="/app/experts" className={styles.backBtn}>
-        ← Back to Practitioners Directory
+        ← Back to Practitioner Directory
       </Link>
 
-      {/* Museum Profile Header */}
+      {/* Documentary Profile Header */}
       <div className={styles.profileHeaderCard}>
-        <div className={styles.avatarBig}>{expert.avatar}</div>
+        <div className={styles.photoCol}>
+          <div className={styles.largePhotoFrame}>
+            <img src={expert.photoUrl} alt={expert.name} className="docu-photo" />
+          </div>
+        </div>
 
         <div className={styles.headerInfo}>
           <div className={styles.nameRow}>
@@ -40,7 +44,7 @@ export default function ExpertProfilePage({ params }: { params: Promise<{ id: st
           <div className={styles.statsBar}>
             <div className={styles.statItem}>
               <span className={styles.statVal}>{expert.memoriesCount}</span>
-              <span className={styles.statLabel}>Archived Entries</span>
+              <span className={styles.statLabel}>Archived Accounts</span>
             </div>
             <div className={styles.statItem}>
               <span className={styles.statVal}>{expert.skills.length}</span>
@@ -67,8 +71,8 @@ export default function ExpertProfilePage({ params }: { params: Promise<{ id: st
       {/* Museum Exhibition Career & Evolution Timeline */}
       <div className={styles.sectionCard}>
         <div className={styles.timelineHeader}>
-          <h2 className={styles.sectionTitle}>📅 CAREER & KNOWLEDGE EVOLUTION TIMELINE</h2>
-          <span className={styles.timelineSub}>Decades of milestone growth, field notes, and tacit learning</span>
+          <h2 className={styles.sectionTitle}>A LIFE IN PRACTICE // CAREER & KNOWLEDGE EVOLUTION TIMELINE</h2>
+          <span className={styles.timelineSub}>Decades of milestone growth, field notes, and oral history accounts</span>
         </div>
 
         <div className={styles.museumTimeline}>

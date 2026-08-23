@@ -15,23 +15,23 @@
 
 .profileHeaderCard {
   background-color: #FFFFFF;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--env-paper-border);
   padding: var(--space-8);
-  display: flex;
+  display: grid;
+  grid-template-columns: 240px 1fr;
   gap: var(--space-8);
 }
 
-.avatarBig {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background-color: var(--color-brass-pale);
-  border: 2px solid var(--color-brass);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.5rem;
-  flex-shrink: 0;
+.photoCol {
+  width: 100%;
+}
+
+.largePhotoFrame {
+  width: 100%;
+  height: 260px;
+  border: 1px solid var(--env-paper-border);
+  overflow: hidden;
+  background-color: #000000;
 }
 
 .headerInfo {
@@ -50,7 +50,7 @@
 .name {
   font-family: var(--font-serif);
   font-size: 2.25rem;
-  color: var(--color-text-primary);
+  color: var(--env-paper-text);
 }
 
 .catalogBadge {
@@ -69,12 +69,12 @@
 .location {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: var(--color-text-muted);
+  color: var(--env-paper-muted);
 }
 
 .bio {
   font-size: 0.875rem;
-  color: var(--color-text-secondary);
+  color: var(--env-paper-text);
   line-height: 1.6;
 }
 
@@ -82,7 +82,7 @@
   display: flex;
   gap: var(--space-6);
   padding-top: var(--space-4);
-  border-top: 1px solid var(--color-border-subtle);
+  border-top: 1px solid var(--env-paper-border);
 }
 
 .statItem {
@@ -94,17 +94,17 @@
   font-family: var(--font-serif);
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--color-text-primary);
+  color: var(--env-paper-text);
 }
 
 .statLabel {
   font-size: 0.75rem;
-  color: var(--color-text-muted);
+  color: var(--env-paper-muted);
 }
 
 .sectionCard {
   background-color: #FFFFFF;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--env-paper-border);
   padding: var(--space-6);
   display: flex;
   flex-direction: column;
@@ -116,7 +116,8 @@
   font-size: 0.7rem;
   color: var(--color-brass);
   letter-spacing: 0.08em;
-  border-bottom: 1px solid var(--color-border-subtle);
+  font-weight: 700;
+  border-bottom: 1px solid var(--env-paper-border);
   padding-bottom: var(--space-2);
 }
 
@@ -134,7 +135,7 @@
 
 .timelineSub {
   font-size: 0.75rem;
-  color: var(--color-text-muted);
+  color: var(--env-paper-muted);
 }
 
 /* Museum Timeline Track */
@@ -152,7 +153,7 @@
   top: 8px;
   bottom: 8px;
   width: 2px;
-  background-color: var(--color-border);
+  background-color: var(--env-paper-border);
 }
 
 .timelineNode {
@@ -187,13 +188,13 @@
   width: 10px;
   height: 10px;
   background-color: var(--color-brass);
-  border: 2px solid var(--color-archive-paper);
+  border: 2px solid var(--env-paper-bg);
   z-index: 2;
 }
 
 .eventBox {
-  background-color: var(--color-archive-paper);
-  border: 1px solid var(--color-border-subtle);
+  background-color: var(--env-paper-bg);
+  border: 1px solid var(--env-paper-border);
   padding: var(--space-4);
   width: 100%;
   display: flex;
@@ -210,20 +211,20 @@
 .eventTitle {
   font-family: var(--font-serif);
   font-size: 1.05rem;
-  color: var(--color-text-primary);
+  color: var(--env-paper-text);
 }
 
 .archiveRefTag {
   font-family: var(--font-mono);
   font-size: 0.6rem;
-  color: var(--color-text-muted);
-  background-color: var(--color-archive-paper-dark);
+  color: var(--env-paper-muted);
+  background-color: var(--env-paper-card);
   padding: 0.1rem 0.4rem;
 }
 
 .eventDetail {
   font-size: 0.8125rem;
-  color: var(--color-text-secondary);
+  color: var(--env-paper-muted);
   line-height: 1.5;
 }
 
@@ -254,13 +255,13 @@
 .duration {
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: var(--color-text-muted);
+  color: var(--env-paper-muted);
 }
 
 .memTitle {
   font-family: var(--font-serif);
   font-size: 1.1rem;
-  color: var(--color-text-primary);
+  color: var(--env-paper-text);
 }
 
 .memTitle a:hover {
@@ -269,39 +270,24 @@
 
 .memSummary {
   font-size: 0.8125rem;
-  color: var(--color-text-secondary);
+  color: var(--env-paper-muted);
   line-height: 1.4;
 }
 
 .viewMemLink {
   font-size: 0.75rem;
   font-weight: 700;
-  color: var(--color-text-primary);
+  color: var(--env-paper-text);
   margin-top: var(--space-2);
 }
 
 @media (max-width: 768px) {
   .profileHeaderCard {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .museumTimeline {
-    padding-left: 0;
-  }
-  .museumTimeline::before {
-    display: none;
-  }
-  .yearNode {
-    position: relative;
-    left: 0;
-    width: auto;
-    justify-content: flex-start;
-  }
-  .timelineNode {
-    flex-direction: column;
-  }
-  .memoriesGrid {
     grid-template-columns: 1fr;
   }
+  .museumTimeline { padding-left: 0; }
+  .museumTimeline::before { display: none; }
+  .yearNode { position: relative; left: 0; }
+  .timelineNode { flex-direction: column; }
+  .memoriesGrid { grid-template-columns: 1fr; }
 }

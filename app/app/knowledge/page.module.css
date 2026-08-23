@@ -1,4 +1,6 @@
 .container {
+  max-width: 1080px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: var(--space-8);
@@ -8,8 +10,14 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 2px solid var(--env-paper-border);
   padding-bottom: var(--space-6);
+}
+
+.topMetaRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .archiveTag {
@@ -17,32 +25,38 @@
   font-size: 0.7rem;
   color: var(--color-brass);
   letter-spacing: 0.08em;
+  font-weight: 700;
+}
+
+.countTag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--env-paper-muted);
 }
 
 .title {
   font-family: var(--font-serif);
-  font-size: clamp(2.25rem, 4vw, 3rem);
-  color: var(--color-text-primary);
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  color: var(--env-paper-text);
 }
 
 .subtitle {
-  font-size: var(--text-base);
-  color: var(--color-text-secondary);
-  max-width: 640px;
+  font-size: 1.125rem;
+  color: var(--env-paper-muted);
 }
 
-.searchWrapper {
+.searchBar {
   display: flex;
   align-items: center;
   gap: var(--space-3);
   background-color: #FFFFFF;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--env-paper-border);
   padding: var(--space-3) var(--space-4);
 }
 
 .searchPrompt {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   color: var(--color-brass);
   font-weight: 700;
 }
@@ -51,182 +65,129 @@
   flex: 1;
   border: none;
   outline: none;
-  font-size: 0.95rem;
+  font-size: 1rem;
   background: transparent;
-  color: var(--color-text-primary);
+  color: var(--env-paper-text);
 }
 
-.clearBtn {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--color-text-muted);
-}
-
-.filtersBar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-6);
-  flex-wrap: wrap;
-  background-color: var(--color-archive-paper-dark);
-  padding: var(--space-3) var(--space-4);
-  border: 1px solid var(--color-border);
-}
-
-.filterGroup {
+.filtersRow {
   display: flex;
   align-items: center;
   gap: var(--space-3);
+  flex-wrap: wrap;
 }
 
 .filterLabel {
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: var(--color-text-muted);
-}
-
-.chipsGroup {
-  display: flex;
-  gap: var(--space-2);
+  color: var(--env-paper-muted);
 }
 
 .filterChip {
   font-family: var(--font-mono);
   font-size: 0.7rem;
-  padding: 0.2rem 0.6rem;
-  background-color: var(--color-archive-paper);
-  border: 1px solid var(--color-border);
-  color: var(--color-text-secondary);
+  padding: 0.25rem 0.65rem;
+  background-color: var(--env-paper-card);
+  border: 1px solid var(--env-paper-border);
+  color: var(--env-paper-text);
   cursor: pointer;
 }
 
 .chipActive {
   background-color: var(--color-brass);
-  color: var(--color-archive-black);
+  color: #0F0F0E;
   border-color: var(--color-brass);
   font-weight: 700;
 }
 
-.selectDropdown {
-  padding: 0.25rem 0.5rem;
-  border: 1px solid var(--color-border);
-  background-color: var(--color-archive-paper);
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--color-text-primary);
-  outline: none;
-}
-
-.resultsInfo {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--color-text-muted);
-}
-
-.archiveList {
+/* Newspaper List */
+.newspaperList {
   display: flex;
   flex-direction: column;
+  gap: 0;
+}
+
+.archiveRow {
+  display: grid;
+  grid-template-columns: 140px 1fr 140px;
   gap: var(--space-6);
+  align-items: flex-start;
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid var(--env-paper-border);
+  transition: background-color 0.15s ease;
 }
 
-.archiveEntryCard {
+.archiveRow:hover {
+  background-color: rgba(239, 236, 228, 0.5);
+}
+
+.idCol {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: 4px;
 }
 
-.cardHeader {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
+.archiveNum {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-brass);
 }
 
 .catBadge {
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: var(--color-forest);
-  background-color: var(--color-forest-pale);
-  padding: 0.15rem 0.5rem;
+  color: var(--env-paper-muted);
 }
 
-.durationMono {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--color-text-muted);
+.mainCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
 }
 
 .entryTitle {
   font-family: var(--font-serif);
   font-size: 1.5rem;
-  color: var(--color-text-primary);
+  color: var(--env-paper-text);
 }
 
 .entryTitle a:hover {
   color: var(--color-brass);
 }
 
-.practitionerMeta {
+.authorMeta {
   font-size: 0.8125rem;
-  color: var(--color-text-secondary);
+  color: var(--env-paper-muted);
   display: flex;
-  align-items: center;
   gap: var(--space-2);
 }
 
-.dot {
-  color: var(--color-border);
-}
+.dot { color: var(--env-paper-border); }
 
-.summaryText {
+.quoteExcerpt {
   font-family: var(--font-serif);
   font-style: italic;
   font-size: 0.95rem;
-  color: var(--color-text-secondary);
-  line-height: 1.6;
+  color: var(--env-paper-text);
+  line-height: 1.5;
   padding-left: var(--space-3);
   border-left: 2px solid var(--color-brass);
 }
 
-.tagsRow {
+.actionCol {
   display: flex;
-  gap: var(--space-2);
+  justify-content: flex-end;
 }
 
-.cardFooter {
-  padding-top: var(--space-3);
-  border-top: 1px solid var(--color-border-subtle);
-}
-
-.listenLink {
-  font-family: var(--font-sans);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--color-text-primary);
+.listenBtn {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-brass);
 }
 
 .emptyState {
+  padding: var(--space-12);
   text-align: center;
-  padding: var(--space-16);
-  background-color: #FFFFFF;
-  border: 1px solid var(--color-border);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-3);
-}
-
-.emptyIcon {
-  font-size: 3rem;
-}
-
-.resetBtn {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 600;
-  background-color: var(--color-brass);
-  color: var(--color-archive-black);
-  padding: 0.5rem 1rem;
-  border: none;
-  cursor: pointer;
-  margin-top: var(--space-2);
 }

@@ -6,7 +6,7 @@
 
 .welcomeBanner {
   background-color: #FFFFFF;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--env-paper-border);
   padding: var(--space-6) var(--space-8);
   display: flex;
   align-items: center;
@@ -18,17 +18,18 @@
   font-size: 0.65rem;
   color: var(--color-brass);
   letter-spacing: 0.08em;
+  font-weight: 700;
 }
 
 .greeting {
   font-family: var(--font-serif);
   font-size: 2.25rem;
-  color: var(--color-text-primary);
+  color: var(--env-paper-text);
 }
 
 .tagline {
   font-size: 0.875rem;
-  color: var(--color-text-secondary);
+  color: var(--env-paper-muted);
 }
 
 .statsGrid {
@@ -39,7 +40,7 @@
 
 .statCard {
   background-color: #FFFFFF;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--env-paper-border);
   padding: var(--space-4) var(--space-5);
   display: flex;
   flex-direction: column;
@@ -49,19 +50,19 @@
 .statCode {
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: var(--color-text-muted);
+  color: var(--env-paper-muted);
 }
 
 .statNum {
   font-family: var(--font-serif);
   font-size: 2rem;
   font-weight: 500;
-  color: var(--color-text-primary);
+  color: var(--env-paper-text);
 }
 
 .statLabel {
   font-size: 0.75rem;
-  color: var(--color-text-secondary);
+  color: var(--env-paper-muted);
 }
 
 .mainGrid {
@@ -80,14 +81,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--color-border-subtle);
+  border-bottom: 1px solid var(--env-paper-border);
   padding-bottom: var(--space-3);
 }
 
 .sectionTitle {
   font-family: var(--font-serif);
   font-size: 1.35rem;
-  color: var(--color-text-primary);
+  color: var(--env-paper-text);
 }
 
 .viewAllLink {
@@ -126,13 +127,13 @@
 .durationTag {
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: var(--color-text-muted);
+  color: var(--env-paper-muted);
 }
 
 .cardTitle {
   font-family: var(--font-serif);
   font-size: 1.25rem;
-  color: var(--color-text-primary);
+  color: var(--env-paper-text);
 }
 
 .cardTitle a:hover {
@@ -141,19 +142,19 @@
 
 .expertAuthor {
   font-size: 0.8125rem;
-  color: var(--color-text-secondary);
+  color: var(--env-paper-muted);
   display: flex;
   align-items: center;
   gap: var(--space-2);
 }
 
 .dot {
-  color: var(--color-border);
+  color: var(--env-paper-border);
 }
 
 .summaryText {
   font-size: 0.875rem;
-  color: var(--color-text-secondary);
+  color: var(--env-paper-text);
   line-height: 1.5;
 }
 
@@ -164,13 +165,13 @@
 
 .cardActions {
   padding-top: var(--space-2);
-  border-top: 1px solid var(--color-border-subtle);
+  border-top: 1px solid var(--env-paper-border);
 }
 
 .viewDetailsBtn {
   font-size: 0.8125rem;
   font-weight: 600;
-  color: var(--color-text-primary);
+  color: var(--env-paper-text);
 }
 
 .sideCol {
@@ -181,7 +182,7 @@
 
 .sideCard {
   background-color: #FFFFFF;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--env-paper-border);
   padding: var(--space-6);
   display: flex;
   flex-direction: column;
@@ -191,8 +192,8 @@
 .sideTitle {
   font-family: var(--font-serif);
   font-size: 1.15rem;
-  color: var(--color-text-primary);
-  border-bottom: 1px solid var(--color-border-subtle);
+  color: var(--env-paper-text);
+  border-bottom: 1px solid var(--env-paper-border);
   padding-bottom: var(--space-2);
 }
 
@@ -207,22 +208,26 @@
   align-items: center;
   gap: var(--space-3);
   padding: var(--space-2) 0;
-  border-bottom: 1px dashed var(--color-border-subtle);
+  border-bottom: 1px dashed var(--env-paper-border);
 }
 
 .expertItem:last-child {
   border-bottom: none;
 }
 
-.expAvatar {
-  width: 32px;
-  height: 32px;
+.expAvatarFrame {
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background-color: var(--color-archive-paper);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
+  overflow: hidden;
+  border: 1px solid var(--color-brass);
+  flex-shrink: 0;
+}
+
+.expAvatarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .expInfo {
@@ -234,12 +239,12 @@
 .expName {
   font-size: 0.8125rem;
   font-weight: 600;
-  color: var(--color-text-primary);
+  color: var(--env-paper-text);
 }
 
 .expRole {
   font-size: 0.7rem;
-  color: var(--color-text-muted);
+  color: var(--env-paper-muted);
 }
 
 .expCount {
@@ -257,9 +262,9 @@
 }
 
 .sideCardUrgent {
-  background-color: var(--color-archive-charcoal);
-  color: var(--color-archive-paper);
-  border: 1px solid var(--color-border-dark);
+  background-color: var(--env-dark-card);
+  color: var(--env-dark-text);
+  border: 1px solid var(--env-dark-border);
   padding: var(--space-6);
   display: flex;
   flex-direction: column;
@@ -276,19 +281,19 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background-color: #E74C3C;
+  background-color: var(--color-rust);
   animation: blinkDot 1s infinite;
 }
 
 .sideTitleUrgent {
   font-family: var(--font-serif);
   font-size: 1.15rem;
-  color: var(--color-archive-paper);
+  color: var(--env-dark-text);
 }
 
 .urgentSub {
   font-size: 0.75rem;
-  color: var(--color-text-inverse-muted);
+  color: var(--env-dark-muted);
 }
 
 .urgentList {
@@ -301,21 +306,21 @@
 .urgentItem {
   display: flex;
   flex-direction: column;
-  background-color: var(--color-archive-dark);
+  background-color: var(--env-dark-bg);
   padding: var(--space-3);
-  border: 1px solid var(--color-border-dark);
+  border: 1px solid var(--env-dark-border);
 }
 
 .itemTitle {
   font-size: 0.8125rem;
   font-weight: 600;
-  color: var(--color-archive-paper);
+  color: var(--env-dark-text);
 }
 
 .itemCount {
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: #E74C3C;
+  color: var(--color-rust);
 }
 
 .fullWidth {
@@ -323,10 +328,6 @@
 }
 
 @media (max-width: 992px) {
-  .statsGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .mainGrid {
-    grid-template-columns: 1fr;
-  }
+  .statsGrid { grid-template-columns: repeat(2, 1fr); }
+  .mainGrid { grid-template-columns: 1fr; }
 }

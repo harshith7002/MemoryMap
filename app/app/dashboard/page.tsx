@@ -109,7 +109,9 @@ export default function DashboardPage() {
             <div className={styles.expertsList}>
               {EXPERTS.slice(0, 3).map((exp) => (
                 <Link key={exp.id} href={`/app/experts/${exp.id}`} className={styles.expertItem}>
-                  <div className={styles.expAvatar}>{exp.avatar}</div>
+                  <div className={styles.expAvatarFrame}>
+                    <img src={exp.photoUrl} alt={exp.name} className={styles.expAvatarImg} />
+                  </div>
                   <div className={styles.expInfo}>
                     <span className={styles.expName}>{exp.name}</span>
                     <span className={styles.expRole}>{exp.role}</span>

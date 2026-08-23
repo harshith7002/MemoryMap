@@ -1,8 +1,8 @@
-.section {
+.fullBleedSection {
   padding: var(--space-20) 0;
-  background-color: var(--color-archive-charcoal);
-  color: var(--color-archive-paper);
-  border-bottom: 1px solid var(--color-border-dark);
+  background-color: var(--env-forest-bg);
+  color: var(--env-forest-text);
+  border-bottom: 1px solid var(--env-forest-border);
 }
 
 .container {
@@ -11,208 +11,173 @@
   padding: 0 var(--space-8);
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
+  gap: var(--space-10);
 }
 
-.sectionMeta {
-  display: flex;
-  justify-content: space-between;
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--color-brass);
-  letter-spacing: 0.08em;
-  border-bottom: 1px solid var(--color-border-dark);
-  padding-bottom: var(--space-3);
-}
-
-.layoutGrid {
-  display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
-  gap: var(--space-12);
-  align-items: flex-start;
-}
-
-.voiceColumn {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-}
-
-.headingGroup {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-}
-
-.title {
-  font-family: var(--font-serif);
-  font-size: clamp(2.25rem, 3.5vw, 3rem);
-  color: var(--color-archive-paper);
-}
-
-.subtitle {
-  font-size: var(--text-base);
-  color: var(--color-text-inverse-muted);
-}
-
-.audioExhibitBox {
-  background-color: var(--color-archive-black);
-  border: 1px solid var(--color-border-dark);
-  padding: var(--space-6);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-}
-
-.playerBar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.playToggleBtn {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--color-brass);
-  background-color: rgba(197, 155, 39, 0.15);
-  border: 1px solid var(--color-brass);
-  padding: 0.4rem 0.85rem;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-}
-
-.timestampMono {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  color: var(--color-text-inverse-muted);
-}
-
-.waveformContainer {
-  padding: var(--space-3) 0;
-  border-top: 1px solid var(--color-border-dark);
-  border-bottom: 1px solid var(--color-border-dark);
-}
-
-.transcriptFlow {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-
-.flowLabel {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--color-brass);
-  letter-spacing: 0.05em;
-}
-
-.transcriptCard {
-  background-color: var(--color-archive-dark);
-  border: 1px solid var(--color-border-dark);
-  padding: var(--space-3) var(--space-4);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-  cursor: pointer;
-  transition: all var(--transition-fast);
-}
-
-.transcriptCard:hover {
-  border-color: var(--color-brass);
-}
-
-.activeSeg {
-  border-color: var(--color-brass);
-  background-color: #2D2D29;
-}
-
-.segTime {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--color-brass);
-}
-
-.normalText {
-  font-size: 0.875rem;
-  color: var(--color-text-inverse-muted);
-  line-height: 1.5;
-}
-
-.highlightText {
-  font-family: var(--font-serif);
-  font-size: 0.95rem;
-  font-style: italic;
-  color: var(--color-archive-paper);
-  line-height: 1.5;
-}
-
-/* Extraction Pipeline */
-.extractionColumn {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-}
-
-.extractionHeader {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.aiTag {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--color-brass);
-  letter-spacing: 0.05em;
-}
-
-.extractTitle {
-  font-family: var(--font-serif);
-  font-size: 1.75rem;
-  color: var(--color-archive-paper);
-}
-
-.pipelineFlow {
+.sectionHeader {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
 }
 
-.pipelineStep {
-  background-color: var(--color-archive-black);
-  border: 1px solid var(--color-border-dark);
-  padding: var(--space-4);
+.monoTag {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-brass);
+  letter-spacing: 0.08em;
+}
+
+.title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.25rem, 4vw, 3.25rem);
+  color: var(--env-forest-text);
+}
+
+.subtitle {
+  font-size: 1.125rem;
+  color: #A3BAA3;
+  max-width: 600px;
+}
+
+.stageBar {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  gap: var(--space-4);
+  border-bottom: 1px solid var(--env-forest-border);
+  padding-bottom: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.stageTab {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--env-forest-card);
+  border: 1px solid var(--env-forest-border);
+  color: #A3BAA3;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.stageTab:hover {
+  border-color: var(--color-brass);
+  color: var(--env-forest-text);
+}
+
+.stageActive {
+  background-color: #273827;
+  border-color: var(--color-brass);
+  color: var(--color-brass);
+  font-weight: 700;
+}
+
+.stageNum {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-brass);
+}
+
+.stageName {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  letter-spacing: 0.04em;
+}
+
+.stageArrow {
+  color: var(--color-brass);
+  font-size: 0.9rem;
+}
+
+.transformationBoard {
+  width: 100%;
+}
+
+.stagePane {
+  background-color: var(--env-forest-card);
+  border: 1px solid var(--env-forest-border);
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.paneMeta {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-brass);
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--env-forest-border);
+  padding-bottom: var(--space-3);
+}
+
+.audioPlayerBox {
+  display: flex;
+  flex-direction: column;
   gap: var(--space-4);
 }
 
-.highlightedStep {
-  border-color: var(--color-forest);
-  background-color: #1A281A;
+.playerControls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.stepMarker {
+.playBtn {
   font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 700;
   color: var(--color-brass);
+  background-color: rgba(197, 155, 39, 0.15);
+  border: 1px solid var(--color-brass);
+  padding: 0.4rem 0.85rem;
+  cursor: pointer;
 }
 
-.stepContent {
+.timeMono {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: #A3BAA3;
+}
+
+.waveformContainer {
+  padding: var(--space-4);
+  background-color: #0F160F;
+  border: 1px solid var(--env-forest-border);
+}
+
+.paneDesc {
+  font-size: 0.875rem;
+  color: #A3BAA3;
+}
+
+.rawTranscriptQuote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  color: var(--env-forest-text);
+  line-height: 1.6;
+  padding-left: var(--space-6);
+  border-left: 3px solid var(--color-brass);
+}
+
+.extractionCardsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.extractedCard {
+  background-color: #0F160F;
+  border: 1px solid var(--env-forest-border);
+  padding: var(--space-6);
   display: flex;
   flex-direction: column;
+  gap: var(--space-3);
 }
 
-.stepType {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--color-text-inverse-muted);
-  letter-spacing: 0.05em;
-}
-
-.stepTypeGreen {
+.cardTypeGreen {
   font-family: var(--font-mono);
   font-size: 0.65rem;
   color: #6B8F68;
@@ -220,7 +185,7 @@
   font-weight: 700;
 }
 
-.stepTypeBrass {
+.cardTypeBrass {
   font-family: var(--font-mono);
   font-size: 0.65rem;
   color: var(--color-brass);
@@ -228,59 +193,47 @@
   font-weight: 700;
 }
 
-.stepTitle {
-  font-family: var(--font-serif);
-  font-size: 1.1rem;
-  color: var(--color-archive-paper);
-}
-
-.stepDesc {
-  font-size: 0.8125rem;
-  color: var(--color-text-inverse-muted);
-  line-height: 1.4;
-  margin-top: 2px;
-}
-
-.connectorArrow {
-  text-align: center;
-  color: var(--color-brass);
-  font-size: 0.875rem;
-  font-weight: bold;
-}
-
-.pipelineStepFinal {
-  background-color: var(--color-brass-pale);
-  color: var(--color-archive-black);
-  border: 1px solid var(--color-brass);
-  padding: var(--space-5);
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-}
-
-.finalCatalogNum {
+.cardTypeRust {
   font-family: var(--font-mono);
   font-size: 0.65rem;
+  color: #E74C3C;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.cardTitle {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  color: var(--env-forest-text);
+}
+
+.cardDesc {
+  font-size: 0.875rem;
+  color: #A3BAA3;
+  line-height: 1.5;
+}
+
+.sourceTag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-brass);
+  margin-top: auto;
+}
+
+.bottomLinkRow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.inspectCatalogBtn {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
   font-weight: 700;
   color: var(--color-brass);
 }
 
-.finalTitle {
-  font-family: var(--font-serif);
-  font-size: 1.25rem;
-  color: var(--color-archive-black);
-}
-
-.exploreRecordBtn {
-  font-family: var(--font-sans);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--color-archive-black);
-  margin-top: var(--space-2);
-}
-
 @media (max-width: 992px) {
-  .layoutGrid {
+  .extractionCardsGrid {
     grid-template-columns: 1fr;
   }
 }

@@ -2,137 +2,96 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Card } from '@/components/ui/Card/Card';
-import { Tag } from '@/components/ui/Tag/Tag';
 import { MEMORIES, searchMemories } from '@/lib/data';
 import styles from './page.module.css';
 
 export default function KnowledgePage() {
   const [query, setQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [selectedExpert, setSelectedExpert] = useState('All');
 
   const categories = ['All', 'Automotive', 'Education', 'Craft', 'Agriculture'];
-  const experts = ['All', 'Ramesh Kumar', 'David Chen', 'Meera Pillai', 'Sunita Devi'];
-
-  const filteredMemories = searchMemories(query, selectedCategory).filter((m) => {
-    if (selectedExpert !== 'All') {
-      return m.expertName === selectedExpert;
-    }
-    return true;
-  });
+  const filteredMemories = searchMemories(query, selectedCategory);
 
   return (
     <div className={styles.container}>
-      {/* Archive Index Header */}
+      {/* Archival Newspaper Header */}
       <div className={styles.header}>
-        <span className={styles.archiveTag}>MEMORYMAP CATALOGUE // INDEX & REGISTRY</span>
+        <div className={styles.topMetaRow}>
+          <span className={styles.archiveTag}>THE ARCHIVE // CATALOGUE REGISTRY</span>
+          <span className={styles.countTag}>47 PRESERVED MEMORIES</span>
+        </div>
+
         <h1 className={styles.title}>The Archive</h1>
         <p className={styles.subtitle}>
-          Thousands of small lessons and diagnostic insights that would otherwise disappear with time.
+          Thousands of small lessons that would otherwise disappear with time.
         </p>
 
-        {/* Archival Search Input */}
-        <div className={styles.searchWrapper}>
-          <span className={styles.searchPrompt}>SEARCH ARCHIVE:</span>
+        {/* Newspaper Style Search Field */}
+        <div className={styles.searchBar}>
+          <span className={styles.searchPrompt}>SEARCH HUMAN KNOWLEDGE:</span>
           <input
             type="text"
             className={styles.searchInput}
-            placeholder="Search human knowledge by craft, engine acoustic, soil smell, loom tension..."
+            placeholder="Search human knowledge... (e.g. engine acoustic, soil smell, loom tension)"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
-          {query && (
-            <button className={styles.clearBtn} onClick={() => setQuery('')}>
-              ✕ CLEAR
-            </button>
-          )}
         </div>
 
-        {/* Archival Filter Bar */}
-        <div className={styles.filtersBar}>
-          <div className={styles.filterGroup}>
-            <span className={styles.filterLabel}>TRADE / FIELD:</span>
-            <div className={styles.chipsGroup}>
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  className={`${styles.filterChip} ${selectedCategory === cat ? styles.chipActive : ''}`}
-                  onClick={() => setSelectedCategory(cat)}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className={styles.filterGroup}>
-            <span className={styles.filterLabel}>PRACTITIONER:</span>
-            <select
-              className={styles.selectDropdown}
-              value={selectedExpert}
-              onChange={(e) => setSelectedExpert(e.target.value)}
+        {/* Filter Chips */}
+        <div className={styles.filtersRow}>
+          <span className={styles.filterLabel}>FILTER TRADE:</span>
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              className={`${styles.filterChip} ${selectedCategory === cat ? styles.chipActive : ''}`}
+              onClick={() => setSelectedCategory(cat)}
             >
-              {experts.map((exp) => (
-                <option key={exp} value={exp}>
-                  {exp}
-                </option>
-              ))}
-            </select>
-          </div>
+              {cat}
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* Index Count Status */}
-      <div className={styles.resultsInfo}>
-        <span>INDEX REGISTRY: SHOWING {filteredMemories.length} CATALOGED ACCOUNTS</span>
-      </div>
-
-      {/* Archive Entries List */}
-      <div className={styles.archiveList}>
+      {/* Newspaper / Archival Style Catalog List */}
+      <div className={styles.newspaperList}>
         {filteredMemories.map((m) => (
-          <Card key={m.id} variant="default" catalogId={m.catalogId} className={styles.archiveEntryCard}>
-            <div className={styles.cardHeader}>
+          <article key={m.id} className={styles.archiveRow}>
+            <div className={styles.idCol}>
+              <span className={styles.archiveNum}>{m.catalogId}</span>
               <span className={styles.catBadge}>{m.category}</span>
-              <span className={styles.durationMono}>AUDIO: {m.duration}</span>
             </div>
 
-            <h2 className={styles.entryTitle}>
-              <Link href={`/app/knowledge/${m.id}`}>{m.title}</Link>
-            </h2>
+            <div className={styles.mainCol}>
+              <h2 className={styles.entryTitle}>
+                <Link href={`/app/knowledge/${m.id}`}>{m.title}</Link>
+              </h2>
 
-            <div className={styles.practitionerMeta}>
-              <span>Practitioner: {m.expertName}</span>
-              <span className={styles.dot}>·</span>
-              <span>{m.expertRole}</span>
-              <span className={styles.dot}>·</span>
-              <span>{m.expertExperience} yrs experience</span>
+              <div className={styles.authorMeta}>
+                <span>Practitioner: <strong>{m.expertName}</strong></span>
+                <span className={styles.dot}>·</span>
+                <span>{m.expertRole}</span>
+                <span className={styles.dot}>·</span>
+                <span>Audio Length: {m.duration}</span>
+              </div>
+
+              <blockquote className={styles.quoteExcerpt}>
+                “{m.transcript || m.summary}”
+              </blockquote>
             </div>
 
-            <p className={styles.summaryText}>“{m.summary}”</p>
-
-            <div className={styles.tagsRow}>
-              {m.tags.slice(0, 4).map((t) => (
-                <Tag key={t} label={t} variant="amber" />
-              ))}
-            </div>
-
-            <div className={styles.cardFooter}>
-              <Link href={`/app/knowledge/${m.id}`} className={styles.listenLink}>
-                Listen to Source Audio & Inspect Procedure →
+            <div className={styles.actionCol}>
+              <Link href={`/app/knowledge/${m.id}`} className={styles.listenBtn}>
+                ▶ LISTEN [{m.duration}] →
               </Link>
             </div>
-          </Card>
+          </article>
         ))}
 
         {filteredMemories.length === 0 && (
           <div className={styles.emptyState}>
-            <span className={styles.emptyIcon}>📂</span>
-            <h3>No catalog records match your query</h3>
-            <p>Try searching for terms like "engine", "soil", "loom", or "teaching".</p>
-            <button className={styles.resetBtn} onClick={() => { setQuery(''); setSelectedCategory('All'); setSelectedExpert('All'); }}>
-              Reset Archive Index Filters
-            </button>
+            <h3>No catalog entries found</h3>
+            <p>Try resetting search filters.</p>
           </div>
         )}
       </div>

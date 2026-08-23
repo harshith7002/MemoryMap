@@ -45,13 +45,17 @@ export default function DemoPage() {
 
       {/* Practitioner Portrait Card */}
       <div className={styles.expertSpotlight}>
-        <div className={styles.expertAvatar}>{expert.avatar}</div>
+        <div className={styles.expertPhotoFrame}>
+          <img src={expert.photoUrl} alt={expert.name} className="docu-photo" />
+        </div>
+
         <div className={styles.expertMeta}>
           <span className={styles.catId}>{expert.catalogId}</span>
           <h2 className={styles.expertName}>{expert.name}</h2>
           <p className={styles.expertRole}>{expert.role} • {expert.yearsExperience} Years Experience • {expert.location}</p>
           <p className={styles.expertBio}>{expert.bio}</p>
         </div>
+
         <div className={styles.expertStats}>
           <div className={styles.eStat}>
             <span className={styles.eVal}>{expert.memoriesCount}</span>
@@ -265,7 +269,7 @@ export default function DemoPage() {
 
                 <div className={styles.attrMeta}>
                   <span>Source Practitioner: Ramesh Kumar • Master Mechanic (35 yrs)</span>
-                  <span>Memory Catalog Entry: Diagnosing Engine Overheating (#ARCH-2026-0047)</span>
+                  <span>Memory Catalog Entry: Diagnosing Engine Overheating (#ARCH-0047)</span>
                 </div>
 
                 <Link

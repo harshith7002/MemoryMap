@@ -12,32 +12,32 @@ export const StorySection: React.FC = () => {
       name: 'Ramesh Kumar',
       tagline: '35 years of diagnosing what manuals miss.',
       quote: '“You learn to hear a machine before you learn to understand it.”',
-      memoriesCount: '47 memories preserved',
-      avatar: '👨‍🔧',
-      location: 'Mumbai, India',
+      memoriesCount: '47 memories cataloged',
+      photoUrl: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1000&auto=format&fit=crop',
+      location: 'Mumbai, Maharashtra',
       expertId: 'ramesh-kumar'
     },
     {
       num: '02',
       trade: 'THE TEACHER',
-      name: 'David Chen',
+      name: 'Anita Rao',
       tagline: '32 years of knowing when a student is lost — even when they say they are fine.',
       quote: '“Students nod rhythmically when put on the spot. The lost ones hover their pencils two inches above the page.”',
-      memoriesCount: '31 memories preserved',
-      avatar: '👨‍🏫',
-      location: 'Toronto, Canada',
-      expertId: 'david-chen'
+      memoriesCount: '31 memories cataloged',
+      photoUrl: 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=800&auto=format&fit=crop',
+      location: 'Bangalore, Karnataka',
+      expertId: 'anita-rao'
     },
     {
       num: '03',
       trade: 'THE ARTISAN',
-      name: 'Meera Pillai',
+      name: 'Lakshmi Devi',
       tagline: '40 years of a weaving technique that was never written down.',
       quote: '“My teacher taught me this when I was 17. Thread tension on a wooden loom is felt by plucking warps like guitar strings.”',
-      memoriesCount: '23 memories preserved',
-      avatar: '👩‍🌾',
+      memoriesCount: '23 memories cataloged',
+      photoUrl: 'https://images.unsplash.com/photo-1606744888344-49423b3ef308?q=80&w=800&auto=format&fit=crop',
       location: 'Balaramapuram, Kerala',
-      expertId: 'meera-pillai'
+      expertId: 'lakshmi-devi'
     },
     {
       num: '04',
@@ -45,52 +45,64 @@ export const StorySection: React.FC = () => {
       name: 'Sunita Devi',
       tagline: 'Three decades of knowledge passed from soil to hands.',
       quote: '“You don\'t plant this crop just because the calendar says May 1st. You squeeze the earth 4 inches deep and smell it.”',
-      memoriesCount: '18 memories preserved',
-      avatar: '🌾',
+      memoriesCount: '18 memories cataloged',
+      photoUrl: 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=800&auto=format&fit=crop',
       location: 'Himachal Pradesh, India',
       expertId: 'sunita-devi'
     }
   ];
 
   return (
-    <section id="stories" className={styles.section}>
+    <section id="stories" className={styles.paperSection}>
       <div className={styles.container}>
         {/* Section Header */}
         <div className={styles.header}>
-          <span className={styles.metaLabel}>DOCUMENTARY PORTRAITS</span>
+          <span className={styles.monoLabel}>[ DOCUMENTARY PORTRAITS // FIELD EXHIBIT ]</span>
           <h2 className={styles.title}>Some knowledge exists only in people's heads.</h2>
           <p className={styles.subtitle}>
-            Living accounts from practitioners whose lifelong intuition is being preserved in the MemoryMap archive.
+            Demonstration accounts from real practitioners whose lifelong intuition is being documented in the MemoryMap oral archive.
           </p>
         </div>
 
-        {/* Editorial Asymmetric Journal Layout */}
-        <div className={styles.storiesFlow}>
-          {stories.map((story) => (
-            <article key={story.num} className={styles.storyBlock}>
-              <div className={styles.numCol}>
-                <span className={styles.bigNum}>{story.num}</span>
-                <span className={styles.tradeLabel}>{story.trade}</span>
-              </div>
-
-              <div className={styles.visualCol}>
-                <div className={styles.photoBox}>
-                  <span className={styles.avatarEmoji}>{story.avatar}</span>
-                  <div className={styles.photoCap}>
-                    <span className={styles.name}>{story.name}</span>
-                    <span className={styles.location}>{story.location}</span>
+        {/* Full-Bleed Alternating Photo Journal Layout */}
+        <div className={styles.journalFlow}>
+          {stories.map((story, idx) => (
+            <article
+              key={story.num}
+              className={`${styles.journalRow} ${idx % 2 === 1 ? styles.rowReverse : ''}`}
+            >
+              {/* Photo Column */}
+              <div className={styles.photoCol}>
+                <div className={styles.photoFrame}>
+                  <img
+                    src={story.photoUrl}
+                    alt={story.name}
+                    className="docu-photo"
+                  />
+                  <div className={styles.photoMetaOverlay}>
+                    <span className={styles.photoNum}>{story.num} // {story.trade}</span>
+                    <span className={styles.photoLoc}>{story.location}</span>
                   </div>
                 </div>
               </div>
 
-              <div className={styles.contentCol}>
-                <h3 className={styles.tagline}>{story.tagline}</h3>
-                <blockquote className={styles.quote}>{story.quote}</blockquote>
+              {/* Story Content Column */}
+              <div className={styles.textCol}>
+                <div className={styles.metaTop}>
+                  <span className={styles.tradeBadge}>{story.trade}</span>
+                  <span className={styles.countBadge}>{story.memoriesCount}</span>
+                </div>
 
-                <div className={styles.metaFooter}>
-                  <span className={styles.archiveCount}>📝 {story.memoriesCount}</span>
-                  <Link href={`/app/experts/${story.expertId}`} className={styles.profileLink}>
-                    Inspect Expert Profile & Timeline →
+                <h3 className={styles.subjectName}>{story.name}</h3>
+                <h4 className={styles.tagline}>{story.tagline}</h4>
+
+                <blockquote className={styles.quoteBox}>
+                  {story.quote}
+                </blockquote>
+
+                <div className={styles.actionFooter}>
+                  <Link href={`/app/experts/${story.expertId}`} className={styles.profileBtn}>
+                    Inspect Timeline & Preserved Memories →
                   </Link>
                 </div>
               </div>

@@ -22,11 +22,11 @@ export const Navbar: React.FC = () => {
       <div className={styles.container}>
         {/* Brand */}
         <Link href="/" className={styles.brand}>
-          <span className={styles.brandMark}>MemoryMap</span>
-          <span className={styles.subMark}>/ Oral Knowledge Archive</span>
+          <span className={styles.brandTitle}>MemoryMap</span>
+          <span className={styles.brandTag}>/ ORAL KNOWLEDGE ARCHIVE</span>
         </Link>
 
-        {/* Minimal Editorial Nav Links */}
+        {/* Minimal Documentary Navigation Links */}
         <nav className={styles.navLinks}>
           <Link href="/app/knowledge" className={styles.link}>
             Archive
@@ -38,17 +38,17 @@ export const Navbar: React.FC = () => {
             Stories
           </a>
           <a href="#how-it-works" className={styles.link}>
-            How It Works
+            About
           </a>
         </nav>
 
-        {/* Action Buttons */}
+        {/* Actions */}
         <div className={styles.actions}>
           <Button href="/demo" variant="secondary" size="sm">
             Exhibition Demo
           </Button>
-          <Button href="/app/record" variant="primary" size="sm">
-            Preserve Knowledge →
+          <Button href="/app/record" variant="brass" size="sm">
+            Preserve knowledge →
           </Button>
         </div>
       </div>

@@ -4,7 +4,8 @@ export interface Expert {
   name: string;
   role: string;
   yearsExperience: number;
-  avatar: string;
+  photoUrl: string;
+  avatar?: string;
   skills: string[];
   memoriesCount: number;
   bio: string;
@@ -12,7 +13,6 @@ export interface Expert {
   location: string;
   coordinates: string;
   recordedDate: string;
-  photoUrl?: string;
 }
 
 export interface TimelineEvent {
@@ -78,11 +78,12 @@ export interface QAEntry {
 export const EXPERTS: Expert[] = [
   {
     id: 'ramesh-kumar',
-    catalogId: 'EXPRT-1989-0047',
+    catalogId: 'ARCH-EXPRT-0047',
     name: 'Ramesh Kumar',
     role: 'Master Mechanic',
     yearsExperience: 35,
-    avatar: '👨‍🔧',
+    photoUrl: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1000&auto=format&fit=crop',
+    avatar: '📷',
     skills: ['Engine Diagnostics', 'Diesel Systems', 'Cooling Systems', 'Preventive Maintenance', 'Brake Systems'],
     memoriesCount: 47,
     bio: 'Over 35 years diagnosing heavy industrial machinery and diesel engines. Known across Mumbai workshops for detecting internal engine wear purely by listening to acoustic signatures.',
@@ -99,12 +100,33 @@ export const EXPERTS: Expert[] = [
     ]
   },
   {
-    id: 'meera-pillai',
-    catalogId: 'EXPRT-1984-0023',
-    name: 'Meera Pillai',
+    id: 'anita-rao',
+    catalogId: 'ARCH-EXPRT-0031',
+    name: 'Anita Rao',
+    role: 'Veteran Physics Teacher',
+    yearsExperience: 32,
+    photoUrl: 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=800&auto=format&fit=crop',
+    avatar: '📷',
+    skills: ['Learning Assessment', 'Classroom Management', 'Intuitive Physics Experiments', 'Student Engagement'],
+    memoriesCount: 31,
+    bio: 'Spent 32 years helping high school students fall in love with physics through hands-on intuition rather than abstract formula memorization.',
+    location: 'Bangalore, Karnataka',
+    coordinates: '12.9716° N, 77.5946° E',
+    recordedDate: '04 August 2026',
+    timeline: [
+      { year: 1994, event: 'Began teaching physical science', detail: 'Introduced practical mechanics labs using everyday objects.' },
+      { year: 2005, event: 'Department Chair of Physical Sciences', detail: 'Redesigned district curriculum around practical intuition.' },
+      { year: 2026, event: 'Captured classroom instincts on MemoryMap', detail: 'Recorded subtle body-language cues indicating student confusion.' }
+    ]
+  },
+  {
+    id: 'lakshmi-devi',
+    catalogId: 'ARCH-EXPRT-0023',
+    name: 'Lakshmi Devi',
     role: 'Master Artisan Weaver',
     yearsExperience: 40,
-    avatar: '👩‍🌾',
+    photoUrl: 'https://images.unsplash.com/photo-1606744888344-49423b3ef308?q=80&w=800&auto=format&fit=crop',
+    avatar: '📷',
     skills: ['Handloom Weaving', 'Natural Dyeing', 'Pattern Design', 'Thread Tension Tuning', 'Jacquard Looming'],
     memoriesCount: 23,
     bio: 'Preserving four decades of traditional silk and cotton handloom weaving techniques passed down through oral tradition in Kerala.',
@@ -112,39 +134,19 @@ export const EXPERTS: Expert[] = [
     coordinates: '8.4312° N, 77.0398° E',
     recordedDate: '12 August 2026',
     timeline: [
-      { year: 1984, event: 'Learned handloom weaving from family elders', detail: 'Began with basic cotton warp preparation and wooden ratchet setting.' },
-      { year: 1996, event: 'Revived natural indigo and madder root dyeing', detail: 'Created eco-friendly color formulation processes.' },
-      { year: 2012, event: 'National Artisan Heritage Recognition', detail: 'Honored for preserving intricate Kasavu gold-border weaves.' },
+      { year: 1986, event: 'Learned handloom weaving from family elders', detail: 'Began with basic cotton warp preparation and wooden ratchet setting.' },
+      { year: 1998, event: 'Revived natural indigo dyeing', detail: 'Created eco-friendly color formulation processes.' },
       { year: 2026, event: 'Preserved loom calibration on MemoryMap', detail: 'Recorded tactile thread tension and warp alignment procedures.' }
     ]
   },
   {
-    id: 'david-chen',
-    catalogId: 'EXPRT-1992-0031',
-    name: 'David Chen',
-    role: 'Veteran Physics Teacher',
-    yearsExperience: 32,
-    avatar: '👨‍🏫',
-    skills: ['Learning Assessment', 'Classroom Management', 'Intuitive Physics Experiments', 'Student Engagement'],
-    memoriesCount: 31,
-    bio: 'Spent 32 years helping high school students fall in love with physics through hands-on intuition rather than abstract formula memorization.',
-    location: 'Toronto, Ontario',
-    coordinates: '43.6532° N, 79.3832° W',
-    recordedDate: '04 August 2026',
-    timeline: [
-      { year: 1992, event: 'Began teaching high school physical science', detail: 'Introduced practical mechanics labs using everyday objects.' },
-      { year: 2005, event: 'Department Chair of Physical Sciences', detail: 'Redesigned district curriculum around practical intuition.' },
-      { year: 2020, event: 'Excellence in Pedagogy Award', detail: 'Recognized for adaptive non-verbal student engagement strategies.' },
-      { year: 2026, event: 'Captured classroom instincts on MemoryMap', detail: 'Recorded subtle body-language cues indicating student confusion.' }
-    ]
-  },
-  {
     id: 'sunita-devi',
-    catalogId: 'EXPRT-1994-0018',
+    catalogId: 'ARCH-EXPRT-0018',
     name: 'Sunita Devi',
     role: 'Traditional Organic Farmer',
     yearsExperience: 30,
-    avatar: '🌾',
+    photoUrl: 'https://images.unsplash.com/photo-1500937386664-56d1dfef3854?q=80&w=800&auto=format&fit=crop',
+    avatar: '📷',
     skills: ['Soil Humidity Reading', 'Natural Pest Control', 'Micro-climate Irrigation', 'Seed Selection'],
     memoriesCount: 18,
     bio: '30 years managing organic terraced farmland. Reads soil health through texture, aroma, and local bio-indicators without digital sensors.',
@@ -152,8 +154,8 @@ export const EXPERTS: Expert[] = [
     coordinates: '31.1048° N, 77.1734° E',
     recordedDate: '29 July 2026',
     timeline: [
-      { year: 1994, event: 'Inherited family terraced farmland', detail: 'Switched exclusively to organic compost soil enrichment.' },
-      { year: 2007, event: 'Developed micro-basin rainwater catchment', detail: 'Protected local crops during severe drought seasons.' },
+      { year: 1996, event: 'Inherited family terraced farmland', detail: 'Switched exclusively to organic compost soil enrichment.' },
+      { year: 2010, event: 'Developed micro-basin rainwater catchment', detail: 'Protected local crops during severe drought seasons.' },
       { year: 2026, event: 'Preserved crop timing knowledge on MemoryMap', detail: 'Recorded weather pattern indicators based on local mountain flora.' }
     ]
   }
@@ -162,8 +164,8 @@ export const EXPERTS: Expert[] = [
 export const MEMORIES: Memory[] = [
   {
     id: 'demo-memory-1',
-    catalogId: 'ARCH-2026-0047',
-    title: 'Diagnosing an Overheating Engine',
+    catalogId: 'ARCH-0047',
+    title: 'Diagnosing Engine Overheating',
     expertId: 'ramesh-kumar',
     expertName: 'Ramesh Kumar',
     expertRole: 'Master Mechanic',
@@ -199,11 +201,11 @@ export const MEMORIES: Memory[] = [
   },
   {
     id: 'teaching-intuition',
-    catalogId: 'ARCH-2026-0031',
+    catalogId: 'ARCH-0046',
     title: 'Recognizing Unspoken Student Confusion',
-    expertId: 'david-chen',
-    expertName: 'David Chen',
-    expertRole: 'Veteran Teacher',
+    expertId: 'anita-rao',
+    expertName: 'Anita Rao',
+    expertRole: 'Veteran Physics Teacher',
     expertExperience: 32,
     category: 'Pedagogy & Teaching',
     duration: '07:14',
@@ -230,10 +232,10 @@ export const MEMORIES: Memory[] = [
   },
   {
     id: 'handloom-tension',
-    catalogId: 'ARCH-2026-0023',
-    title: 'Calibrating Handloom Warp Tension by Touch',
-    expertId: 'meera-pillai',
-    expertName: 'Meera Pillai',
+    catalogId: 'ARCH-0045',
+    title: 'The Thread Has To Be Tight Before Weaving Begins',
+    expertId: 'lakshmi-devi',
+    expertName: 'Lakshmi Devi',
     expertRole: 'Master Artisan Weaver',
     expertExperience: 40,
     category: 'Handloom Craft',
@@ -260,7 +262,7 @@ export const MEMORIES: Memory[] = [
   },
   {
     id: 'soil-reading',
-    catalogId: 'ARCH-2026-0018',
+    catalogId: 'ARCH-0044',
     title: 'Reading Soil Readiness Before Planting',
     expertId: 'sunita-devi',
     expertName: 'Sunita Devi',
@@ -294,8 +296,8 @@ export const MEMORIES: Memory[] = [
 export const KNOWLEDGE_AT_RISK: KnowledgeAtRisk[] = [
   {
     id: 'risk-1',
-    catalogId: 'RISK-REG-01',
-    title: 'Traditional Kasavu Handloom Weaving',
+    catalogId: 'RISK-001',
+    title: 'Traditional Kasavu Gold-Thread Handloom Weaving',
     practitionersLeft: 2,
     category: 'Textile Craft',
     region: 'Kerala, South India',
@@ -304,7 +306,7 @@ export const KNOWLEDGE_AT_RISK: KnowledgeAtRisk[] = [
   },
   {
     id: 'risk-2',
-    catalogId: 'RISK-REG-02',
+    catalogId: 'RISK-002',
     title: 'High-Altitude Terraced Canal Alignment',
     practitionersLeft: 3,
     category: 'Traditional Irrigation',
@@ -314,7 +316,7 @@ export const KNOWLEDGE_AT_RISK: KnowledgeAtRisk[] = [
   },
   {
     id: 'risk-3',
-    catalogId: 'RISK-REG-03',
+    catalogId: 'RISK-003',
     title: 'Vintage Diesel Mechanical Acoustic Tuning',
     practitionersLeft: 1,
     category: 'Automotive Heritage',
@@ -327,7 +329,7 @@ export const KNOWLEDGE_AT_RISK: KnowledgeAtRisk[] = [
 export const QA_ENTRIES: QAEntry[] = [
   {
     id: 'qa-1',
-    catalogId: 'QA-SRC-0047',
+    catalogId: 'QA-0047',
     question: 'My engine overheats after 30 minutes of highway driving. What should I check first?',
     answer: 'According to Ramesh Kumar (35 years experience as a Master Mechanic), do not replace the thermostat first. Check the lower radiator hose while idling: if the upper hose is hot but lower remains cold, or if you smell a sweet burnt scent at the reservoir cap, your issue is coolant flow cavitation or early head gasket pressure leakage.',
     sourceExpert: 'Ramesh Kumar',
@@ -339,7 +341,7 @@ export const QA_ENTRIES: QAEntry[] = [
   },
   {
     id: 'qa-2',
-    catalogId: 'QA-SRC-0018',
+    catalogId: 'QA-0044',
     question: 'How do I know if soil is ready for planting without digital sensors?',
     answer: 'According to Sunita Devi (30 years farming experience), dig 4 inches deep and squeeze a fistful of soil. If water drips out, it is too wet. If it holds shape but crumbles smoothly under light thumb pressure, the micro-soil temperature and moisture are optimal for seed germination.',
     sourceExpert: 'Sunita Devi',

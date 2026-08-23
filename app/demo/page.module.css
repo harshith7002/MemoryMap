@@ -8,9 +8,9 @@
 }
 
 .demoBanner {
-  background-color: var(--color-archive-black);
-  color: var(--color-archive-paper);
-  border: 1px solid var(--color-border-dark);
+  background-color: var(--env-dark-bg);
+  color: var(--env-dark-text);
+  border: 1px solid var(--env-dark-border);
   padding: var(--space-8);
   display: flex;
   flex-direction: column;
@@ -35,7 +35,7 @@
 .stepProgressTag {
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: var(--color-forest);
+  color: #6B8F68;
   background-color: rgba(39, 56, 39, 0.3);
   padding: 0.15rem 0.5rem;
   font-weight: 700;
@@ -44,12 +44,12 @@
 .title {
   font-family: var(--font-serif);
   font-size: clamp(2rem, 3.5vw, 2.75rem);
-  color: var(--color-archive-paper);
+  color: var(--env-dark-text);
 }
 
 .subtitle {
-  font-size: var(--text-base);
-  color: var(--color-text-inverse-muted);
+  font-size: 1rem;
+  color: var(--env-dark-muted);
   max-width: 620px;
 }
 
@@ -62,23 +62,20 @@
 
 .expertSpotlight {
   background-color: #FFFFFF;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--env-paper-border);
   padding: var(--space-6);
   display: flex;
   align-items: center;
   gap: var(--space-6);
 }
 
-.expertAvatar {
-  width: 64px;
-  height: 64px;
+.expertPhotoFrame {
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
-  background-color: var(--color-brass-pale);
-  border: 1px solid var(--color-brass);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
+  overflow: hidden;
+  border: 2px solid var(--color-brass);
+  flex-shrink: 0;
 }
 
 .expertMeta {
@@ -92,12 +89,13 @@
   font-family: var(--font-mono);
   font-size: 0.65rem;
   color: var(--color-brass);
+  font-weight: 700;
 }
 
 .expertName {
   font-family: var(--font-serif);
   font-size: 1.75rem;
-  color: var(--color-text-primary);
+  color: var(--env-paper-text);
 }
 
 .expertRole {
@@ -108,7 +106,7 @@
 
 .expertBio {
   font-size: 0.8125rem;
-  color: var(--color-text-secondary);
+  color: var(--env-paper-muted);
   line-height: 1.4;
 }
 
@@ -116,7 +114,7 @@
   display: flex;
   gap: var(--space-4);
   padding-left: var(--space-6);
-  border-left: 1px solid var(--color-border-subtle);
+  border-left: 1px solid var(--env-paper-border);
 }
 
 .eStat {
@@ -129,17 +127,17 @@
   font-family: var(--font-serif);
   font-size: 1.5rem;
   font-weight: 600;
-  color: var(--color-text-primary);
+  color: var(--env-paper-text);
 }
 
 .eLabel {
   font-size: 0.65rem;
-  color: var(--color-text-muted);
+  color: var(--env-paper-muted);
 }
 
 .interactiveBox {
   background-color: #FFFFFF;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--env-paper-border);
   padding: var(--space-6);
   display: flex;
   flex-direction: column;
@@ -150,7 +148,7 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: var(--space-2);
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--env-paper-border);
   padding-bottom: var(--space-4);
 }
 
@@ -160,10 +158,10 @@
   align-items: center;
   gap: 2px;
   padding: var(--space-2);
-  border: 1px solid var(--color-border-subtle);
-  background-color: var(--color-archive-paper);
+  border: 1px solid var(--env-paper-border);
+  background-color: var(--env-paper-bg);
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all 0.15s ease;
   text-align: center;
 }
 
@@ -173,19 +171,19 @@
 }
 
 .stepCompleted {
-  border-color: var(--color-forest);
+  border-color: #6B8F68;
 }
 
 .stepTabTitle {
   font-family: var(--font-mono);
   font-size: 0.7rem;
   font-weight: 700;
-  color: var(--color-text-primary);
+  color: var(--env-paper-text);
 }
 
 .stepTabDesc {
   font-size: 0.65rem;
-  color: var(--color-text-muted);
+  color: var(--env-paper-muted);
 }
 
 .stepContent {
@@ -210,22 +208,23 @@
   font-size: 0.65rem;
   color: var(--color-brass);
   letter-spacing: 0.08em;
+  font-weight: 700;
 }
 
 .paneTitle {
   font-family: var(--font-serif);
   font-size: 1.75rem;
-  color: var(--color-text-primary);
+  color: var(--env-paper-text);
 }
 
 .paneDesc {
   font-size: 0.875rem;
-  color: var(--color-text-secondary);
+  color: var(--env-paper-muted);
 }
 
 .audioPlayerCard {
-  background-color: var(--color-archive-paper);
-  border: 1px solid var(--color-border);
+  background-color: var(--env-paper-bg);
+  border: 1px solid var(--env-paper-border);
   padding: var(--space-6);
   display: flex;
   flex-direction: column;
@@ -246,20 +245,20 @@
 .trackTitle {
   font-family: var(--font-serif);
   font-size: 1.25rem;
-  color: var(--color-text-primary);
+  color: var(--env-paper-text);
 }
 
 .trackMeta {
   font-size: 0.75rem;
-  color: var(--color-text-secondary);
+  color: var(--env-paper-muted);
 }
 
 .playBtnBig {
   padding: 0.5rem 1.25rem;
   background-color: var(--color-brass);
-  color: var(--color-archive-black);
+  color: #0F0F0E;
   font-family: var(--font-sans);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.8125rem;
   border: none;
   cursor: pointer;
@@ -280,8 +279,8 @@
 }
 
 .transcriptCard {
-  background-color: var(--color-archive-paper);
-  border: 1px solid var(--color-border);
+  background-color: var(--env-paper-bg);
+  border: 1px solid var(--env-paper-border);
   padding: var(--space-6);
   display: flex;
   flex-direction: column;
@@ -303,7 +302,7 @@
   font-family: var(--font-serif);
   font-style: italic;
   font-size: 1.05rem;
-  color: var(--color-text-primary);
+  color: var(--env-paper-text);
   line-height: 1.6;
   padding-left: var(--space-4);
   border-left: 3px solid var(--color-brass);
@@ -311,7 +310,7 @@
 
 .transcriptPlaceholder {
   font-size: 0.8125rem;
-  color: var(--color-text-muted);
+  color: var(--env-paper-muted);
 }
 
 .extractionResultGrid {
@@ -321,8 +320,8 @@
 }
 
 .resultBox {
-  background-color: var(--color-archive-paper);
-  border: 1px solid var(--color-border);
+  background-color: var(--env-paper-bg);
+  border: 1px solid var(--env-paper-border);
   padding: var(--space-4);
   display: flex;
   flex-direction: column;
@@ -333,11 +332,12 @@
   font-family: var(--font-mono);
   font-size: 0.65rem;
   color: var(--color-brass);
+  font-weight: 700;
 }
 
 .numList, .bulletList {
   font-size: 0.8125rem;
-  color: var(--color-text-primary);
+  color: var(--env-paper-text);
   line-height: 1.5;
   padding-left: var(--space-4);
 }
@@ -350,8 +350,8 @@
 }
 
 .qaDemoBox {
-  background-color: var(--color-archive-paper);
-  border: 1px solid var(--color-border);
+  background-color: var(--env-paper-bg);
+  border: 1px solid var(--env-paper-border);
   padding: var(--space-6);
   display: flex;
   flex-direction: column;
@@ -367,20 +367,20 @@
 .qLabel {
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: var(--color-text-muted);
+  color: var(--env-paper-muted);
 }
 
 .qText {
   font-family: var(--font-serif);
   font-size: 1.25rem;
-  color: var(--color-text-primary);
+  color: var(--env-paper-text);
 }
 
 .triggerAnswerBtn {
   align-self: flex-start;
   padding: 0.45rem 0.85rem;
   background-color: var(--color-brass);
-  color: var(--color-archive-black);
+  color: #0F0F0E;
   font-family: var(--font-mono);
   font-size: 0.75rem;
   font-weight: 700;
@@ -390,7 +390,7 @@
 
 .aCard {
   background-color: #FFFFFF;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--env-paper-border);
   padding: var(--space-4);
   display: flex;
   flex-direction: column;
@@ -400,21 +400,21 @@
 .aLabel {
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: var(--color-forest);
+  color: #6B8F68;
   font-weight: 700;
 }
 
 .aText {
   font-family: var(--font-serif);
   font-size: 1.05rem;
-  color: var(--color-text-primary);
+  color: var(--env-paper-text);
   line-height: 1.5;
   font-style: italic;
 }
 
 .attributionCard {
-  background-color: var(--color-archive-paper-dark);
-  border: 1px solid var(--color-border);
+  background-color: var(--env-paper-bg);
+  border: 1px solid var(--env-paper-border);
   padding: var(--space-6);
   display: flex;
   flex-direction: column;
@@ -437,8 +437,8 @@
 .stampBadge {
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: var(--color-forest);
-  background-color: var(--color-forest-pale);
+  color: #273827;
+  background-color: #EEF3EE;
   padding: 0.15rem 0.5rem;
 }
 
@@ -446,7 +446,7 @@
   display: flex;
   flex-direction: column;
   font-size: 0.8125rem;
-  color: var(--color-text-secondary);
+  color: var(--env-paper-muted);
 }
 
 .listenFullBtn {
@@ -458,7 +458,7 @@
 }
 
 .demoCompleteBox {
-  background-color: var(--color-forest-pale);
+  background-color: #EEF3EE;
   border: 1px solid rgba(39, 56, 39, 0.3);
   padding: var(--space-6);
   text-align: center;
@@ -472,12 +472,12 @@
 .completeTitle {
   font-family: var(--font-serif);
   font-size: 1.5rem;
-  color: var(--color-forest);
+  color: #273827;
 }
 
 .completeText {
   font-size: 0.875rem;
-  color: var(--color-text-secondary);
+  color: var(--env-paper-muted);
   max-width: 480px;
 }
 
@@ -493,24 +493,12 @@
   justify-content: space-between;
   margin-top: var(--space-4);
   padding-top: var(--space-4);
-  border-top: 1px solid var(--color-border-subtle);
+  border-top: 1px solid var(--env-paper-border);
 }
 
 @media (max-width: 768px) {
-  .stepsBar {
-    grid-template-columns: 1fr;
-  }
-  .expertSpotlight {
-    flex-direction: column;
-    text-align: center;
-  }
-  .expertStats {
-    border-left: none;
-    border-top: 1px solid var(--color-border-subtle);
-    padding-left: 0;
-    padding-top: var(--space-4);
-  }
-  .extractionResultGrid {
-    grid-template-columns: 1fr;
-  }
+  .stepsBar { grid-template-columns: 1fr; }
+  .expertSpotlight { flex-direction: column; text-align: center; }
+  .expertStats { border-left: none; border-top: 1px solid var(--env-paper-border); padding-left: 0; padding-top: var(--space-4); }
+  .extractionResultGrid { grid-template-columns: 1fr; }
 }

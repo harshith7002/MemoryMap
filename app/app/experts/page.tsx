@@ -22,13 +22,15 @@ export default function ExpertsPage() {
         {EXPERTS.map((expert) => (
           <Card key={expert.id} variant="default" catalogId={expert.catalogId} className={styles.card}>
             <div className={styles.cardHeader}>
-              <div className={styles.avatar}>{expert.avatar}</div>
+              <div className={styles.avatarFrame}>
+                <img src={expert.photoUrl} alt={expert.name} className={styles.avatarImg} />
+              </div>
               <div className={styles.headerMeta}>
                 <h2 className={styles.name}>
                   <Link href={`/app/experts/${expert.id}`}>{expert.name}</Link>
                 </h2>
                 <span className={styles.role}>{expert.role}</span>
-                <span className={styles.experience}>⏱️ {expert.yearsExperience} years in field · {expert.location}</span>
+                <span className={styles.experience}>{expert.yearsExperience} years in field · {expert.location}</span>
               </div>
             </div>
 

@@ -25,7 +25,9 @@ export default function TimelinePage() {
               className={`${styles.tabBtn} ${selectedExpertId === exp.id ? styles.tabActive : ''}`}
               onClick={() => setSelectedExpertId(exp.id)}
             >
-              <span className={styles.tabAvatar}>{exp.avatar}</span>
+              <div className={styles.tabPhotoFrame}>
+                <img src={exp.photoUrl} alt={exp.name} className={styles.tabPhotoImg} />
+              </div>
               <div className={styles.tabMeta}>
                 <span className={styles.tabName}>{exp.name}</span>
                 <span className={styles.tabRole}>{exp.role}</span>
@@ -38,7 +40,9 @@ export default function TimelinePage() {
       {/* Main Exhibition Timeline Board */}
       <div className={styles.timelineCard}>
         <div className={styles.expertBanner}>
-          <div className={styles.bannerAvatar}>{selectedExpert.avatar}</div>
+          <div className={styles.bannerPhotoFrame}>
+            <img src={selectedExpert.photoUrl} alt={selectedExpert.name} className={styles.bannerPhotoImg} />
+          </div>
           <div className={styles.bannerMeta}>
             <span className={styles.catId}>{selectedExpert.catalogId}</span>
             <h2 className={styles.bannerName}>{selectedExpert.name}</h2>
