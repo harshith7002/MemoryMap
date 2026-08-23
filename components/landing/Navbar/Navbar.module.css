@@ -6,68 +6,223 @@
   z-index: 100;
   background-color: var(--env-dark-bg);
   border-bottom: 1px solid var(--env-dark-border);
-  transition: all 0.2s ease;
+  transition: background-color var(--transition-base), box-shadow var(--transition-base);
 }
 
 .scrolled {
-  background-color: rgba(15, 15, 14, 0.95);
-  backdrop-filter: blur(8px);
+  background-color: rgba(26, 24, 21, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
 }
 
 .container {
-  max-width: 1280px;
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: var(--space-3) var(--space-8);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--space-6);
 }
 
+/* Brand */
 .brand {
   display: flex;
-  align-items: baseline;
-  gap: var(--space-2);
+  align-items: center;
+  gap: var(--space-3);
+  flex-shrink: 0;
+}
+
+.mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(197, 155, 39, 0.45);
+  color: var(--color-amber);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.brandText {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
 }
 
 .brandTitle {
   font-family: var(--font-serif);
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 600;
   color: var(--env-dark-text);
 }
 
 .brandTag {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--color-brass);
-  letter-spacing: 0.08em;
+  font-size: 0.625rem;
+  font-weight: 500;
+  color: var(--color-amber);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
+/* Desktop nav */
 .navLinks {
   display: flex;
   align-items: center;
   gap: var(--space-8);
+  margin: 0 auto;
 }
 
 .link {
+  position: relative;
   font-family: var(--font-sans);
   font-size: 0.8125rem;
   font-weight: 500;
   color: var(--env-dark-muted);
-  transition: color 0.15s ease;
+  padding: var(--space-2) 0;
+  transition: color var(--transition-fast);
+}
+
+.link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background-color: var(--color-amber);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-fast);
 }
 
 .link:hover {
   color: var(--env-dark-text);
 }
 
+.link:hover::after {
+  transform: scaleX(1);
+}
+
+.linkActive {
+  color: var(--env-dark-text);
+}
+
+.linkActive::after {
+  transform: scaleX(1);
+}
+
 .actions {
   display: flex;
   align-items: center;
   gap: var(--space-3);
+  flex-shrink: 0;
 }
 
-@media (max-width: 768px) {
-  .navLinks { display: none; }
-  .brandTag { display: none; }
+/* Mobile toggle */
+.menuToggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.menuToggle:hover {
+  background-color: rgba(245, 241, 232, 0.06);
+}
+
+.burgerLine {
+  width: 18px;
+  height: 1.5px;
+  background-color: var(--env-dark-text);
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.burgerLineTop {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+.burgerLineMid {
+  opacity: 0;
+}
+
+.burgerLineBottom {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* Mobile panel */
+.mobilePanel {
+  display: none;
+  max-height: 0;
+  overflow: hidden;
+  border-top: 1px solid var(--env-dark-border);
+  transition: max-height var(--transition-base) ease;
+}
+
+.mobilePanelOpen {
+  max-height: 420px;
+}
+
+.mobileLinks {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-4) var(--space-8) 0;
+}
+
+.mobileLink {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--env-dark-text);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--env-dark-border);
+}
+
+.mobileLink:last-child {
+  border-bottom: none;
+}
+
+.mobileActions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-8) var(--space-6);
+}
+
+.mobileButton {
+  width: 100%;
+}
+
+@media (max-width: 860px) {
+  .navLinks,
+  .actions {
+    display: none;
+  }
+
+  .brandTag {
+    display: none;
+  }
+
+  .menuToggle {
+    display: flex;
+  }
+
+  .mobilePanel {
+    display: block;
+  }
+
+  .container {
+    padding: var(--space-3) var(--space-5);
+  }
 }

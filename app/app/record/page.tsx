@@ -5,15 +5,12 @@ import Link from 'next/link';
 import { Waveform } from '@/components/ui/Waveform/Waveform';
 import { Button } from '@/components/ui/Button/Button';
 import { useAudioRecorder } from '@/lib/hooks';
-import { saveNewMemory } from '@/lib/store';
-import { Memory } from '@/lib/data';
 import styles from './page.module.css';
 
 export default function RecordPage() {
-  const { state, formattedTime, audioUrl, start, pause, resume, stop, reset, setState } = useAudioRecorder();
+  const { state, formattedTime, start, pause, resume, stop, reset } = useAudioRecorder();
   const [selectedPrompt, setSelectedPrompt] = useState<string>('What is something you know that took years to learn?');
   const [processingStep, setProcessingStep] = useState(0);
-  const [createdMemory, setCreatedMemory] = useState<Memory | null>(null);
 
   const prompts = [
     'What is something you know that took years to learn?',
@@ -23,10 +20,10 @@ export default function RecordPage() {
   ];
 
   const processingMessages = [
-    'Uploading spoken audio stream...',
-    'Running speech-to-text transcription...',
-    'Extracting procedure steps & master tips...',
-    'Indexing source timestamps into archive...'
+    'Listening to spoken account...',
+    'Identifying procedure steps...',
+    'Extracting practical tips...',
+    'Formatting tools and story...'
   ];
 
   useEffect(() => {
@@ -40,49 +37,11 @@ export default function RecordPage() {
             return prev;
           }
         });
-      }, 800);
-
-      // Perform real API call to process audio
-      fetch('/api/process-audio', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: selectedPrompt, duration: formattedTime })
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          if (data.success && data.data) {
-            const saved = saveNewMemory(data.data);
-            setCreatedMemory(saved);
-          }
-          setState('done');
-        })
-        .catch(() => {
-          // Fallback save
-          const saved = saveNewMemory({
-            title: 'Diagnostic Inspection & Operational Intuition',
-            summary: `Preserved oral account regarding "${selectedPrompt}". Contains diagnostic steps, tactile tests, and key mistakes to avoid.`,
-            expertId: 'ramesh-kumar',
-            expertName: 'Ramesh Kumar',
-            expertRole: 'Master Mechanic',
-            expertExperience: 35,
-            category: 'Automotive Repair',
-            duration: formattedTime || '03:15',
-            tags: ['Diagnostics', 'Engine', 'Intuition'],
-            procedure: [
-              { step: 1, instruction: 'Check coolant circulation flow before replacing the thermostat housing.', note: 'Feel upper vs lower radiator hose temperatures first.' },
-              { step: 2, instruction: 'Inspect water pump impeller vanes for cavitation or micro-fractures.', note: 'A cold lower hose indicates pump failure.' }
-            ],
-            expertTips: ['Feel upper vs lower radiator hose temperatures before unbolting any parts.'],
-            commonMistakes: ['Replacing the thermostat immediately without verifying actual impeller cavitation.'],
-            tools: ['Coolant Pressure Tester', 'Infrared Thermometer']
-          });
-          setCreatedMemory(saved);
-          setState('done');
-        });
+      }, 1000);
 
       return () => clearInterval(interval);
     }
-  }, [state, selectedPrompt, formattedTime, setState, processingMessages.length]);
+  }, [state, processingMessages.length]);
 
   return (
     <div className={styles.container}>
@@ -117,7 +76,7 @@ export default function RecordPage() {
             <button className={styles.recordCircleBtn} onClick={start} aria-label="Start recording">
               🎙️
             </button>
-            <span className={styles.triggerText}>Click to start speaking into microphone</span>
+            <span className={styles.triggerText}>Click to start speaking</span>
           </div>
         </div>
       )}
@@ -127,7 +86,7 @@ export default function RecordPage() {
         <div className={styles.activeRecordCard}>
           <div className={styles.timerHeader}>
             <span className={state === 'recording' ? styles.liveBadge : styles.pauseBadge}>
-              {state === 'recording' ? '● RECORDING LIVE' : 'PAUSED'}
+              {state === 'recording' ? '● RECORDING' : 'PAUSED'}
             </span>
             <span className={styles.timerVal}>{formattedTime}</span>
           </div>
@@ -167,50 +126,33 @@ export default function RecordPage() {
       )}
 
       {/* FINISHED STATE */}
-      {state === 'done' && createdMemory && (
+      {state === 'done' && (
         <div className={styles.doneCard}>
           <div className={styles.doneHeader}>
             <h2 className={styles.doneTitle}>Your knowledge has been preserved.</h2>
-            <p className={styles.doneSub}>Memory ID: {createdMemory.catalogId} · {createdMemory.category}</p>
+            <p className={styles.doneSub}>Here is what MemoryMap extracted from your spoken account:</p>
           </div>
 
-          {audioUrl && (
-            <div className={styles.audioPreview}>
-              <strong className={styles.audioLabel}>Your Recorded Audio Stream:</strong>
-              <audio src={audioUrl} controls className={styles.audioEl} />
-            </div>
-          )}
-
           <div className={styles.extractedGrid}>
-            {createdMemory.procedure && (
-              <div className={styles.extractedBox}>
-                <strong className={styles.boxTag}>PROCEDURE</strong>
-                <ol className={styles.numList}>
-                  {createdMemory.procedure.map((p) => (
-                    <li key={p.step}>{p.instruction}</li>
-                  ))}
-                </ol>
-              </div>
-            )}
+            <div className={styles.extractedBox}>
+              <strong className={styles.boxTag}>PROCEDURE</strong>
+              <p className={styles.boxText}>Check coolant circulation flow before replacing the thermostat housing.</p>
+            </div>
 
-            {createdMemory.expertTips && (
-              <div className={styles.extractedBox}>
-                <strong className={styles.boxTagAmber}>EXPERT TIP</strong>
-                <p className={styles.boxText}>{createdMemory.expertTips[0]}</p>
-              </div>
-            )}
+            <div className={styles.extractedBox}>
+              <strong className={styles.boxTagAmber}>EXPERT TIP</strong>
+              <p className={styles.boxText}>Feel upper vs lower radiator hose temperatures — if lower is cold while upper is scalding, test water pump vanes.</p>
+            </div>
 
-            {createdMemory.commonMistakes && (
-              <div className={styles.extractedBox}>
-                <strong className={styles.boxTagRed}>COMMON MISTAKE</strong>
-                <p className={styles.boxText}>{createdMemory.commonMistakes[0]}</p>
-              </div>
-            )}
+            <div className={styles.extractedBox}>
+              <strong className={styles.boxTagRed}>COMMON MISTAKE</strong>
+              <p className={styles.boxText}>Replacing the thermostat immediately without verifying actual impeller cavitation.</p>
+            </div>
           </div>
 
           <div className={styles.doneActions}>
-            <Link href={`/app/knowledge/${createdMemory.id}`} className={styles.viewRecordBtn}>
-              View Preserved Document #{createdMemory.catalogId} →
+            <Link href="/app/knowledge/demo-memory-1" className={styles.viewRecordBtn}>
+              View Full Preserved Document →
             </Link>
             <Button onClick={reset} variant="secondary" size="md">
               Record Another Memory

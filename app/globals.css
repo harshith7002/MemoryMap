@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
 :root {
   /* Apple-Level Clean Palette */
   --bg-main: #FAF8F5;
   --bg-card: #FFFFFF;
   --bg-subtle: #F2EFE9;
-  
+
   --text-primary: #1C1C1A;
   --text-secondary: #5A5A54;
   --text-muted: #8C8C82;
@@ -15,14 +15,51 @@
   --color-amber-light: #F5ECCB;
   --color-forest: #1E2C1E;
   --color-forest-pale: #EEF3EE;
-  
+
   /* Borders */
   --border-color: #E6E2D8;
   --border-dark: #2C3A2C;
 
+  /* --- Aliases: components reference these token names --- */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-border: var(--border-color);
+  --color-border-dark: var(--border-dark);
+  --color-brass: var(--color-amber);
+  --color-brass-pale: var(--color-amber-light);
+
+  /* Archive dark surfaces (charcoal, not pure black — warm, museum-catalog feel) */
+  --color-archive-paper: var(--bg-main);
+  --color-archive-paper-dark: var(--bg-subtle);
+  --color-archive-charcoal: #24221D;
+  --color-archive-dark: #1A1815;
+
+  /* Navbar "exhibition placard" dark environment */
+  --env-dark-bg: #1A1815;
+  --env-dark-border: rgba(245, 241, 232, 0.1);
+  --env-dark-text: #F5F1E8;
+  --env-dark-muted: rgba(245, 241, 232, 0.62);
+
   /* Fonts */
   --font-serif: 'Newsreader', Georgia, serif;
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Menlo, monospace;
+
+  /* Spacing scale (1 unit = 0.25rem, matches usage across components) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
 
   /* Spacing & Radii */
   --max-width: 1200px;
