@@ -65,14 +65,12 @@ export function useMemories() {
   useEffect(() => {
     syncMemories();
 
-    // Fetch from server as well
     fetch('/api/memories')
       .then((res) => res.json())
       .then((data) => {
         if (data.success && Array.isArray(data.data) && data.data.length > 0) {
           const serverMemories = data.data;
           const combined = [...serverMemories, ...getStoredMemories()];
-          // Deduplicate by ID
           const unique = Array.from(new Map(combined.map((m) => [m.id, m])).values());
           setMemories(unique);
         }
@@ -95,12 +93,43 @@ export function useMemories() {
 export function useExperts() {
   const { memories } = useMemories();
 
-  const dynamicExperts = EXPERTS.map((expert) => {
+  // Find all unique expert names from memories
+  const existingExpertNames = new Set(EXPERTS.map((e) => e.name.toLowerCase()));
+  const customExperts: Expert[] = [];
+
+  memories.forEach((m) => {
+    if (m.expertName && !existingExpertNames.has(m.expertName.toLowerCase())) {
+      existingExpertNames.add(m.expertName.toLowerCase());
+      const customId = `expert-${m.expertName.toLowerCase().replace(/\s+/g, '-')}`;
+      customExperts.push({
+        id: customId,
+        catalogId: `ARCH-EXPRT-00${Math.floor(Math.random() * 90 + 10)}`,
+        name: m.expertName,
+        role: m.expertRole || 'Practitioner',
+        yearsExperience: m.expertExperience || 20,
+        photoUrl: 'https://images.unsplash.com/photo-1544717305-2782549b5136?q=80&w=800&auto=format&fit=crop',
+        skills: m.tags || ['Practical Experience', 'Diagnostics'],
+        memoriesCount: 0,
+        bio: `Experienced practitioner sharing unwritten wisdom and domain knowledge in ${m.category}.`,
+        timeline: [
+          { year: 2026, event: 'Knowledge Preserved', detail: `First oral account preserved: ${m.title}` }
+        ],
+        location: 'Recorded Archive Session',
+        coordinates: '18.9220° N, 72.8347° E',
+        recordedDate: m.createdAt
+      });
+    }
+  });
+
+  const allBaseExperts = [...EXPERTS, ...customExperts];
+
+  const dynamicExperts = allBaseExperts.map((expert) => {
     const expertMemories = memories.filter(
-      (m) => m.expertId === expert.id || m.expertName.toLowerCase() === expert.name.toLowerCase()
+      (m) =>
+        m.expertId === expert.id ||
+        (m.expertName && m.expertName.toLowerCase() === expert.name.toLowerCase())
     );
 
-    // Compute dynamic timeline
     const userTimelineEvents: TimelineEvent[] = expertMemories
       .filter((m) => m.id.startsWith('user-memory-') || m.id.startsWith('mem-'))
       .map((m) => ({
@@ -111,7 +140,7 @@ export function useExperts() {
 
     return {
       ...expert,
-      memoriesCount: expert.memoriesCount + expertMemories.filter((m) => m.id.startsWith('user-memory-') || m.id.startsWith('mem-')).length,
+      memoriesCount: expertMemories.length,
       memoriesList: expertMemories,
       timeline: [...userTimelineEvents, ...expert.timeline]
     };

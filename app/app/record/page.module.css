@@ -60,71 +60,185 @@
 /* Layout */
 .layout {
   display: grid;
-  grid-template-columns: 1fr 280px;
+  grid-template-columns: 1fr 320px;
+  gap: 2rem;
   align-items: start;
-  gap: 1.75rem;
 }
 
 .layoutSingle {
   grid-template-columns: 1fr;
-  max-width: 800px;
-  margin: 0 auto;
-  width: 100%;
 }
 
 .mainCol {
-  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-/* Idle card */
+/* Setup Card */
+.setupCard {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
+}
+
+.setupHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.setupEyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-amber);
+  letter-spacing: 0.05em;
+}
+
+.setupTitle {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  color: var(--text-primary);
+}
+
+.setupSub {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+}
+
+.presetSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  background-color: var(--bg-main);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+}
+
+.presetRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.presetBtn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.85rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.presetBtn:hover {
+  border-color: var(--text-primary);
+}
+
+.presetActive {
+  background-color: var(--color-amber-light);
+  border-color: var(--color-amber);
+  font-weight: 600;
+}
+
+.setupForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.fieldGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.fieldLabel {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.fieldInput, .fieldSelect {
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  outline: none;
+  font-family: var(--font-sans);
+}
+
+.fieldInput:focus, .fieldSelect:focus {
+  border-color: var(--text-primary);
+  background-color: #FFFFFF;
+}
+
+.setupAction {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.5rem;
+}
+
+/* Idle State */
 .idleCard {
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  padding: 3rem 2.5rem;
+  padding: 3rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2.5rem;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
-}
-
-.promptHeader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
   text-align: center;
+  gap: 2rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.03);
 }
 
 .promptLabel {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: var(--color-amber);
+  text-transform: uppercase;
 }
 
 .promptTitle {
   font-family: var(--font-serif);
-  font-size: 1.75rem;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
   color: var(--text-primary);
-  line-height: 1.35;
-  text-align: center;
-  max-width: 34ch;
+  max-width: 600px;
 }
 
 .recordTriggerBox {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .recordCircleBtn {
-  width: 84px;
-  height: 84px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   background-color: var(--color-amber);
   color: #FFFFFF;
@@ -132,76 +246,30 @@
   align-items: center;
   justify-content: center;
   box-shadow: 0 8px 24px rgba(197, 155, 39, 0.3);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  transition: transform var(--transition-fast);
 }
 
 .recordCircleBtn:hover {
   transform: scale(1.05);
-  box-shadow: 0 10px 28px rgba(197, 155, 39, 0.4);
 }
 
 .triggerText {
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: var(--text-primary);
 }
 
-/* Saved / advancing transition */
-.savedCard {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  padding: 4rem 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-  text-align: center;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
-}
-
-.savedTick {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background-color: var(--color-forest-pale);
-  color: var(--color-forest);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 0.5rem;
-}
-
-.savedTitle {
-  font-family: var(--font-serif);
-  font-size: 1.5rem;
-  color: var(--text-primary);
-}
-
-.savedSub {
-  font-size: 0.9375rem;
-  color: var(--text-muted);
-}
-
-/* Active recording */
+/* Active Recording */
 .activeRecordCard {
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
-  padding: 2.75rem 3rem;
+  padding: 2.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.75rem;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
-}
-
-.activePromptLabel {
-  font-family: var(--font-serif);
-  font-size: 1.25rem;
-  color: var(--text-secondary);
-  text-align: center;
-  max-width: 40ch;
 }
 
 .timerHeader {
@@ -210,43 +278,12 @@
   gap: 1rem;
 }
 
-.liveBadge {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: #C0392B;
-}
+.liveBadge { font-size: 0.75rem; font-weight: 700; color: #C0392B; }
+.pauseBadge { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); }
+.timerVal { font-family: var(--font-serif); font-size: 2.5rem; font-weight: 600; color: var(--text-primary); }
 
-.pauseBadge {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  color: var(--text-muted);
-}
-
-.timerVal {
-  font-family: var(--font-serif);
-  font-size: 2.5rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.waveformContainer {
-  width: 100%;
-  padding: 1.5rem 0;
-  border-top: 1px solid var(--border-color);
-  border-bottom: 1px solid var(--border-color);
-}
-
-.controlsRow {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-}
+.waveformContainer { width: 100%; padding: 1.25rem 0; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); }
+.controlsRow { display: flex; align-items: center; gap: 1rem; }
 
 /* Processing */
 .processingCard {
@@ -270,22 +307,10 @@
   animation: spin 0.8s linear infinite;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
+.procTitle { font-family: var(--font-serif); font-size: 1.75rem; color: var(--text-primary); }
+.procSub { font-size: 0.9375rem; color: var(--text-muted); }
 
-.procTitle {
-  font-family: var(--font-serif);
-  font-size: 1.75rem;
-  color: var(--text-primary);
-}
-
-.procSub {
-  font-size: 0.9375rem;
-  color: var(--text-muted);
-}
-
-/* Done state */
+/* Done State */
 .doneCard {
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
@@ -297,236 +322,67 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
 }
 
-.doneHeader {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
+.doneHeader { display: flex; flex-direction: column; gap: 0.25rem; }
+.doneTitle { font-family: var(--font-serif); font-size: 2rem; color: var(--text-primary); }
+.doneSub { font-size: 1rem; color: var(--text-secondary); }
 
-.doneTitle {
-  font-family: var(--font-serif);
-  font-size: 2rem;
-  color: var(--text-primary);
-}
+.answeredList { display: flex; flex-direction: column; gap: 0.5rem; background-color: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem; }
+.answeredRow { display: flex; align-items: center; gap: 0.75rem; font-size: 0.875rem; }
+.answeredIndex { font-family: var(--font-mono); font-weight: 700; color: var(--color-amber); }
+.answeredQuestion { flex: 1; color: var(--text-primary); }
+.answeredDuration { font-size: 0.8125rem; color: var(--text-muted); }
 
-.doneSub {
-  font-size: 1rem;
-  color: var(--text-secondary);
-}
-
-.answeredList {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  overflow: hidden;
-}
-
-.answeredRow {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1rem;
-  background-color: var(--bg-main);
-}
-
-.answeredRow:not(:last-child) {
-  border-bottom: 1px solid var(--border-color);
-}
-
-.answeredIndex {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--color-amber);
-  font-weight: 600;
-  width: 1.2rem;
-  flex-shrink: 0;
-}
-
-.answeredQuestion {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  flex: 1;
-}
-
-.answeredDuration {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  flex-shrink: 0;
-}
-
-.extractedGrid {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.extractedBox {
-  background-color: var(--bg-main);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.boxTag { font-size: 0.75rem; font-weight: 700; color: var(--text-primary); letter-spacing: 0.03em; }
-.boxTagAmber { font-size: 0.75rem; font-weight: 700; color: var(--color-amber); letter-spacing: 0.03em; }
-.boxTagRed { font-size: 0.75rem; font-weight: 700; color: #C0392B; letter-spacing: 0.03em; }
-
+.extractedGrid { display: flex; flex-direction: column; gap: 1rem; }
+.extractedBox { background-color: var(--bg-main); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1.25rem; display: flex; flex-direction: column; gap: 0.25rem; }
+.boxTag { font-size: 0.75rem; font-weight: 700; color: var(--text-primary); }
+.boxTagAmber { font-size: 0.75rem; font-weight: 700; color: var(--color-amber); }
+.boxTagRed { font-size: 0.75rem; font-weight: 700; color: #C0392B; }
 .boxText { font-size: 0.9375rem; color: var(--text-secondary); }
 
-.doneActions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--border-color);
-}
+.doneActions { display: flex; align-items: center; justify-content: space-between; padding-top: 1rem; border-top: 1px solid var(--border-color); }
+.viewRecordBtn { font-size: 0.9375rem; font-weight: 600; color: var(--text-primary); }
 
-.viewRecordBtn {
-  font-size: 0.9375rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-/* Outline panel */
+/* Outline Panel */
 .outlinePanel {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
   background-color: var(--bg-card);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-lg);
   padding: 1.5rem;
-  position: sticky;
-  top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
 .sessionCard {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding-bottom: 1.25rem;
+  gap: 0.85rem;
+  padding-bottom: 1rem;
   border-bottom: 1px solid var(--border-color);
 }
 
-.sessionInfo {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-}
+.sessionInfo { display: flex; flex-direction: column; }
+.sessionExpert { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 600; color: var(--text-primary); }
+.sessionRole { font-size: 0.8125rem; color: var(--text-muted); }
 
-.sessionExpert {
-  font-size: 0.9375rem;
+.changePractitionerBtn {
+  font-size: 0.75rem;
   font-weight: 600;
-  color: var(--text-primary);
-}
-
-.sessionRole {
-  font-size: 0.8125rem;
-  color: var(--text-muted);
-}
-
-.outlineEyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-
-.outlineList {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  list-style: none;
-}
-
-.outlineItem {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.65rem;
-  padding: 0.6rem 0.5rem;
-  border-radius: var(--radius-sm);
-}
-
-.outlineMarker {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  border: 1px solid var(--border-color);
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--text-muted);
-  flex-shrink: 0;
-  margin-top: 0.1rem;
-}
-
-.outlineTextCol {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  min-width: 0;
-}
-
-.outlineQuestion {
-  font-size: 0.8125rem;
-  color: var(--text-secondary);
-  line-height: 1.4;
-}
-
-.outlineDuration {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  color: var(--text-muted);
-}
-
-.outlineDone .outlineMarker {
-  background-color: var(--color-forest-pale);
-  border-color: var(--color-forest-pale);
-  color: var(--color-forest);
-}
-
-.outlineDone .outlineQuestion {
-  color: var(--text-muted);
-}
-
-.outlineCurrent {
-  background-color: var(--color-amber-light);
-}
-
-.outlineCurrent .outlineMarker {
-  border-color: var(--color-amber);
   color: var(--color-amber);
-  font-weight: 700;
+  margin-top: 0.2rem;
+  cursor: pointer;
 }
 
-.outlineCurrent .outlineQuestion {
-  color: var(--text-primary);
-  font-weight: 600;
-}
+.outlineEyebrow { font-family: var(--font-mono); font-size: 0.75rem; font-weight: 700; color: var(--text-muted); letter-spacing: 0.04em; }
+.outlineList { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+.outlineItem { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.875rem; color: var(--text-secondary); }
+.outlineMarker { width: 20px; height: 20px; border-radius: 50%; background-color: var(--bg-subtle); color: var(--text-muted); font-size: 0.75rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.outlineDone .outlineMarker { background-color: var(--color-amber-light); color: var(--color-amber); }
+.outlineCurrent .outlineMarker { background-color: var(--text-primary); color: #FFFFFF; }
+.outlineQuestion { font-size: 0.875rem; color: var(--text-primary); }
+.outlineDuration { font-size: 0.75rem; color: var(--text-muted); }
 
-@media (max-width: 860px) {
-  .layout {
-    grid-template-columns: 1fr;
-  }
-
-  .outlinePanel {
-    position: static;
-    order: -1;
-  }
-
-  .idleCard,
-  .activeRecordCard {
-    padding: 2rem 1.5rem;
-  }
+@media (max-width: 992px) {
+  .layout { grid-template-columns: 1fr; }
+  .fieldGrid { grid-template-columns: 1fr; }
 }
