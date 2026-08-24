@@ -30,6 +30,12 @@ export function IdleState({ currentIndex, currentQuestion, advancing, totalQuest
       <span className={styles.promptLabel}>Interview question {currentIndex + 1}</span>
       <h2 className={styles.promptTitle}>&ldquo;{currentQuestion}&rdquo;</h2>
 
+      {currentIndex === 0 && (
+        <div className={styles.guidanceBox}>
+          <strong>Interview Guidance:</strong> Start by introducing yourself. Tell us your full name, what you do, your area of expertise, and how much experience you have. Then share your knowledge, experiences, procedures, tips, and lessons learned through the interview.
+        </div>
+      )}
+
       <div className={styles.recordTriggerBox}>
         <button className={styles.recordCircleBtn} onClick={start} aria-label="Start recording">
           <IconRecord size={30} />

@@ -1,0 +1,60 @@
+{
+  "memories": [
+    {
+      "title": "Automotive Diagnostic Principles and Lessons",
+      "summary": "Priyanshu Singh shares key automotive diagnostic lessons learned over time, including listening to engine sounds prior to attaching diagnostic equipment, avoiding premature component replacement based on error codes alone, and investigating the root cause of failures.",
+      "category": "Automotive Repair",
+      "tags": [
+        "Automotive Repair",
+        "Diagnostics",
+        "Engine Troubleshooting",
+        "Mechanic Tips"
+      ],
+      "expertTips": [
+        "Pay attention to the sound an engine makes before connecting any diagnostic equipment (e.g., faster cranking than normal can indicate compression or timing issues).",
+        "Focus on understanding why a component failed in the first place rather than merely replacing broken parts.",
+        "Treat every repair as a learning opportunity and investigate unfamiliar issues instead of pretending to know the answer."
+      ],
+      "commonMistakes": [
+        "Immediately replacing a part just because a machine isn't working.",
+        "Assuming a component mentioned by an error code is faulty, rather than recognizing that error codes specify where a problem was detected (e.g., sensor errors caused by damaged wiring or poor connections).",
+        "Rushing a diagnosis because a customer is waiting."
+      ],
+      "tools": [
+        "diagnostic equipment"
+      ],
+      "story": "When starting out, the speaker used to assume that car charging problems were always caused by a faulty battery or starter. Their mentor taught them never to rush a diagnosis due to customer pressure, emphasizing that a mechanic's role is to understand the root cause of failure.",
+      "transcript": "All right, so my name is Priyanshu Singh and I am studying in SRM Institute of Science and Technology. So, what is something I know that took years to learn? One thing that took me years to learn is that I shouldn't immediately replace a part of just because a machine isn't working. When I was starting out, if a car had a charging problem, I would often assume that the battery or starter was the issue. But that's not, should be done. What is a diagnostic trick only experience teaches? So, one trick I learned over the years is to pay attention to a sound a engine makes before connecting anything, any diagnostic equipment. For example, if the engine cranks noticeably faster than normal, that can indicate a compression problem or a timing issue. So, yeah. What common mistakes do beginners in my trade make? Well, they see an error code and assume that the component mentioned by the code needs to be replaced. But an error code often tells you where the problem was detected, not necessarily which part has failed. So, for example, a sensor error could actually be caused by damaged wiring or a poor electrical connection. My mentor always told me never rush a diagnosis just because the customer is waiting. That lesson stayed with me. He taught me that a mechanic's job isn't just to replace broken parts. It's to understand why something failed in the first place. He also taught me to treat every repair as a learning opportunity. Even after many years, if I encounter something I haven't seen before, I don't pretend I know the answer. I investigate it, learn from it, and remember it for the next time.",
+      "expertId": "user-expert-1",
+      "expertName": "Current User",
+      "expertRole": "Practitioner",
+      "expertExperience": 0,
+      "duration": "00:00",
+      "id": "user-memory-1787552934428",
+      "catalogId": "ARCH-0049",
+      "createdAt": "24 Aug 2026"
+    },
+    {
+      "title": "Lesson from a Mentor: Just Keep Moving",
+      "summary": "The speaker shares a concise piece of advice received from their mentor: to simply keep moving.",
+      "category": "Personal Development",
+      "tags": [
+        "Mentorship",
+        "Perseverance",
+        "Life Advice"
+      ],
+      "expertTips": [
+        "Just keep moving."
+      ],
+      "transcript": "Well, the lesson that my mentor passed on to me is just keep moving. That's all.",
+      "expertId": "user-expert-1",
+      "expertName": "Current User",
+      "expertRole": "Practitioner",
+      "expertExperience": 0,
+      "duration": "00:00",
+      "id": "user-memory-1787549320083",
+      "catalogId": "ARCH-0048",
+      "createdAt": "24 Aug 2026"
+    }
+  ]
+}

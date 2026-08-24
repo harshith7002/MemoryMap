@@ -40,7 +40,7 @@ export function useAudioRecorder() {
       }
 
       setState((prevState) => {
-        if (prevState === 'idle') {
+        if (prevState === 'idle' && (!mediaRecorderRef.current || mediaRecorderRef.current.state === 'inactive')) {
           setSeconds(0);
           chunksRef.current = [];
           setAudioBlob(null);
@@ -67,8 +67,22 @@ export function useAudioRecorder() {
     setState('recording');
   }, []);
 
+  const nextQuestion = useCallback(() => {
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
+      mediaRecorderRef.current.pause();
+    }
+    setState('idle');
+    setSeconds(0);
+    // Crucially: do NOT clear chunksRef or stop tracks!
+    if (timerRef.current) clearInterval(timerRef.current);
+  }, []);
+
   const stop = useCallback(() => {
     if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
+      // If it's paused, we need to resume before stopping to ensure all data flushes correctly in some browsers
+      if (mediaRecorderRef.current.state === 'paused') {
+         mediaRecorderRef.current.resume();
+      }
       mediaRecorderRef.current.stop();
       // stop all tracks
       mediaRecorderRef.current.stream.getTracks().forEach(track => track.stop());
@@ -117,6 +131,7 @@ export function useAudioRecorder() {
     start,
     pause,
     resume,
+    nextQuestion,
     stop,
     reset,
     setState,

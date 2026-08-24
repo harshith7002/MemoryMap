@@ -41,7 +41,7 @@ import { ProcessingState } from './components/ProcessingState';
 import { DoneState } from './components/DoneState';
 
 export default function RecordPage() {
-  const { state, seconds, formattedTime, start, pause, resume, stop, reset, setState, audioBlob } =
+  const { state, seconds, formattedTime, start, pause, resume, nextQuestion, stop, reset, setState, audioBlob } =
     useAudioRecorder();
 
   // Practitioner Pre-Interview Configuration State
@@ -144,7 +144,7 @@ export default function RecordPage() {
     commitCurrentAnswer();
     setAdvancing(true);
     window.setTimeout(() => {
-      reset();
+      nextQuestion();
       setCurrentIndex((i) => i + 1);
       setAdvancing(false);
     }, 1000);
@@ -169,7 +169,8 @@ export default function RecordPage() {
       <div className={styles.header}>
         <h1 className={styles.title}>Preserve a memory.</h1>
         <p className={styles.subtitle}>
-          You don&rsquo;t need to write it down. Just tell the story, one question at a time.
+          This interview consists of 4 questions that will be combined into one complete knowledge record. 
+          Please let the interviewee answer naturally and provide detailed explanations, experiences, procedures, and tips.
         </p>
       </div>
 
