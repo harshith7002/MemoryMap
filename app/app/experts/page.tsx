@@ -3,10 +3,12 @@
 import React from 'react';
 import Link from 'next/link';
 import { ExpertAvatar } from '@/components/ui/Avatar/ExpertAvatar';
-import { EXPERTS } from '@/lib/data';
+import { useExperts } from '@/lib/store';
 import styles from './page.module.css';
 
 export default function ExpertsPage() {
+  const { experts } = useExperts();
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -17,7 +19,7 @@ export default function ExpertsPage() {
       </div>
 
       <div className={styles.peopleGrid}>
-        {EXPERTS.map((person) => (
+        {experts.map((person) => (
           <div key={person.id} className={styles.personCard}>
             <div className={styles.cardTop}>
               <ExpertAvatar src={person.photoUrl} name={person.name} size="lg" />

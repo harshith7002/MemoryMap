@@ -1,13 +1,15 @@
 'use client';
 
 import React, { useState } from 'react';
-import { EXPERTS } from '@/lib/data';
+import { useExperts } from '@/lib/store';
 import { ExpertAvatar } from '@/components/ui/Avatar/ExpertAvatar';
 import styles from './page.module.css';
 
 export default function TimelinePage() {
+  const { experts } = useExperts();
   const [selectedExpertId, setSelectedExpertId] = useState('ramesh-kumar');
-  const selectedExpert = EXPERTS.find((e) => e.id === selectedExpertId) || EXPERTS[0];
+
+  const selectedExpert = experts.find((e) => e.id === selectedExpertId) || experts[0];
 
   return (
     <div className={styles.container}>
@@ -19,7 +21,7 @@ export default function TimelinePage() {
 
         {/* Practitioner Tabs */}
         <div className={styles.tabsRow}>
-          {EXPERTS.map((exp) => (
+          {experts.map((exp) => (
             <button
               key={exp.id}
               className={`${styles.tabBtn} ${selectedExpertId === exp.id ? styles.tabActive : ''}`}
@@ -41,7 +43,9 @@ export default function TimelinePage() {
           <ExpertAvatar src={selectedExpert.photoUrl} name={selectedExpert.name} size="lg" />
           <div className={styles.expertMeta}>
             <h2 className={styles.expertName}>{selectedExpert.name}</h2>
-            <p className={styles.expertRole}>{selectedExpert.role} · {selectedExpert.yearsExperience} Years Practice · {selectedExpert.location}</p>
+            <p className={styles.expertRole}>
+              {selectedExpert.role} · {selectedExpert.yearsExperience} Years Practice · {selectedExpert.location}
+            </p>
           </div>
         </div>
 

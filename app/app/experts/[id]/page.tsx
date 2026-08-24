@@ -2,21 +2,17 @@
 
 import React, { useState, use } from 'react';
 import Link from 'next/link';
-import { getExpertById, getQAResponse, QAEntry } from '@/lib/data';
-import { useMemories } from '@/lib/store';
+import { useExperts } from '@/lib/store';
+import { getQAResponse, QAEntry } from '@/lib/data';
 import { ExpertAvatar } from '@/components/ui/Avatar/ExpertAvatar';
 import styles from './page.module.css';
-import ExpertHeader from './components/ExpertHeader';
-import ExpertSkills from './components/ExpertSkills';
-import ContextualSearch from './components/ContextualSearch';
-import ExpertTimeline from './components/ExpertTimeline';
 
 export default function ExpertProfilePage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = use(params);
-  const expert = getExpertById(resolvedParams.id) || getExpertById('ramesh-kumar')!;
-  
-  const { memories } = useMemories();
-  const expertMemories = memories.filter((m) => m.expertId === expert.id);
+  const { experts } = useExperts();
+
+  const expert = experts.find((e) => e.id === resolvedParams.id) || experts[0];
+  const expertMemories = expert.memoriesList || [];
 
   const [query, setQuery] = useState('');
   const [qaResult, setQaResult] = useState<QAEntry | null>(null);
@@ -33,19 +29,56 @@ export default function ExpertProfilePage({ params }: { params: Promise<{ id: st
         ← Back to People
       </Link>
 
-      <ExpertHeader expert={expert} />
+      {/* Person Header Profile */}
+      <div className={styles.profileHeaderCard}>
+        <ExpertAvatar src={expert.photoUrl} name={expert.name} size="xl" />
 
-      <ExpertSkills expert={expert} />
+        <div className={styles.headerMeta}>
+          <h1 className={styles.name}>{expert.name}</h1>
+          <p className={styles.roleTitle}>{expert.role} · {expert.yearsExperience} years of practice</p>
+          <p className={styles.location}>Location: {expert.location} · {expert.memoriesCount} Memories Preserved</p>
+          <p className={styles.bioText}>{expert.bio}</p>
+        </div>
+      </div>
 
-      <ContextualSearch
-        expert={expert}
-        query={query}
-        setQuery={setQuery}
-        handleContextualAsk={handleContextualAsk}
-        qaResult={qaResult}
-      />
+      {/* What He Knows */}
+      <div className={styles.sectionCard}>
+        <h2 className={styles.sectionTitle}>What he knows</h2>
+        <div className={styles.skillsGrid}>
+          {expert.skills.map((skill) => (
+            <span key={skill} className={styles.skillBadge}>{skill}</span>
+          ))}
+        </div>
+      </div>
 
-      {/* Memories Preserved */}
+      {/* Ask Expert's Archive Contextual Search */}
+      <div className={styles.contextualAskCard}>
+        <h2 className={styles.sectionTitle}>Ask {expert.name.split(' ')[0]}'s archive</h2>
+        <p className={styles.askSub}>Search directly across {expert.name}'s recorded accounts:</p>
+
+        <div className={styles.inputRow}>
+          <input
+            type="text"
+            className={styles.askInput}
+            placeholder={`Ask something about ${expert.name.split(' ')[0]}'s experience...`}
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && handleContextualAsk()}
+          />
+          <button className={styles.askBtn} onClick={handleContextualAsk}>
+            Search →
+          </button>
+        </div>
+
+        {qaResult && (
+          <blockquote className={styles.qaResultBox}>
+            “{qaResult.answer}”
+            <span className={styles.qaRef}>Timestamp Ref: {qaResult.recordingTimestamp}</span>
+          </blockquote>
+        )}
+      </div>
+
+      {/* Memories Preserved (Dynamic) */}
       <div className={styles.sectionCard}>
         <h2 className={styles.sectionTitle}>Memories preserved ({expertMemories.length})</h2>
         <div className={styles.memoriesList}>
@@ -63,7 +96,23 @@ export default function ExpertProfilePage({ params }: { params: Promise<{ id: st
         </div>
       </div>
 
-      <ExpertTimeline expert={expert} />
+      {/* A Life in Practice Timeline (Dynamic) */}
+      <div className={styles.sectionCard}>
+        <h2 className={styles.sectionTitle}>A life in practice</h2>
+
+        <div className={styles.timelineTrack}>
+          {expert.timeline.map((item, idx) => (
+            <div key={idx} className={styles.timelineItem}>
+              <div className={styles.yearCol}>{item.year}</div>
+              <div className={styles.markerCol} />
+              <div className={styles.contentCol}>
+                <h3 className={styles.eventTitle}>{item.event}</h3>
+                {item.detail && <p className={styles.eventDetail}>{item.detail}</p>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
