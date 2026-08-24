@@ -1,57 +1,32 @@
 'use client';
 
-import { EXPERTS, MEMORIES, Memory, Expert, QAEntry, getQAResponse } from './data';
+import { useState, useEffect, useMemo } from 'react';
+import { EXPERTS, MEMORIES, Memory, QAEntry, getQAResponse } from './data';
 
-const STORAGE_KEY_MEMORIES = 'memorymap_user_memories';
+export function useMemories() {
+  const [memories, setMemories] = useState<Memory[]>(MEMORIES);
+  const [loading, setLoading] = useState(true);
 
-export function getStoredMemories(): Memory[] {
-  if (typeof window === 'undefined') return MEMORIES;
-  try {
-    const data = localStorage.getItem(STORAGE_KEY_MEMORIES);
-    if (!data) return MEMORIES;
-    const parsed = JSON.parse(data);
-    return Array.isArray(parsed) && parsed.length > 0 ? [...parsed, ...MEMORIES] : MEMORIES;
-  } catch (err) {
-    console.error('Failed to read memories from storage:', err);
-    return MEMORIES;
-  }
+  useEffect(() => {
+    fetch('/api/memories')
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.data) {
+          // Combine fetched server memories with demo memories to avoid empty state
+          // Assuming server memory IDs start with 'user-memory-'
+          const serverMemories = data.data;
+          setMemories([...serverMemories, ...MEMORIES]);
+        }
+      })
+      .catch(err => console.error('Failed to fetch memories:', err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  return { memories, loading };
 }
 
-export function getStoredMemoryById(id: string): Memory | undefined {
-  const all = getStoredMemories();
-  return all.find((m) => m.id === id);
-}
-
-export function saveNewMemory(newMemory: Omit<Memory, 'id' | 'catalogId' | 'createdAt'>): Memory {
-  const allCurrent = getStoredMemories();
-  const nextNum = allCurrent.length + 48;
-  const catalogId = `ARCH-00${nextNum}`;
-  const id = `user-memory-${Date.now()}`;
-
-  const created: Memory = {
-    ...newMemory,
-    id,
-    catalogId,
-    tags: newMemory.tags || ['Intuition', 'Diagnostics'],
-    createdAt: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })
-  };
-
-  if (typeof window !== 'undefined') {
-    try {
-      const existingUserMems = JSON.parse(localStorage.getItem(STORAGE_KEY_MEMORIES) || '[]');
-      const updated = [created, ...existingUserMems];
-      localStorage.setItem(STORAGE_KEY_MEMORIES, JSON.stringify(updated));
-    } catch (err) {
-      console.error('Failed to save memory to storage:', err);
-    }
-  }
-
-  return created;
-}
-
-export function searchAllMemories(query: string, category: string = 'All'): Memory[] {
-  const all = getStoredMemories();
-  return all.filter((m) => {
+export function searchAllMemories(memories: Memory[], query: string, category: string = 'All'): Memory[] {
+  return memories.filter((m) => {
     const matchesCat = category === 'All' || m.category.toLowerCase() === category.toLowerCase();
     const q = query.toLowerCase();
     const matchesQuery =
@@ -64,12 +39,10 @@ export function searchAllMemories(query: string, category: string = 'All'): Memo
   });
 }
 
-export function queryArchive(question: string): QAEntry {
-  const allMemories = getStoredMemories();
+export function queryArchive(memories: Memory[], question: string): QAEntry {
   const qLower = question.toLowerCase();
 
-  // Try matching stored memories first
-  const match = allMemories.find((m) =>
+  const match = memories.find((m) =>
     m.title.toLowerCase().includes(qLower) ||
     m.summary.toLowerCase().includes(qLower) ||
     (m.expertTips && m.expertTips.some((t) => t.toLowerCase().includes(qLower)))

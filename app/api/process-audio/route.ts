@@ -1,54 +1,117 @@
 import { NextResponse } from 'next/server';
+import { GoogleGenAI, Type, Schema } from '@google/genai';
+import { saveNewMemory } from '@/lib/serverStore';
+
+// Initialize the Gemini SDK
+const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+const MODEL_NAME = 'gemini-3.6-flash';
+
+const memorySchema: Schema = {
+  type: Type.OBJECT,
+  properties: {
+    title: { type: Type.STRING, description: "A short, descriptive title for the knowledge shared." },
+    summary: { type: Type.STRING, description: "A summary of the experience or lesson." },
+    category: { type: Type.STRING, description: "The broad category, e.g. Automotive Repair, Carpentry, Software Engineering." },
+    tags: { type: Type.ARRAY, items: { type: Type.STRING }, description: "Relevant tags." },
+    procedure: {
+      type: Type.ARRAY,
+      description: "Step-by-step instructions if a procedure was described.",
+      items: {
+        type: Type.OBJECT,
+        properties: {
+          step: { type: Type.INTEGER },
+          instruction: { type: Type.STRING },
+          note: { type: Type.STRING }
+        }
+      }
+    },
+    expertTips: { type: Type.ARRAY, items: { type: Type.STRING }, description: "Expert tips shared in the recording." },
+    commonMistakes: { type: Type.ARRAY, items: { type: Type.STRING }, description: "Common mistakes to avoid." },
+    tools: { type: Type.ARRAY, items: { type: Type.STRING }, description: "Tools or materials mentioned." },
+    story: { type: Type.STRING, description: "Any personal story or anecdote mentioned." },
+    transcript: { type: Type.STRING, description: "The verbatim transcript of the audio recording." }
+  },
+  required: ["title", "summary", "category", "tags", "transcript"]
+};
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json().catch(() => ({}));
+    const formData = await request.formData();
+    const audioFile = formData.get('audio') as File | null;
+    
+    if (!audioFile) {
+      return NextResponse.json({ success: false, error: 'No audio file provided' }, { status: 400 });
+    }
 
-    const title = body.title || 'Diagnostic Inspection & Operational Intuition';
-    const expertName = body.expertName || 'Ramesh Kumar';
-    const expertRole = body.expertRole || 'Master Mechanic';
-    const category = body.category || 'Automotive Repair';
-    const duration = body.duration || '03:15';
+    // Convert audio file to Base64
+    const arrayBuffer = await audioFile.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+    const base64Data = buffer.toString('base64');
 
-    // Extracted knowledge structure payload
-    const processedMemory = {
-      id: `mem-${Date.now()}`,
-      catalogId: `ARCH-00${Math.floor(Math.random() * 90 + 10)}`,
-      title,
-      summary: body.prompt
-        ? `Preserved oral account regarding "${body.prompt}". Contains diagnostic steps, tactile tests, and key mistakes to avoid.`
-        : 'Spoken account capturing 35 years of unwritten diagnostic intuition.',
-      expertId: 'ramesh-kumar',
-      expertName,
-      expertRole,
-      expertExperience: 35,
-      category,
-      duration,
-      createdAt: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }),
-      procedure: [
-        { step: 1, instruction: 'Check coolant circulation flow before replacing the thermostat housing.', note: 'Feel upper vs lower radiator hose temperatures first.' },
-        { step: 2, instruction: 'Inspect water pump impeller vanes for cavitation or micro-fractures.', note: 'A cold lower hose indicates pump failure, not thermostat failure.' },
-        { step: 3, instruction: 'Perform aroma diagnostic at radiator cap once engine cools down.', note: 'A sweet metallic odor indicates head gasket pressure leakage.' }
+    const prompt = `You are an expert archivist. Listen to the following spoken account.
+Please perform two tasks:
+1. Provide a faithful, verbatim transcript of what was spoken. Do not summarize the transcript. Preserve the speaker's actual wording as accurately as possible.
+2. Extract the structured knowledge based ONLY on the recording. Do not invent skills, experience, or facts. If a field is not supported by the recording, leave it empty or omit it.`;
+
+    // Call Gemini API
+    const response = await ai.models.generateContent({
+      model: MODEL_NAME,
+      contents: [
+        {
+          role: 'user',
+          parts: [
+            { text: prompt },
+            {
+              inlineData: {
+                mimeType: audioFile.type || 'audio/webm',
+                data: base64Data
+              }
+            }
+          ]
+        }
       ],
-      expertTips: [
-        'Feel upper vs lower radiator hose temperatures before unbolting any parts.',
-        'A metallic ticking under load combined with cold return lines signals impeller erosion.'
-      ],
-      commonMistakes: [
-        'Replacing the thermostat immediately without verifying actual impeller cavitation.',
-        'Opening radiator pressure cap while coolant system remains pressurized.'
-      ],
-      tools: ['Coolant Pressure Tester', 'Infrared Thermometer', 'Tactile Inspection Gloves']
-    };
+      config: {
+        responseMimeType: 'application/json',
+        responseSchema: memorySchema,
+        temperature: 0.1 // Low temperature for more faithful extraction
+      }
+    });
+
+    const resultText = response.text;
+    if (!resultText) {
+      throw new Error("No response from Gemini");
+    }
+
+    const structuredData = JSON.parse(resultText);
+
+    // Persist to data/db.json
+    const processedMemory = await saveNewMemory({
+      title: structuredData.title,
+      summary: structuredData.summary,
+      category: structuredData.category,
+      tags: structuredData.tags,
+      procedure: structuredData.procedure,
+      expertTips: structuredData.expertTips,
+      commonMistakes: structuredData.commonMistakes,
+      tools: structuredData.tools,
+      story: structuredData.story,
+      transcript: structuredData.transcript,
+      expertId: 'user-expert-1', // Defaulting to the current user
+      expertName: 'Current User', 
+      expertRole: 'Practitioner',
+      expertExperience: 0,
+      duration: '00:00', // We can calculate real duration if needed
+    });
 
     return NextResponse.json({
       success: true,
       message: 'Memory extracted and preserved successfully',
       data: processedMemory
     });
-  } catch (error) {
+  } catch (error: any) {
+    console.error('Error processing audio:', error);
     return NextResponse.json(
-      { success: false, error: 'Failed to process oral account' },
+      { success: false, error: error.message || 'Failed to process oral account' },
       { status: 500 }
     );
   }

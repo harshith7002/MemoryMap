@@ -2,15 +2,17 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { MEMORIES, searchMemories } from '@/lib/data';
+import { useMemories, searchAllMemories } from '@/lib/store';
 import styles from './page.module.css';
 
 export default function KnowledgePage() {
   const [query, setQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
+  
+  const { memories, loading } = useMemories();
 
   const categories = ['All', 'Automotive Repair', 'Pedagogy & Teaching', 'Handloom Craft', 'Agriculture'];
-  const filteredMemories = searchMemories(query, selectedCategory);
+  const filteredMemories = searchAllMemories(memories, query, selectedCategory);
 
   return (
     <div className={styles.container}>

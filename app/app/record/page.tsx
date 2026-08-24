@@ -2,10 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Waveform } from '@/components/ui/Waveform/Waveform';
-import { Button } from '@/components/ui/Button/Button';
 import { ExpertAvatar } from '@/components/ui/Avatar/ExpertAvatar';
-import { IconCheck, IconPause, IconPlay, IconRecord } from '@/components/ui/icons/NavIcons';
+import { IconCheck } from '@/components/ui/icons/NavIcons';
 import { EXPERTS } from '@/lib/data';
 import { useAudioRecorder } from '@/lib/hooks';
 import styles from './page.module.css';
@@ -26,25 +24,32 @@ const PROCESSING_MESSAGES = [
 
 const expert = EXPERTS[0];
 
-interface Answer {
+export interface Answer {
   question: string;
   duration: number;
 }
 
-function formatDuration(totalSeconds: number) {
+export function formatDuration(totalSeconds: number) {
   const mins = Math.floor(totalSeconds / 60);
   const secs = totalSeconds % 60;
   return `${mins}:${secs.toString().padStart(2, '0')}`;
 }
 
+import { IdleState } from './components/IdleState';
+import { RecordingState } from './components/RecordingState';
+import { ProcessingState } from './components/ProcessingState';
+import { DoneState } from './components/DoneState';
+
 export default function RecordPage() {
-  const { state, seconds, formattedTime, start, pause, resume, stop, reset, setState } =
+  const { state, seconds, formattedTime, start, pause, resume, stop, reset, setState, audioBlob } =
     useAudioRecorder();
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [advancing, setAdvancing] = useState(false);
   const [processingStep, setProcessingStep] = useState(0);
+  // Store the newly created memory from backend
+  const [createdMemory, setCreatedMemory] = useState<any>(null);
 
   const totalQuestions = QUESTIONS.length;
   const isLastQuestion = currentIndex === totalQuestions - 1;
@@ -55,19 +60,44 @@ export default function RecordPage() {
   // land on the done screen once every question has been processed.
   useEffect(() => {
     if (state !== 'processing') return;
-
+    
+    // Auto-advance visual messages slowly while waiting
     setProcessingStep(0);
     const interval = setInterval(() => {
-      setProcessingStep((prev) => {
-        if (prev < PROCESSING_MESSAGES.length - 1) return prev + 1;
-        clearInterval(interval);
-        window.setTimeout(() => setState('done'), 500);
-        return prev;
-      });
-    }, 850);
+      setProcessingStep((prev) => Math.min(prev + 1, PROCESSING_MESSAGES.length - 1));
+    }, 2000);
 
     return () => clearInterval(interval);
-  }, [state, setState]);
+  }, [state]);
+
+  // When audio blob is ready and we are processing, hit the backend
+  useEffect(() => {
+    if (state === 'processing' && audioBlob) {
+      const processAudio = async () => {
+        try {
+          const formData = new FormData();
+          formData.append('audio', audioBlob, 'recording.webm');
+          formData.append('prompt', currentQuestion);
+          
+          const res = await fetch('/api/process-audio', {
+            method: 'POST',
+            body: formData,
+          });
+          const data = await res.json();
+          if (data.success && data.data) {
+            setCreatedMemory(data.data);
+          } else {
+             console.error("Backend error:", data.error);
+          }
+        } catch (e) {
+           console.error("Failed to process audio:", e);
+        } finally {
+           setState('done');
+        }
+      };
+      processAudio();
+    }
+  }, [state, audioBlob, setState, currentQuestion]);
 
   const commitCurrentAnswer = () => {
     setAnswers((prev) => [...prev, { question: currentQuestion, duration: seconds }]);
@@ -122,139 +152,49 @@ export default function RecordPage() {
 
       <div className={`${styles.layout} ${interviewDone ? styles.layoutSingle : ''}`}>
         <div className={styles.mainCol}>
-          {/* IDLE — waiting to record the current question */}
-          {state === 'idle' && !advancing && (
-            <div className={styles.idleCard}>
-              <span className={styles.promptLabel}>Interview question {currentIndex + 1}</span>
-              <h2 className={styles.promptTitle}>&ldquo;{currentQuestion}&rdquo;</h2>
-
-              <div className={styles.recordTriggerBox}>
-                <button className={styles.recordCircleBtn} onClick={start} aria-label="Start recording">
-                  <IconRecord size={30} />
-                </button>
-                <span className={styles.triggerText}>Click to start speaking</span>
-              </div>
-            </div>
-          )}
-
-          {/* Brief confirmation before moving to the next question */}
-          {advancing && (
-            <div className={styles.savedCard}>
-              <div className={styles.savedTick}>
-                <IconCheck size={22} />
-              </div>
-              <h2 className={styles.savedTitle}>Response saved.</h2>
-              <p className={styles.savedSub}>
-                Moving to question {currentIndex + 2} of {totalQuestions}&hellip;
-              </p>
-            </div>
+          {/* IDLE or ADVANCING */}
+          {(state === 'idle' || advancing) && (
+            <IdleState
+              currentIndex={currentIndex}
+              currentQuestion={currentQuestion}
+              advancing={advancing}
+              totalQuestions={totalQuestions}
+              start={start}
+            />
           )}
 
           {/* RECORDING / PAUSED */}
           {(state === 'recording' || state === 'paused') && !advancing && (
-            <div className={styles.activeRecordCard}>
-              <span className={styles.activePromptLabel}>&ldquo;{currentQuestion}&rdquo;</span>
-
-              <div className={styles.timerHeader}>
-                <span className={state === 'recording' ? styles.liveBadge : styles.pauseBadge}>
-                  {state === 'recording' ? '● RECORDING' : 'PAUSED'}
-                </span>
-                <span className={styles.timerVal}>{formattedTime}</span>
-              </div>
-
-              <div className={styles.waveformContainer}>
-                <Waveform isAnimating={state === 'recording'} barCount={36} height={40} color="var(--color-amber)" />
-              </div>
-
-              <div className={styles.controlsRow}>
-                {state === 'recording' ? (
-                  <Button onClick={pause} variant="secondary" size="md">
-                    <IconPause size={15} /> Pause
-                  </Button>
-                ) : (
-                  <Button onClick={resume} variant="primary" size="md">
-                    <IconPlay size={15} /> Resume
-                  </Button>
-                )}
-
-                <Button
-                  onClick={isLastQuestion ? handleFinishInterview : handleSaveAndContinue}
-                  variant="brass"
-                  size="lg"
-                >
-                  {isLastQuestion ? 'Save & finish interview' : `Save & continue →`}
-                </Button>
-
-                <Button onClick={reset} variant="ghost" size="sm">
-                  Cancel
-                </Button>
-              </div>
-            </div>
+            <RecordingState
+              state={state}
+              currentQuestion={currentQuestion}
+              formattedTime={formattedTime}
+              isLastQuestion={isLastQuestion}
+              pause={pause}
+              resume={resume}
+              reset={reset}
+              handleSaveAndContinue={handleSaveAndContinue}
+              handleFinishInterview={handleFinishInterview}
+            />
           )}
 
           {/* PROCESSING */}
           {state === 'processing' && (
-            <div className={styles.processingCard}>
-              <div className={styles.spinner} />
-              <h2 className={styles.procTitle}>Understanding your experience...</h2>
-              <p className={styles.procSub}>{PROCESSING_MESSAGES[processingStep]}</p>
-            </div>
+            <ProcessingState
+              processingStep={processingStep}
+              processingMessages={PROCESSING_MESSAGES}
+            />
           )}
 
           {/* DONE */}
           {interviewDone && (
-            <div className={styles.doneCard}>
-              <div className={styles.doneHeader}>
-                <h2 className={styles.doneTitle}>Your knowledge has been preserved.</h2>
-                <p className={styles.doneSub}>
-                  MemoryMap turned {answers.length} spoken {answers.length === 1 ? 'answer' : 'answers'} (
-                  {formatDuration(totalRecordedSeconds)} total) into the following:
-                </p>
-              </div>
-
-              <div className={styles.answeredList}>
-                {answers.map((a, idx) => (
-                  <div key={idx} className={styles.answeredRow}>
-                    <span className={styles.answeredIndex}>{idx + 1}</span>
-                    <span className={styles.answeredQuestion}>{a.question}</span>
-                    <span className={styles.answeredDuration}>{formatDuration(a.duration)}</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className={styles.extractedGrid}>
-                <div className={styles.extractedBox}>
-                  <strong className={styles.boxTag}>PROCEDURE</strong>
-                  <p className={styles.boxText}>
-                    Check coolant circulation flow before replacing the thermostat housing.
-                  </p>
-                </div>
-
-                <div className={styles.extractedBox}>
-                  <strong className={styles.boxTagAmber}>EXPERT TIP</strong>
-                  <p className={styles.boxText}>
-                    Feel upper vs lower radiator hose temperatures — if lower is cold while upper is
-                    scalding, test water pump vanes.
-                  </p>
-                </div>
-
-                <div className={styles.extractedBox}>
-                  <strong className={styles.boxTagRed}>COMMON MISTAKE</strong>
-                  <p className={styles.boxText}>
-                    Replacing the thermostat immediately without verifying actual impeller cavitation.
-                  </p>
-                </div>
-              </div>
-
-              <div className={styles.doneActions}>
-                <Link href="/app/knowledge/demo-memory-1" className={styles.viewRecordBtn}>
-                  View full preserved document →
-                </Link>
-                <Button onClick={handleRecordAnother} variant="secondary" size="md">
-                  Record another memory
-                </Button>
-              </div>
-            </div>
+            <DoneState
+              answers={answers}
+              totalRecordedSeconds={totalRecordedSeconds}
+              formatDuration={formatDuration}
+              handleRecordAnother={handleRecordAnother}
+              createdMemory={createdMemory}
+            />
           )}
         </div>
 

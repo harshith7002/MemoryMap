@@ -4,8 +4,11 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { MEMORIES } from '@/lib/data';
 import { Tag } from '@/components/ui/Tag/Tag';
-import { Waveform } from '@/components/ui/Waveform/Waveform';
 import styles from '../[id]/page.module.css';
+
+import { MemoryHeader } from '@/components/app/knowledge/MemoryHeader';
+import { MemoryAudioPlayer } from '@/components/app/knowledge/MemoryAudioPlayer';
+import { MemorySection } from '@/components/app/knowledge/MemorySection';
 
 export default function DemoMemoryPage() {
   const memory = MEMORIES[0]; // Ramesh Kumar demo memory
@@ -23,37 +26,14 @@ export default function DemoMemoryPage() {
         ← Back to Knowledge Archive
       </Link>
 
-      <div className={styles.header}>
-        <div className={styles.categoryRow}>
-          <span className={styles.catBadge}>{memory.category}</span>
-          <span className={styles.aiBadge}>✨ AI Preserved Knowledge</span>
-          <span className={styles.dateStamp}>Recorded: {memory.createdAt}</span>
-        </div>
+      <MemoryHeader memory={memory} styles={styles} variant="demo" />
 
-        <h1 className={styles.title}>{memory.title}</h1>
-
-        <div className={styles.sourceBar}>
-          <div className={styles.authorAvatar}>👨‍🔧</div>
-          <div className={styles.authorMeta}>
-            <span className={styles.authorName}>
-              Source: <Link href={`/app/experts/${memory.expertId}`}>{memory.expertName}</Link>
-            </span>
-            <span className={styles.authorRole}>
-              {memory.expertRole} • {memory.expertExperience} years experience
-            </span>
-          </div>
-          <div className={styles.durationChip}>⏱️ Audio length: {memory.duration}</div>
-        </div>
-      </div>
-
-      <div className={styles.sectionCard}>
-        <h2 className={styles.sectionHeader}>💡 What I Learned (Summary)</h2>
+      <MemorySection styles={styles} title="💡 What I Learned (Summary)" titleClassName={styles.sectionHeader}>
         <p className={styles.summaryBox}>{memory.summary}</p>
-      </div>
+      </MemorySection>
 
       {memory.procedure && (
-        <div className={styles.sectionCard}>
-          <h2 className={styles.sectionHeader}>📋 Procedure (Extracted Steps)</h2>
+        <MemorySection styles={styles} title="📋 Procedure (Extracted Steps)" titleClassName={styles.sectionHeader}>
           <div className={styles.stepsList}>
             {memory.procedure.map((p) => (
               <div key={p.step} className={styles.stepItem}>
@@ -62,13 +42,12 @@ export default function DemoMemoryPage() {
               </div>
             ))}
           </div>
-        </div>
+        </MemorySection>
       )}
 
       <div className={styles.twoCol}>
         {memory.expertTips && (
-          <div className={styles.sectionCard}>
-            <h2 className={styles.sectionHeader}>✦ Expert Tips & Insights</h2>
+          <MemorySection styles={styles} title="✦ Expert Tips & Insights" titleClassName={styles.sectionHeader}>
             <ul className={styles.tipsList}>
               {memory.expertTips.map((tip, idx) => (
                 <li key={idx} className={styles.tipItem}>
@@ -77,12 +56,11 @@ export default function DemoMemoryPage() {
                 </li>
               ))}
             </ul>
-          </div>
+          </MemorySection>
         )}
 
         {memory.commonMistakes && (
-          <div className={styles.sectionCard}>
-            <h2 className={styles.sectionHeader}>⚠️ Common Mistakes to Avoid</h2>
+          <MemorySection styles={styles} title="⚠️ Common Mistakes to Avoid" titleClassName={styles.sectionHeader}>
             <ul className={styles.mistakesList}>
               {memory.commonMistakes.map((m, idx) => (
                 <li key={idx} className={styles.mistakeItem}>
@@ -91,79 +69,40 @@ export default function DemoMemoryPage() {
                 </li>
               ))}
             </ul>
-          </div>
+          </MemorySection>
         )}
       </div>
 
       {memory.tools && (
-        <div className={styles.sectionCard}>
-          <h2 className={styles.sectionHeader}>🛠️ Tools & Materials Extracted</h2>
+        <MemorySection styles={styles} title="🛠️ Tools & Materials Extracted" titleClassName={styles.sectionHeader}>
           <div className={styles.toolsRow}>
             {memory.tools.map((tool) => (
               <Tag key={tool} label={tool} variant="brown" size="md" />
             ))}
           </div>
-        </div>
+        </MemorySection>
       )}
 
       {memory.story && (
-        <div className={styles.sectionCardStory}>
-          <h2 className={styles.sectionHeaderStory}>📖 The Personal Story Behind It</h2>
+        <MemorySection 
+          styles={styles} 
+          title="📖 The Personal Story Behind It" 
+          titleClassName={styles.sectionHeaderStory}
+          className={styles.sectionCardStory}
+        >
           <blockquote className={styles.storyQuote}>“{memory.story}”</blockquote>
-        </div>
+        </MemorySection>
       )}
 
-      <div className={styles.audioPlayerCard}>
-        <div className={styles.playerHeader}>
-          <div className={styles.playerTitleRow}>
-            <span className={styles.playerIcon}>🎙️</span>
-            <div>
-              <h3 className={styles.playerTitle}>Original Spoken Recording</h3>
-              <span className={styles.playerSubtitle}>
-                Verify source audio timestamp — {memory.expertName}
-              </span>
-            </div>
-          </div>
-          <button
-            className={styles.playButtonBig}
-            onClick={() => setIsPlaying(!isPlaying)}
-          >
-            {isPlaying ? '⏸️ Pause' : '▶ Play Audio'}
-          </button>
-        </div>
-
-        <div className={styles.waveformBox}>
-          <Waveform isAnimating={isPlaying} barCount={42} height={44} color="var(--color-amber)" />
-          <div className={styles.timeMeta}>
-            <span>{currentTime}</span>
-            <span>{memory.duration}</span>
-          </div>
-        </div>
-
-        <div className={styles.timestampSection}>
-          <span className={styles.timestampLabel}>Jump to source timestamp:</span>
-          <div className={styles.timestampButtons}>
-            <button
-              className={styles.timeBtn}
-              onClick={() => handleJumpToTimestamp('02:17')}
-            >
-              🔊 02:17 — Diagnostic procedure
-            </button>
-            <button
-              className={styles.timeBtn}
-              onClick={() => handleJumpToTimestamp('03:45')}
-            >
-              🔊 03:45 — Expert tip on radiator cap
-            </button>
-            <button
-              className={styles.timeBtn}
-              onClick={() => handleJumpToTimestamp('04:10')}
-            >
-              🔊 04:10 — Story of the apprentice
-            </button>
-          </div>
-        </div>
-      </div>
+      <MemoryAudioPlayer 
+        memory={memory} 
+        styles={styles} 
+        isPlaying={isPlaying} 
+        setIsPlaying={setIsPlaying} 
+        currentTime={currentTime} 
+        handleJumpToTimestamp={handleJumpToTimestamp}
+        variant="demo"
+      />
     </div>
   );
 }

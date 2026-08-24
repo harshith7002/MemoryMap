@@ -7,6 +7,11 @@ import { Button } from '@/components/ui/Button/Button';
 import { ExpertAvatar } from '@/components/ui/Avatar/ExpertAvatar';
 import { EXPERTS, MEMORIES } from '@/lib/data';
 import styles from './page.module.css';
+import { StepListen } from './components/StepListen';
+import { StepUnderstand } from './components/StepUnderstand';
+import { StepPreserve } from './components/StepPreserve';
+import { StepAsk } from './components/StepAsk';
+import { StepVerify } from './components/StepVerify';
 
 export default function DemoPage() {
   const expert = EXPERTS[0]; // Ramesh Kumar
@@ -67,181 +72,27 @@ export default function DemoPage() {
         <div className={styles.stepContent}>
           {/* STEP 1: LISTEN */}
           {activeStep === 1 && (
-            <div className={styles.stepPane}>
-              <h2 className={styles.paneTitle}>01 / Listen to Ramesh's original voice recording</h2>
-              <p className={styles.paneDesc}>Hear Ramesh describe his cooling system diagnostic procedure in his own spoken voice.</p>
-
-              <div className={styles.audioPlayerCard}>
-                <div className={styles.playerTop}>
-                  <div className={styles.trackInfo}>
-                    <strong className={styles.trackTitle}>{memory.title}</strong>
-                    <span className={styles.trackMeta}>Ramesh Kumar · Length: {memory.duration}</span>
-                  </div>
-                  <button
-                    className={styles.playBtn}
-                    onClick={() => setIsPlayingAudio(!isPlayingAudio)}
-                  >
-                    {isPlayingAudio ? '⏸ Pause' : '▶ Play (04:32)'}
-                  </button>
-                </div>
-
-                <div className={styles.waveformWrapper}>
-                  <Waveform isAnimating={isPlayingAudio} barCount={36} height={36} color="var(--color-amber)" />
-                </div>
-              </div>
-
-              <div className={styles.paneActions}>
-                <Button onClick={() => setActiveStep(2)} variant="primary" size="md">
-                  Next: Inspect Transcript →
-                </Button>
-              </div>
-            </div>
+            <StepListen memory={memory} isPlayingAudio={isPlayingAudio} setIsPlayingAudio={setIsPlayingAudio} setActiveStep={setActiveStep} />
           )}
 
           {/* STEP 2: UNDERSTAND */}
           {activeStep === 2 && (
-            <div className={styles.stepPane}>
-              <h2 className={styles.paneTitle}>02 / Spoken verbatim transcript</h2>
-              <p className={styles.paneDesc}>Spoken accounts are spontaneous and unstructured before AI processing.</p>
-
-              <div className={styles.transcriptCard}>
-                <button
-                  className={styles.toggleTranscriptBtn}
-                  onClick={() => setShowTranscript(!showTranscript)}
-                >
-                  {showTranscript ? 'Hide Spoken Transcript' : 'Show Full Spoken Transcript'}
-                </button>
-
-                {showTranscript ? (
-                  <blockquote className={styles.rawTranscriptText}>
-                    “When this engine starts making that high-pitched metallic ticking, most guys grab the scanner. But if you put your hand right on the thermostat housing... you feel the pulse. The manual points to replacing the thermostat, but 80% of the time, it's water pump impeller cavitation or early head gasket pressure loss...”
-                  </blockquote>
-                ) : (
-                  <p className={styles.transcriptPlaceholder}>
-                    Click the button above to view Ramesh's raw verbatim oral transcript...
-                  </p>
-                )}
-              </div>
-
-              <div className={styles.paneActions}>
-                <Button onClick={() => setActiveStep(3)} variant="primary" size="md">
-                  Next: View AI Extraction →
-                </Button>
-              </div>
-            </div>
+            <StepUnderstand showTranscript={showTranscript} setShowTranscript={setShowTranscript} setActiveStep={setActiveStep} />
           )}
 
           {/* STEP 3: PRESERVE */}
           {activeStep === 3 && (
-            <div className={styles.stepPane}>
-              <h2 className={styles.paneTitle}>03 / AI Knowledge extraction</h2>
-              <p className={styles.paneDesc}>MemoryMap automatically extracts procedures, expert tips, common mistakes, and tools.</p>
-
-              <div className={styles.extractionResultGrid}>
-                <div className={styles.resultBox}>
-                  <strong className={styles.boxTag}>PROCEDURE</strong>
-                  <ol className={styles.numList}>
-                    {memory.procedure?.slice(0, 3).map((p) => (
-                      <li key={p.step}>{p.instruction}</li>
-                    ))}
-                  </ol>
-                </div>
-
-                <div className={styles.resultBox}>
-                  <strong className={styles.boxTagAmber}>EXPERT TIP</strong>
-                  <ul className={styles.bulletList}>
-                    {memory.expertTips?.slice(0, 2).map((t, idx) => (
-                      <li key={idx}>{t}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              <div className={styles.paneActions}>
-                <Link href="/app/knowledge/demo-memory-1" className={styles.fullMemoryLink}>
-                  View Full Memory Record →
-                </Link>
-                <Button onClick={() => setActiveStep(4)} variant="primary" size="md">
-                  Next: Query Archive →
-                </Button>
-              </div>
-            </div>
+            <StepPreserve memory={memory} setActiveStep={setActiveStep} />
           )}
 
           {/* STEP 4: ASK */}
           {activeStep === 4 && (
-            <div className={styles.stepPane}>
-              <h2 className={styles.paneTitle}>04 / Query Ramesh's oral archive</h2>
-              <p className={styles.paneDesc}>Test how future learners query Ramesh's preserved knowledge.</p>
-
-              <div className={styles.qaDemoBox}>
-                <div className={styles.qHeader}>
-                  <span className={styles.qLabel}>Learner question:</span>
-                  <p className={styles.qText}>“My engine overheats after 30 minutes. What should I check first?”</p>
-                </div>
-
-                <button
-                  className={styles.triggerAnswerBtn}
-                  onClick={() => setShowQuestionAnswer(true)}
-                >
-                  Ask Ramesh's Archive →
-                </button>
-
-                {showQuestionAnswer && (
-                  <div className={styles.aCard}>
-                    <strong className={styles.aLabel}>Ramesh's preserved answer:</strong>
-                    <blockquote className={styles.aText}>
-                      “According to Ramesh's 35 years of experience, check coolant flow before replacing the thermostat. Touch upper vs lower hose temperature: if lower hose remains cold while upper is scalding, your water pump impeller is worn.”
-                    </blockquote>
-                  </div>
-                )}
-              </div>
-
-              <div className={styles.paneActions}>
-                <Button onClick={() => setActiveStep(5)} variant="primary" size="md">
-                  Next: Source Verification →
-                </Button>
-              </div>
-            </div>
+            <StepAsk showQuestionAnswer={showQuestionAnswer} setShowQuestionAnswer={setShowQuestionAnswer} setActiveStep={setActiveStep} />
           )}
 
           {/* STEP 5: VERIFY */}
           {activeStep === 5 && (
-            <div className={styles.stepPane}>
-              <h2 className={styles.paneTitle}>05 / Source timestamp verification</h2>
-              <p className={styles.paneDesc}>Verify exactly where in the original audio recording the knowledge originated.</p>
-
-              <div className={styles.attributionCard}>
-                <div className={styles.attrHeader}>
-                  <span className={styles.attrTag}>SOURCE VERIFICATION</span>
-                  <span className={styles.stampBadge}>Timestamp: 02:17–03:04</span>
-                </div>
-
-                <div className={styles.attrMeta}>
-                  <span>Source: Ramesh Kumar · Master Mechanic (35 yrs)</span>
-                  <span>Memory Catalog Entry: Diagnosing Engine Overheating (#ARCH-0047)</span>
-                </div>
-
-                <Link href="/app/knowledge/demo-memory-1" className={styles.listenFullBtn}>
-                  ▶ Listen to recording at 02:17 →
-                </Link>
-              </div>
-
-              <div className={styles.demoCompleteBox}>
-                <h3 className={styles.completeTitle}>Exhibition Walkthrough Complete</h3>
-                <p className={styles.completeText}>
-                  You've experienced how MemoryMap captures human wisdom before it's lost and makes it searchable forever.
-                </p>
-                <div className={styles.finalBtns}>
-                  <Button href="/app/record" variant="primary" size="lg">
-                    Preserve a Real Memory Now →
-                  </Button>
-                  <Button href="/app/dashboard" variant="secondary" size="lg">
-                    Go to Overview
-                  </Button>
-                </div>
-              </div>
-            </div>
+            <StepVerify />
           )}
         </div>
       </div>

@@ -4,11 +4,13 @@ import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button/Button';
 import { ExpertAvatar } from '@/components/ui/Avatar/ExpertAvatar';
-import { MEMORIES, getDemoStats, getExpertById } from '@/lib/data';
+import { getDemoStats, getExpertById } from '@/lib/data';
+import { useMemories } from '@/lib/store';
 import styles from './page.module.css';
 
 export default function DashboardPage() {
   const stats = getDemoStats();
+  const { memories } = useMemories();
 
   return (
     <div className={styles.container}>
@@ -43,7 +45,7 @@ export default function DashboardPage() {
         </div>
 
         <div className={styles.memoriesList}>
-          {MEMORIES.map((m) => {
+          {memories.map((m) => {
             const expert = getExpertById(m.expertId);
 
             return (

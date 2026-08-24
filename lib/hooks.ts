@@ -9,26 +9,84 @@ export function useAudioRecorder() {
   const [seconds, setSeconds] = useState(0);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const start = useCallback(() => {
-    setState('recording');
-    setSeconds(0);
+  const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const chunksRef = useRef<BlobPart[]>([]);
+
+  const start = useCallback(async () => {
+    try {
+      if (!mediaRecorderRef.current) {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+        const mediaRecorder = new MediaRecorder(stream);
+        mediaRecorderRef.current = mediaRecorder;
+
+        mediaRecorder.ondataavailable = (e) => {
+          if (e.data.size > 0) {
+            chunksRef.current.push(e.data);
+          }
+        };
+
+        mediaRecorder.onstop = () => {
+          const blob = new Blob(chunksRef.current, { type: 'audio/webm' });
+          setAudioBlob(blob);
+          // Don't clear chunks here if we want to pause/resume natively
+        };
+      }
+
+      if (mediaRecorderRef.current.state === 'inactive') {
+        mediaRecorderRef.current.start();
+      } else if (mediaRecorderRef.current.state === 'paused') {
+        mediaRecorderRef.current.resume();
+      }
+
+      setState((prevState) => {
+        if (prevState === 'idle') {
+          setSeconds(0);
+          chunksRef.current = [];
+          setAudioBlob(null);
+        }
+        return 'recording';
+      });
+    } catch (err) {
+      console.error('Error accessing microphone', err);
+      alert('Could not access microphone. Please allow permissions.');
+    }
   }, []);
 
   const pause = useCallback(() => {
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'recording') {
+      mediaRecorderRef.current.pause();
+    }
     setState('paused');
   }, []);
 
   const resume = useCallback(() => {
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state === 'paused') {
+      mediaRecorderRef.current.resume();
+    }
     setState('recording');
   }, []);
 
   const stop = useCallback(() => {
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
+      mediaRecorderRef.current.stop();
+      // stop all tracks
+      mediaRecorderRef.current.stream.getTracks().forEach(track => track.stop());
+      mediaRecorderRef.current = null;
+    }
     setState('processing');
   }, []);
 
   const reset = useCallback(() => {
+    if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
+      mediaRecorderRef.current.stop();
+      mediaRecorderRef.current.stream.getTracks().forEach(track => track.stop());
+      mediaRecorderRef.current = null;
+    }
     setState('idle');
     setSeconds(0);
+    setAudioBlob(null);
+    chunksRef.current = [];
     if (timerRef.current) clearInterval(timerRef.current);
   }, []);
 
@@ -61,7 +119,8 @@ export function useAudioRecorder() {
     resume,
     stop,
     reset,
-    setState
+    setState,
+    audioBlob
   };
 }
 
