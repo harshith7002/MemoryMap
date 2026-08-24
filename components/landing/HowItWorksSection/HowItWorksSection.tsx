@@ -30,7 +30,7 @@ export const HowItWorksSection: React.FC = () => {
       name: 'Lakshmi Devi',
       role: 'Master Artisan Weaver · Kerala',
       quote: '“Thread tension on a wooden loom is felt by plucking warps like guitar strings.”',
-      photoUrl: 'https://images.unsplash.com/photo-1606744888344-49423b3ef308?q=80&w=800&auto=format&fit=crop',
+      photoUrl: 'https://images.unsplash.com/photo-1590736969955-71cc94801759?q=80&w=800&auto=format&fit=crop',
       expertId: 'lakshmi-devi'
     },
     {

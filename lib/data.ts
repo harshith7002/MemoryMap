@@ -125,7 +125,7 @@ export const EXPERTS: Expert[] = [
     name: 'Lakshmi Devi',
     role: 'Master Artisan Weaver',
     yearsExperience: 40,
-    photoUrl: 'https://images.unsplash.com/photo-1606744888344-49423b3ef308?q=80&w=800&auto=format&fit=crop',
+    photoUrl: 'https://images.unsplash.com/photo-1590736969955-71cc94801759?q=80&w=800&auto=format&fit=crop',
     avatar: '📷',
     skills: ['Handloom Weaving', 'Natural Dyeing', 'Pattern Design', 'Thread Tension Tuning', 'Jacquard Looming'],
     memoriesCount: 23,
