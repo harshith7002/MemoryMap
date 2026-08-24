@@ -41,6 +41,9 @@ export async function POST(request: Request) {
   try {
     const formData = await request.formData();
     const audioFile = formData.get('audio') as File | null;
+    const expertName = formData.get('expertName') as string || 'Anonymous Expert';
+    const expertRole = formData.get('expertRole') as string || 'Practitioner';
+    const category = formData.get('category') as string || 'Uncategorized';
     
     if (!audioFile) {
       return NextResponse.json({ success: false, error: 'No audio file provided' }, { status: 400 });
@@ -92,7 +95,7 @@ Please perform three tasks:
     const processedMemory = await saveNewMemory({
       title: structuredData.title,
       summary: structuredData.summary,
-      category: structuredData.category,
+      category: category !== 'Uncategorized' ? category : structuredData.category,
       tags: structuredData.tags,
       procedure: structuredData.procedure,
       expertTips: structuredData.expertTips,
@@ -100,9 +103,9 @@ Please perform three tasks:
       tools: structuredData.tools,
       story: structuredData.story,
       transcript: structuredData.transcript,
-      expertId: 'user-expert-' + Date.now(),
-      expertName: structuredData.expertName || 'Anonymous Expert', 
-      expertRole: structuredData.expertRole || 'Practitioner',
+      expertId: 'user-expert-' + expertName.toLowerCase().replace(/\s+/g, '-'),
+      expertName: expertName, 
+      expertRole: expertRole,
       expertExperience: structuredData.expertExperience || 0,
       duration: '00:00', // We can calculate real duration if needed
     });
