@@ -29,9 +29,12 @@ const memorySchema: Schema = {
     commonMistakes: { type: Type.ARRAY, items: { type: Type.STRING }, description: "Common mistakes to avoid." },
     tools: { type: Type.ARRAY, items: { type: Type.STRING }, description: "Tools or materials mentioned." },
     story: { type: Type.STRING, description: "Any personal story or anecdote mentioned." },
-    transcript: { type: Type.STRING, description: "The verbatim transcript of the audio recording." }
+    transcript: { type: Type.STRING, description: "The verbatim transcript of the audio recording." },
+    expertName: { type: Type.STRING, description: "The name of the person being interviewed, if provided." },
+    expertRole: { type: Type.STRING, description: "The profession, role, or title of the person being interviewed, if provided." },
+    expertExperience: { type: Type.INTEGER, description: "The number of years of experience the person has, if provided." }
   },
-  required: ["title", "summary", "category", "tags", "transcript"]
+  required: ["title", "summary", "category", "tags", "transcript", "expertName", "expertRole", "expertExperience"]
 };
 
 export async function POST(request: Request) {
@@ -49,9 +52,10 @@ export async function POST(request: Request) {
     const base64Data = buffer.toString('base64');
 
     const prompt = `You are an expert archivist. Listen to the following spoken account.
-Please perform two tasks:
+Please perform three tasks:
 1. Provide a faithful, verbatim transcript of what was spoken. Do not summarize the transcript. Preserve the speaker's actual wording as accurately as possible.
-2. Extract the structured knowledge based ONLY on the recording. Do not invent skills, experience, or facts. If a field is not supported by the recording, leave it empty or omit it.`;
+2. Extract the interviewee's identity, including their name, role/profession, and years of experience.
+3. Extract the structured knowledge based ONLY on the recording. Do not invent skills, experience, or facts. If a field is not supported by the recording, leave it empty or omit it.`;
 
     // Call Gemini API
     const response = await ai.models.generateContent({
@@ -96,10 +100,10 @@ Please perform two tasks:
       tools: structuredData.tools,
       story: structuredData.story,
       transcript: structuredData.transcript,
-      expertId: 'user-expert-1', // Defaulting to the current user
-      expertName: 'Current User', 
-      expertRole: 'Practitioner',
-      expertExperience: 0,
+      expertId: 'user-expert-' + Date.now(),
+      expertName: structuredData.expertName || 'Anonymous Expert', 
+      expertRole: structuredData.expertRole || 'Practitioner',
+      expertExperience: structuredData.expertExperience || 0,
       duration: '00:00', // We can calculate real duration if needed
     });
 
